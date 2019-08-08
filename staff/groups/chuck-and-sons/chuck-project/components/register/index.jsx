@@ -30,25 +30,25 @@ function Register(props){
                     }
                 }>
 
-                <label htmlFor = "name">Name
+                <label htmlFor = "name">Name</label>
                     <input type="text" name="name" id="name" />
-                </label>
+                
 
-                <label htmlFor = "surname">Surname
+                <label htmlFor = "surname">Surname</label>
                     <input type="text" name="surname" id="surname" />
-                </label>
+                
 
-                <label htmlFor = "username">Email
+                <label htmlFor = "username">Email</label>
                     <input type="email" name="username" id="username" />
-                </label>
+                
 
-                <label htmlFor = "password">Password
+                <label htmlFor = "password">Password</label>
                     <input type="password" name="password" id="password"/>
-                </label>
+                
 
-                <label htmlFor = "repassword">Repeat password
+                <label htmlFor = "repassword">Repeat password</label>
                     <input type="password" name="repassword" id="repassword" />
-                </label>
+                
 
                 <button className = "btn btn__submit">Register</button>
 
