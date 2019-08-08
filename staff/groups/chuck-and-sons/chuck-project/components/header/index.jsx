@@ -11,7 +11,7 @@ function Header(props){
     return <>
         <header className="header">
             <h1> Chuck Generator </h1>
-            {user && <p>Welcome {user.name} {user.surname}</p>}
+            
             <nav className = "navigation">
                 <ul>
                 { onChangeView === 'landing' && <li><a href="" className = "btn btn__nav" onClick={ event => {
@@ -25,7 +25,8 @@ function Header(props){
                                                     onGoToLogin()
                                                 }}>Login</a></li>
                                             }
-                { user && <li><a href="" className = "btn btn__logout btn--anchor" onClick={ event => {
+                {user && <p>Welcome {user.name} {user.surname}</p>}
+                { user && <li><a href="" className = "btn btn__logout" onClick={ event => {
                                                     event.preventDefault()
                                                     onLogout()
                                                 }}>Logout</a></li>
