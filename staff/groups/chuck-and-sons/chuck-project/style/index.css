@@ -52,6 +52,45 @@
   color: white;
 }
 
+.results {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.results h2 {
+  text-align: center;
+}
+
+.joke-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+  background-color: #D7D4D4;
+  border-radius: 0.5rem;
+}
+.joke-container .div-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.joke {
+  line-height: 1.3;
+  margin: 5px auto;
+  padding: 25px;
+  width: 80%;
+  height: auto;
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
+
 li {
   list-style: none;
   font-size: 1.3rem;
@@ -82,10 +121,10 @@ li {
   padding: 0.75rem 0;
   color: black;
   font-family: "Special Elite", cursive;
+  outline: none;
 }
 .btn__nav {
   width: 100%;
-  background-color: #ccc;
   padding: 0.5rem;
 }
 .btn__submit {
@@ -105,6 +144,13 @@ li {
 .btn__search {
   padding: 0.25rem;
   margin-bottom: 0.5rem;
+}
+.btn__synth {
+  padding: 0.25rem;
+  margin: 0.5rem 0;
+  background-color: white;
+  border-radius: 0.25rem;
+  border: 1px solid #999;
 }
 
 .random-button {
@@ -145,10 +191,15 @@ li {
 .form__landing > input {
   display: block;
   width: 75%;
+  height: 1.5rem;
   border: 1px solid;
   margin-bottom: 0.5rem;
   text-align: center;
   font-size: 1rem;
+  font-family: "Special Elite", cursive;
+  outline: none;
+  border: none;
+  background-color: #C1BEBE;
 }
 .form--search {
   width: 100%;
