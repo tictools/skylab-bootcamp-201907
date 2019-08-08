@@ -9,9 +9,9 @@ function Register(props){
     return <>
         <div className = "form">
 
-            <h1> Register </h1>
+            <h2> Register </h2>
 
-            <form   className = "form__register"
+            <form   className = "form__landing form--register"
             
                     onSubmit={ event =>{
                         event.preventDefault()
