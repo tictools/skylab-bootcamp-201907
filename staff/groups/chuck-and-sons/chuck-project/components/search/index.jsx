@@ -19,7 +19,7 @@ function Search(props){
             <label htmlFor="query"></label>
                 <input type="text" name="query" id ="query" />
             
-            <button className="btn btn__submit">Search</button>
+            <button className="btn btn__search">Search</button>
 
         </form>
     </>

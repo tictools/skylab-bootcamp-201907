@@ -181,11 +181,13 @@ class App extends React.Component {
                 {view === 'register-success' && <RegisterSuccess onGoToLanding={handleGoToLanding} onGoToLogin={handleGoToLogin} />}
 
                 {view === "landing" && <main className="main-container">
-                    <Search onSearch={handleSearch} />
-                    {<button className="random-button" onClick={event => {
-                        event.preventDefault()
-                        handleRandomButton()
-                    }}>Random Chuck</button>}
+                    <div className = "search-random-box">
+                        <Search onSearch={handleSearch} />
+                        {<button className="random-button" onClick={event => {
+                            event.preventDefault()
+                            handleRandomButton()
+                        }}>Random Chuck</button>}
+                    </div>
 
                     <Categories categories={categories} searchCategory={handleSearchCategories} />
                     //-----------------------------------------------------------------------
