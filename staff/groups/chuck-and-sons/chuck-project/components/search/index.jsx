@@ -1,24 +1,19 @@
-function Search(props){
+function Search(props) {
 
-    const {
-        onSearch
-    } = props
+    const { onSearch } = props
 
     return <>
-        <form
-            className = "form form__landing form--search"
-            onSubmit = { event =>{
-                event.preventDefault()
+        <form className="form form--search" onSubmit={event => {
+            event.preventDefault()
 
-                const  { target : { query : { value : query } } } = event
+            const { target: { query: { value: query } } } = event
 
-                onSearch(query)
-            }                
+            onSearch(query)
+        }
         }>
-            
             <label htmlFor="query"></label>
-                <input type="text" name="query" id ="query" />
-            
+            <input type="text" name="query" id="query" />
+
             <button className="btn btn__search">Search</button>
 
         </form>
