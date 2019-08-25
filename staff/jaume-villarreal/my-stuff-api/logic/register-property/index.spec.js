@@ -10,8 +10,7 @@ describe('logic - register property', () => {
      let name, surname, email, password , address , m2 , year , cadastre , userId
 
     beforeEach(() => {
-        name = `John`
-        // name = `name-${Math.random()}`
+        name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`

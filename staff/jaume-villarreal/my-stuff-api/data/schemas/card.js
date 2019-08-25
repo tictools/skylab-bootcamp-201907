@@ -9,6 +9,6 @@ module.exports = new Schema({
     },
 
     expiration : {
-        expiry : Date
+        type : Date
     }
 })
