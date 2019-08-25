@@ -6,5 +6,6 @@ module.exports = {
     unregisterUser : require('./unregister-user'),
     registerProperty : require('./register-property'),
     retrieveProperty : require('./retrieve-property'),
-    updateProperty : require('./update-property')
+    updateProperty : require('./update-property'),
+    unregisterProperty : require('./unregister-property')
 }

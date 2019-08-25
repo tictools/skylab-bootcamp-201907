@@ -45,10 +45,10 @@ describe('logic - register property', () => {
             })
     )
     
-    // it('should fail on unexisting user', () =>
-    //     logic.registerProperty('123' , address , m2 , year , cadastre)
-    //         .catch( ({ message}) => expect(message).to.equal('user with email 123 does not exist'))
-    // )
+    it('should fail on unexisting user', () =>
+        logic.registerProperty('123' , address , m2 , year , cadastre)
+            .catch( ({ message}) => expect(message).to.equal('user with email 123 does not exist'))
+    )
 
     after(() => mongoose.disconnect())
 })
