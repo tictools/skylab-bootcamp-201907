@@ -7,5 +7,9 @@ module.exports = {
     registerProperty : require('./register-property'),
     retrieveProperty : require('./retrieve-property'),
     updateProperty : require('./update-property'),
-    unregisterProperty : require('./unregister-property')
+    unregisterProperty : require('./unregister-property'),
+    registerVehicle : require('./register-vehicle'),
+    retrieveVehicle : require('./retrieve-vehicle'),
+    updateVehicle : require('./update-vehicle'),
+    unregisterVehicle : require('./unregister-vehicle')
 }
