@@ -27,7 +27,7 @@ describe('logic - retrieve property', () => {
     })
 
     it('should succeed on correct data', () =>
-        logic.retrieveProperty(cadastre)
+        logic.retrieveProperty(propertyId)
             .then(property => {
                 expect(property).to.exist
                 expect(property._id).not.to.exist
@@ -40,6 +40,12 @@ describe('logic - retrieve property', () => {
                 expect(property.owners[1].toString()).to.equal(id1)
             })
     )
+
+    it("should fail on unexisting property" , () => {
+        propertyId = '5d5d5530531d455f75da9fF9'
+        logic.retrieveProperty(propertyId)
+            .catch(({ message }) => expect(message).to.equal('property with id 5d5d5530531d455f75da9fF9 does not exist'))
+    })
 
     after(() => mongoose.disconnect())
 })

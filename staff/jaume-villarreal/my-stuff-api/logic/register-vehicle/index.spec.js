@@ -32,7 +32,7 @@ describe('logic - register vehicle', () => {
     })
 
     it('should succeed on correct data', () =>
-        logic.registerVehicle(email , brand , model , year , type , color , license)
+        logic.registerVehicle(userId , brand , model , year , type , color , license)
             .then(result => {
                 expect(result).to.exist
                 return Vehicle.findOne({ license })
@@ -50,16 +50,11 @@ describe('logic - register vehicle', () => {
     )
     
     it('should fail on unexisting user', () =>
-        logic.registerVehicle('123' , brand , model , year , type , color , license)
-            .catch( ({ message}) => expect(message).to.equal('wrong credentials'))
+        logic.registerVehicle('5d5d5530531d455f75da9fF9' , brand , model , year , type , color , license)
+            .catch( ({ message}) => expect(message).to.equal('user with id 5d5d5530531d455f75da9fF9 does not exist'))
     )
 
     it('should fail on existing vehicle', () =>{
-        // name = `name-${Math.random()}`
-        // surname = `surname-${Math.random()}`
-        // email = `email-${Math.random()}@domain.com`
-        // password = `password-${Math.random()}`
-
         brand = `brand-${Math.random()}`
         model = `model-${Math.random()}`
         year = Math.random()
@@ -68,7 +63,7 @@ describe('logic - register vehicle', () => {
         license = `license-${Math.random()}`
 
         return Vehicle.create({ brand , model , year , type , color , license })
-            .then(vehicle => logic.registerVehicle(email , brand , model , year , type , color , license))
+            .then(vehicle => logic.registerVehicle(userId , brand , model , year , type , color , license))
             .catch( ({ message }) => expect(message).to.equal(`vehicle with license ${license} already exists`))
         }
     )

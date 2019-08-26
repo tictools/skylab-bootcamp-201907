@@ -12,5 +12,7 @@ module.exports = {
     retrieveVehicle : require('./retrieve-vehicle'),
     updateVehicle : require('./update-vehicle'),
     unregisterVehicle : require('./unregister-vehicle'),
-    registerCard : require('./register-card')
+    registerCard : require('./register-card'),
+    retrieveCard : require('./retrieve-card'),
+    unregisterCard : require('./unregister-card')
 }

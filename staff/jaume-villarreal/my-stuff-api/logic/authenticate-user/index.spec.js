@@ -29,5 +29,15 @@ describe('logic - authenticate user', () => {
             })
     )
 
+    it("should fail on wrong mail" , () => 
+        logic.authenticateUser('123@mail.com', password)
+            .catch(({ message }) => 'user with e-mail 123@mail.com does not exist')
+    )
+    
+    it("should fail on wrong password" , () => 
+        logic.authenticateUser(email, '123')
+            .catch(({ message }) => 'wrong credentials')
+    )
+
     after(() => mongoose.disconnect())
 })

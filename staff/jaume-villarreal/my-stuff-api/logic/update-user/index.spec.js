@@ -30,7 +30,7 @@ describe('logic - update user', () => {
     it('should succeed on correct data', () =>
         logic.updateUser(id, body)
             .then(result => {
-                expect(result).not.to.exist
+                expect(result.nModified).to.exist
 
                 return User.findById(id)
             })

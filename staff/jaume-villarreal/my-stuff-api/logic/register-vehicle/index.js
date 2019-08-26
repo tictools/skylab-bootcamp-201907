@@ -1,10 +1,10 @@
 const { User } = require('../../data')
 const { Vehicle } = require('../../data')
 
-module.exports = function(email , brand , model , year , type , color , license) {
-    return Promise.all([ User.findOne({ email }) , Vehicle.findOne({ license })])
+module.exports = function(userId , brand , model , year , type , color , license) {
+    return Promise.all([ User.findOne({ _id : userId }) , Vehicle.findOne({ license })])
         .then(([ user , vehicle ]) => {
-            if(!user) throw new Error('wrong credentials')
+            if(!user) throw new Error(`user with id ${userId} does not exist`)
             
             if(vehicle) throw new Error(`vehicle with license ${license} already exists`)
 

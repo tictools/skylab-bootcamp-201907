@@ -9,8 +9,9 @@ const { User } = require('../../data')
  * @returns {Promise}
  */
 module.exports = function (id, data) {
-    return User.findByIdAndUpdate(id, { $set: data })
+    return User.findById(id)
         .then(user => {
             if (!user) throw new Error(`user with id ${id} does not exist`)
+            return User.updateOne({ _id : id } , { $set: data })
         })
 }

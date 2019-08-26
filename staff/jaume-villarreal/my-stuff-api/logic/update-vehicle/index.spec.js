@@ -45,7 +45,10 @@ describe('logic - update vehicle', () => {
 
     it('should succeed on correct data', () =>
         logic.updateVehicle(userId1, license , updatedData)
-            .then(() => Vehicle.findOne({ license }))
+            .then(result =>{
+                 expect(result.nModified).to.exist
+                 return Vehicle.findOne({ license })
+            })
             .then(vehicle => {
                 expect(vehicle).to.exist
                 expect(vehicle.brand).to.equal(updatedData.brand)

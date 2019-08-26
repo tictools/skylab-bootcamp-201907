@@ -19,25 +19,34 @@ describe('logic - register card', () => {
         expiration = new Date()
 
         return User.deleteMany()
-            .then(() => Card.deleteMany())
             .then(() => User.create({ name , surname , email , password }))
             .then(user => userId = user.id)
     })
 
     it('should succeed on correct data', () =>
         logic.registerCard(userId , number , expiration)
-            .then(() => User.findById({ _id :userId }).populate('cards'))
+            .then(cardId => {
+                expect(cardId).to.exist
+                return User.findById({ _id :userId })
+            })
             .then(user => {
                 expect(user.cards.length).to.equal(1)
-                // expect(user.cards[0].number).to.equal(number)
-                // expect(user.cards[0].expiration).to.equal(date)
+                expect(user.cards[0].number).to.equal(number)
+                
+                expect(user.cards[0].expiration).to.deep.equal(expiration)
             })
     )
     
-    // it('should fail on unexisting user', () =>
-    //     logic.registerProperty('123' , address , m2 , year , cadastre)
-    //         .catch( ({ message}) => expect(message).to.equal('user with email 123 does not exist'))
-    // )
+    it('should fail on unexisting user' , () =>
+        logic.registerCard('5d5d5530531d455f75da9fF9' , number , expiration)
+            .catch( ({ message }) => expect(message).to.equal(`user with id 5d5d5530531d455f75da9fF9 does not exist`))
+    )
+
+    it('should fail on existing card' ,  () => 
+        logic.registerCard(userId , number , expiration)
+            .then(() => logic.registerCard(userId , number , expiration))
+                .catch(({ message }) => expect(message).to.equal('card already exists'))
+    )
 
     after(() => mongoose.disconnect())
 })
