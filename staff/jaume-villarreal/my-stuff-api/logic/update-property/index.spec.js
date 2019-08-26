@@ -39,7 +39,7 @@ describe('logic - update property', () => {
             .then(() => Property.deleteMany())
             .then(() => User.create({ name , surname , email , password }))
             .then(user =>{
-                userId1 = user._id
+                userId1 = user.id
                 const property = new Property({ address , m2 , year , cadastre })
                 propertyId = property.id
                 property.owners.push(userId1)
@@ -99,6 +99,30 @@ describe('logic - update property', () => {
             })
         })
     })
+
+    it('should fail on empty user id', () => 
+        expect(() => logic.updateProperty("", propertyId , updatedData)).to.throw('user id is empty or blank')
+    )
+    
+    it('should fail on wrong user id type', () => 
+         expect(() => logic.updateProperty(123, propertyId , updatedData)).to.throw('user id with value 123 is not a string')
+    )
+    
+    it('should fail on empty property id', () => 
+        expect(() => logic.updateProperty(userId1, "" , updatedData)).to.throw('property id is empty or blank')
+    )
+    
+    it('should fail on wrong property id type', () => 
+         expect(() => logic.updateProperty(userId1, 123 , updatedData)).to.throw('property id with value 123 is not a string')
+    )
+    
+    // it('should fail on empty name', () => 
+    //     expect(() => logic.updateProperty(userId1, propertyId , updatedData)).to.throw('name is empty or blank')
+    // )
+    
+    // it('should fail on wrong name type', () => 
+    //      expect(() => logic.updateProperty(userId1, propertyId , updatedData)).to.throw('name is empty or blank')
+    // )
 
     after(() => mongoose.disconnect())
 })

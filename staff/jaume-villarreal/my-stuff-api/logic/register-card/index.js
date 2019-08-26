@@ -1,8 +1,13 @@
+const validate = require('../../utils/validate')
 const { User } = require('../../data')
 const { Card } = require('../../data')
 
 module.exports = function(userId , number , expiration){
-    let cardId , _user
+    validate.string(userId , 'user id')
+    validate.number(number , 'number')
+    // validate.date(expiration , 'expiration')
+
+    let cardId
 
     return User.findById(userId)
         .then(user => {

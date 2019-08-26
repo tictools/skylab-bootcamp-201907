@@ -47,5 +47,21 @@ describe('logic - register card', () => {
                 .catch(({ message }) => expect(message).to.equal('card already exists'))
     )
 
+    it('should fail on empty user id', () => 
+        expect(() => logic.registerCard("" , number , expiration)).to.throw('user id is empty or blank')
+    )
+
+    it('should fail on wrong user id type', () => 
+        expect(() => logic.registerCard(123 , number, expiration)).to.throw('user id with value 123 is not a string')
+    )
+    
+    it('should fail on empty number', () => 
+        expect(() => logic.registerCard(userId , "" , expiration)).to.throw('number is empty or blank')
+    )
+
+    it('should fail on wrong number type', () => 
+        expect(() => logic.registerCard(userId , '123' , expiration)).to.throw('number with value 123 is not a number')
+    )
+
     after(() => mongoose.disconnect())
 })

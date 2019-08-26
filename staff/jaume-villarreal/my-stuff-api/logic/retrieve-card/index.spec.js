@@ -49,5 +49,21 @@ describe('logic - retrieve card', () => {
             .catch(({ message }) => expect(message).to.equal('card with id 5d5d5530531d455f75da9fF9 does not exist'))
     })
 
+    it('should fail on empty user id', () => 
+        expect(() => logic.retrieveCard("" , cardId)).to.throw('user id is empty or blank')
+    )
+    
+    it('should fail on wrong user id type', () => 
+        expect(() => logic.retrieveCard(123 , cardId)).to.throw('user id with value 123 is not a string')
+    )
+    
+    it('should fail on empty card id', () => 
+        expect(() => logic.retrieveCard(userId , "")).to.throw('card id is empty or blank')
+    )
+    
+    it('should fail on wrong card id type', () => 
+        expect(() => logic.retrieveCard(userId , 123)).to.throw('card id with value 123 is not a string')
+    )
+
     after(() => mongoose.disconnect())
 })

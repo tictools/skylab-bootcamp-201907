@@ -1,3 +1,4 @@
+const validate = require('../../utils/validate')
 const { User } = require('../../data')
 /**
  * Unregisters a user.
@@ -8,10 +9,12 @@ const { User } = require('../../data')
  * @returns {Promise}
  */
 module.exports = function (id, password) {
-    // TODO validate fields
+    validate.string(id , 'id')
+    validate.string(password , 'password')
 
     return User.deleteOne({ _id: id, password })
         .then(result => {
             if (!result.deletedCount) throw new Error(`wrong credentials`)
         })
 }
+    

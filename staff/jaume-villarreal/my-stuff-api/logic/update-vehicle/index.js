@@ -1,8 +1,12 @@
+const validate = require('../../utils/validate')
 const { User } = require('../../data')
 const { Vehicle } = require('../../data')
 
 module.exports = function(userId , license , data){
-    debugger
+    validate.string(userId , 'user id')
+    validate.string(license , 'license')
+    // validate.string(data , 'data')
+
     return Promise.all([ User.findById({ _id : userId }) , Vehicle.findOne({ license })])
     .then(([ user , vehicle]) => {
         if(!user) throw new Error ('wrong credentials')
@@ -14,3 +18,6 @@ module.exports = function(userId , license , data){
         return Vehicle.updateOne({ _id : vehicle._id } , { $set: data })
     })
 }
+
+
+

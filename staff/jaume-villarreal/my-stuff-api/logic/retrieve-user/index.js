@@ -1,3 +1,4 @@
+const validate = require('../../utils/validate')
 const { User } = require('../../data')
 const mongoose = require('mongoose')
 
@@ -9,6 +10,9 @@ const mongoose = require('mongoose')
  * @returns {Promise}
  */
 module.exports = function (userId) {
+
+    validate.string(userId , 'user id')
+    // 
     return User.findOne({ _id: userId }, { _id: 0, password: 0 }).lean()
         .then(user => {
             if (!user) throw new Error(`user with id ${userId} not found`)
@@ -18,3 +22,4 @@ module.exports = function (userId) {
             return user
         })
 }
+

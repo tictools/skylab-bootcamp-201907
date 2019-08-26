@@ -1,8 +1,12 @@
+const validate = require('../../utils/validate')
 const { User } = require('../../data')
 const { Property } = require('../../data')
 
 module.exports = function(userId , propertyId , data){
-    debugger
+    validate.string(userId , 'user id')
+    validate.string(propertyId , 'property id')
+    // validate.string(data , 'data')
+
     return Promise.all([ User.findById({ _id : userId }) , Property.findOne({ _id : propertyId })])
     .then(([ user , property]) => {
         if(!user) throw new Error (`user with id ${userId} does not exist`)
@@ -14,3 +18,4 @@ module.exports = function(userId , propertyId , data){
         return Property.updateOne({ _id : property._id } , { $set: data })
     })
 }
+    

@@ -49,5 +49,13 @@ describe('logic - retrieve vehicle', () => {
             .catch(({ message }) => expect(message).to.equal('vehicle with license 5d5d5530531d455f75da9fF9 does not exist'))
     )
 
+    it('should fail on empty vehicle id', () => 
+        expect(() => logic.retrieveVehicle("")).to.throw('vehicle id is empty or blank')
+    )
+    
+    it('should fail on wrong vehicle id type', () => 
+        expect(() => logic.retrieveVehicle(123)).to.throw('vehicle id with value 123 is not a string')
+    )
+
     after(() => mongoose.disconnect())
 })

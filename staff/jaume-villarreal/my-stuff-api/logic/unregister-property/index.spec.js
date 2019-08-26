@@ -98,5 +98,22 @@ describe('logic - unregister property', () => {
         })
     })
 
+
+    it('should fail on empty property id', () => 
+        expect(() => logic.unregisterProperty("" , userId)).to.throw('property id is empty or blank')
+    )
+    
+    it('should fail on wrong property id type', () => 
+        expect(() => logic.unregisterProperty(123 , userId)).to.throw('property id with value 123 is not a string')
+    )
+
+    it('should fail on empty user id', () => 
+        expect(() => logic.unregisterProperty(propertyId , "")).to.throw('user id is empty or blank')
+    )
+    
+    it('should fail on wrong user id type', () => 
+        expect(() => logic.unregisterProperty(propertyId , 123)).to.throw('user id with value 123 is not a string')
+    )
+
     after(() => mongoose.disconnect())
 })

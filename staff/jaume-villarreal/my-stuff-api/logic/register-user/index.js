@@ -1,3 +1,4 @@
+const validate = require('../../utils/validate')
 const { User } = require('../../data')
 
 /**
@@ -11,7 +12,11 @@ const { User } = require('../../data')
  * @returns {Promise}
  */
 module.exports = function (name, surname, email, password) {
-    // TODO validate fields
+    validate.string(name , 'name')
+    validate.string(surname , 'surname')
+    validate.string(email , 'email')
+    validate.email(email , 'email')
+    validate.string(password , 'password')
 
     return User.findOne({ email })
         .then(user => {

@@ -36,7 +36,7 @@ describe('logic - update vehicle', () => {
             .then(() => Vehicle.deleteMany())
             .then(() => User.create({ name , surname , email , password }))
             .then(user =>{
-                userId1 = user._id
+                userId1 = user.id
                 const vehicle = new Vehicle({ brand , model , year , type , color , license })
                 vehicle.owner.push(userId1)
                 return vehicle.save()
@@ -86,6 +86,22 @@ describe('logic - update vehicle', () => {
     //         .then(() => { throw new Error('should not reach this point') })
     //         .catch(({ message }) => expect(message).to.equal(`user with id ${userId2} is not the owner of vehicle with license ${license}`))
     // })
+
+    it('should fail on empty user id', () => 
+        expect(() => logic.updateVehicle("", license , updatedData)).to.throw('user id is empty or blank')
+    )
+    
+    it('should fail on wrong user id type', () => 
+        expect(() => logic.updateVehicle(123, license , updatedData)).to.throw('user id with value 123 is not a string')
+    )
+    
+    it('should fail on empty license', () => 
+        expect(() => logic.updateVehicle(userId1, "" , updatedData)).to.throw('license is empty or blank')
+    )
+    
+    it('should fail on wrong license type', () => 
+        expect(() => logic.updateVehicle(userId1, 123 , updatedData)).to.throw('license with value 123 is not a string')
+    )
 
     after(() => mongoose.disconnect())
 })

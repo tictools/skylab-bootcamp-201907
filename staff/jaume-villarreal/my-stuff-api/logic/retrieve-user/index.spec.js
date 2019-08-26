@@ -32,5 +32,12 @@ describe('logic - retrieve user', () => {
             })
     )
 
+    it('should fail on empty user id', () => 
+        expect(() => logic.retrieveUser("")).to.throw('user id is empty or blank')
+    )
+    
+    it('should fail on wrong user id type', () => 
+        expect(() => logic.retrieveUser(123)).to.throw('user id with value 123 is not a string'))
+
     after(() => mongoose.disconnect())
 })

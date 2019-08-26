@@ -26,7 +26,7 @@ describe('logic - unregister vehicle', () => {
         return User.deleteMany()
             .then(() => User.create({ name , surname , email , password }))
             .then(user =>{
-                userId = user._id
+                userId = user.id
                 return Vehicle.deleteMany()
             })
             .then(() => {
@@ -80,6 +80,22 @@ describe('logic - unregister vehicle', () => {
             })
         })
     })
+
+    it('should fail on empty vehicle id', () => 
+        expect(() => logic.unregisterVehicle("" , userId)).to.throw('vehicle id is empty or blank')
+    )
+    
+    it('should fail on wrong vehicle id type', () => 
+        expect(() => logic.unregisterVehicle(123 , userId)).to.throw('vehicle id with value 123 is not a string')
+    )
+    
+    it('should fail on empty user id', () => 
+        expect(() => logic.unregisterVehicle(vehicleId , "")).to.throw('user id is empty or blank')
+    )
+    
+    it('should fail on wrong user id type', () => 
+        expect(() => logic.unregisterVehicle(vehicleId , 123)).to.throw('user id with value 123 is not a string')
+    )
 
     after(() => mongoose.disconnect())
 })
