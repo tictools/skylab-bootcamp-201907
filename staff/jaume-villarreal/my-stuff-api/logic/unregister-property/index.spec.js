@@ -7,7 +7,7 @@ const logic = require('..')
 describe('logic - unregister property', () => {
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
-    let userId , name , surname , email , password , propertyId , address , m2 , year , cadastre
+    let userId , userId2 , name , surname , email , password , propertyId , address , m2 , year , cadastre
 
     beforeEach(() => {
         name = `name-${Math.random()}`
@@ -71,6 +71,31 @@ describe('logic - unregister property', () => {
             .then(() => { throw Error('should not reach this point') })
             .catch(({ message }) => expect(message).to.equal('invalid action: there are two or more owners for this property'))
 
+    })
+
+    it("should fail on unregistering a property by a user who is not an owner" , () => {
+        let _name = `name-${Math.random()}`
+        let _surname = `surname-${Math.random()}`
+        let _email = `email-${Math.random()}@domain.com`
+        let _password = `password-${Math.random()}`
+
+        return Promise.all([ User.create({ name , surname , email , password }) , User.create({ name : _name , surname : _surname , email : _email , password : _password }) ])
+            .then(([user1 , user2]) =>{
+                userId = user1.id
+                userId2 = user2.id
+
+                const property = new Property({ address, m2 , year , cadastre })
+                propertyId = property.id
+                property.owners.push(userId)
+
+                return property.save()
+            })
+        .then(property => {
+            logic.unregisterProperty( property.id , userId2 ) 
+            .catch(({ message }) => {
+                expect(message).to.equal(`user with id ${userId2} is not owner of property with id ${property.id}`)
+            })
+        })
     })
 
     after(() => mongoose.disconnect())
