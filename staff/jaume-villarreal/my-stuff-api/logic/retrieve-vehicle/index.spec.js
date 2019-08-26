@@ -7,7 +7,7 @@ const logic = require('..')
 describe('logic - retrieve vehicle', () => {
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
-    let brand , model , year , type , color , license
+    let brand , model , year , type , color , license , vehicleId
     let types = ['tourism' , 'suv' , 'van' , 'coupe' , 'cabrio' , 'roadster' , 'truck']
 
     beforeEach(() => {
@@ -22,14 +22,14 @@ describe('logic - retrieve vehicle', () => {
         return Vehicle.deleteMany()
             .then(() => {
                 const vehicle = new Vehicle({ brand , model , year , type , color , license })
+                vehicleId = vehicle.id
                 vehicle.owner.push(id0)
                 return vehicle.save()
             })
-            .then(vehicle => vehicleId = vehicle.id)
     })
 
     it('should succeed on correct data', () =>
-        logic.retrieveVehicle(license)
+        logic.retrieveVehicle(vehicleId)
             .then(vehicle => {
                 expect(vehicle).to.exist
                 expect(vehicle._id).not.to.exist
@@ -44,9 +44,9 @@ describe('logic - retrieve vehicle', () => {
             })
     )
     
-    it('should fail on wrong license', () =>
-        logic.retrieveVehicle('123')
-            .catch(({ message }) => expect(message).to.equal('vehicle with license 123 does not exist'))
+    it('should fail on wrong vehicle id', () =>
+        logic.retrieveVehicle('5d5d5530531d455f75da9fF9')
+            .catch(({ message }) => expect(message).to.equal('vehicle with license 5d5d5530531d455f75da9fF9 does not exist'))
     )
 
     after(() => mongoose.disconnect())

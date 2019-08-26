@@ -13,10 +13,10 @@ const { Property } = require('../../data')
  * @returns {Promise}
  */
 
-module.exports = function( email , address , m2 , year , cadastre){
-    return Promise.all([ User.findOne({ email }) , Property.findOne({ cadastre }) ])
+module.exports = function( userId , address , m2 , year , cadastre){
+    return Promise.all([ User.findOne({ _id : userId }) , Property.findOne({ cadastre }) ])
         .then(([ user , property ]) => {
-            if(!user) throw new Error (`user with email ${email} does not exist`)
+            if(!user) throw new Error (`user with id ${userId} does not exist`)
 
             if(property) throw new Error(`property with cadastre ${cadastre} already exists`)
 

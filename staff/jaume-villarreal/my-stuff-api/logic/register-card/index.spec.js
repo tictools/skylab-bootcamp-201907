@@ -32,7 +32,6 @@ describe('logic - register card', () => {
             .then(user => {
                 expect(user.cards.length).to.equal(1)
                 expect(user.cards[0].number).to.equal(number)
-                
                 expect(user.cards[0].expiration).to.deep.equal(expiration)
             })
     )

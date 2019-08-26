@@ -7,7 +7,7 @@ const logic = require('..')
 describe('logic - unregister vehicle', () => {
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
-    let userId , name , surname , email , password , brand , model , year , type , color , license
+    let userId , name , surname , email , password , vehicleId , brand , model , year , type , color , license
     let types = ['tourism' , 'suv' , 'van' , 'coupe' , 'cabrio' , 'roadster' , 'truck']
 
     beforeEach(() => {
@@ -31,31 +31,34 @@ describe('logic - unregister vehicle', () => {
             })
             .then(() => {
                 const vehicle = new Vehicle({ brand , model , year , type , color , license })
+                vehicleId = vehicle.id
                 vehicle.owner.push(userId)
                 return vehicle.save()
             })
     })
 
     it('should succeed on correct data', () =>
-        logic.unregisterVehicle(license , userId)
-            .then(result => Vehicle.findOne({ license }))
+        logic.unregisterVehicle(vehicleId , userId)
+            .then(result => Vehicle.findOne({ vehicleId }))
             .then(vehicle => {
                 expect(vehicle).not.to.exist
             })
     )
 
-    it('should fail on right cadsatre and unexisting user', () =>
-        logic.unregisterVehicle(license , '5d5d5530531d455f75da9fF9')
+    it('should fail on right vehicle and unexisting user', () =>
+        logic.unregisterVehicle(vehicleId , '5d5d5530531d455f75da9fF9')
             .then(() => { throw Error('should not reach this point') })
-            .catch(({ message }) => expect(message).to.equal('wrong credentials'))
+            .catch(({ message }) => expect(message).to.equal('user with id 5d5d5530531d455f75da9fF9 does not exist'))
     )
 
-    it('should fail on existing user, but wrong cadastre', () =>{
-        return logic.unregisterProperty('123' , userId)
+    it('should fail on existing user and unexisting vehicle', () =>{
+        return logic.unregisterVehicle('5d5d5530531d455f75da9fF9' , userId)
             .then(() => { throw Error('should not reach this point') })
-            .catch(({ message }) => expect(message).to.equal('property with cadastre 123 does not exist'))
+            .catch(({ message }) => expect(message).to.equal('vehicle with id 5d5d5530531d455f75da9fF9 does not exist'))
 
     })
+
+    it("should fail on ")
 
     after(() => mongoose.disconnect())
 })

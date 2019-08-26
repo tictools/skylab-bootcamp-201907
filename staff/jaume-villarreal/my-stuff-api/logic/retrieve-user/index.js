@@ -8,12 +8,12 @@ const mongoose = require('mongoose')
  * 
  * @returns {Promise}
  */
-module.exports = function (id) {
-    return User.findOne({ _id: id }, { _id: 0, password: 0 }).lean()
+module.exports = function (userId) {
+    return User.findOne({ _id: userId }, { _id: 0, password: 0 }).lean()
         .then(user => {
-            if (!user) throw new Error(`user with id ${id} not found`)
+            if (!user) throw new Error(`user with id ${userId} not found`)
 
-            user.id = id
+            user.id = userId
 
             return user
         })

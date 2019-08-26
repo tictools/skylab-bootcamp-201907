@@ -7,7 +7,7 @@ module.exports = function(userId , number , expiration){
     return User.findById(userId)
         .then(user => {
             if(!user) throw new Error (`user with id ${userId} does not exist`)
-            _user = user
+            // _user = user
 
             const card = user.cards.find( card => card.number === number)
             if(card) throw new Error ('card already exists')
