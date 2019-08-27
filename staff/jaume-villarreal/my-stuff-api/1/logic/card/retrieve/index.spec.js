@@ -9,7 +9,7 @@ describe('logic - retrieve card', () => {
 
     let name , surname , email , password , number , expiration , userId , cardId
 
-    beforeEach(() => {
+    beforeEach(async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@mail.com`
@@ -17,35 +17,46 @@ describe('logic - retrieve card', () => {
         number = Math.random()
         expiration = new Date()
 
-        return User.deleteMany()
-            .then(() => User.create({ name , surname , email , password }))
-            .then(user => {
-                userId = user.id
-                const card = new Card({ userId , number , expiration })
-                cardId = card.id
-                user.cards.push(card)
-                return user.save()
-            })
+        await User.deleteMany()
+
+        const user = await User.create({ name , surname , email , password })
+        userId = user.id
+        
+        const card = await new Card({ userId , number , expiration })
+        cardId = card.id
+        user.cards.push(card)
+
+        return await user.save()
     })
 
-    it("should succeed on correct data" , () => 
-        logic.retrieveCard(userId , cardId)
-            .then(card => {
-                expect(card).to.exist
-                expect(card.id).to.equal(cardId)
-                expect(card.number).to.equal(number)
-                expect(card.expiration).to.deep.equal(expiration)
-            })
-    )
+    it("should succeed on correct data" , async () => {
+        const card = await logic.retrieveCard(userId , cardId)
+        expect(card).to.exist
+        expect(card.id).to.equal(cardId)
+        expect(card.number).to.equal(number)
+        expect(card.expiration).to.deep.equal(expiration)
+    })
 
     it("should fail on unexisting user" , () => {
-        logic.retrieveCard('5d5d5530531d455f75da9fF9' , cardId)
-            .catch(({ message }) => expect(message).to.equal('user with id 5d5d5530531d455f75da9fF9 does not exist'))
+        expect(async () => {
+            await logic.retrieveCard('5d5d5530531d455f75da9fF9' , cardId).should.be.rejected()
+        })
+    })
+    
+    it("should fail on unexisting user" , async () => {
+        try{
+            await logic.retrieveCard('5d5d5530531d455f75da9fF9' , cardId)
+        } catch({ message }){
+            expect(message).to.equal('user with id 5d5d5530531d455f75da9fF9 does not exist')
+        }
     })
 
-    it("should fail on unexisting card" , () => {
-        logic.retrieveCard(userId , '5d5d5530531d455f75da9fF9')
-            .catch(({ message }) => expect(message).to.equal('card with id 5d5d5530531d455f75da9fF9 does not exist'))
+    it("should fail on unexisting card" , async () => {
+        try {
+            await logic.retrieveCard(userId , '5d5d5530531d455f75da9fF9')
+        } catch({ message }) {
+            expect(message).to.equal('card with id 5d5d5530531d455f75da9fF9 does not exist')
+        }
     })
 
     it('should fail on empty user id', () => 

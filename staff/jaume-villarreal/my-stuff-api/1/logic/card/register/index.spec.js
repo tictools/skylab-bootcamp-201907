@@ -3,12 +3,12 @@ const { expect } = require('chai')
 const { User , Card } = require('../../../data')
 const logic = require('../../.')
 
-describe.only('logic - register card', () => {
+describe('logic - register card', () => {
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
      let name, surname, email, password , number , date
 
-    beforeEach(() => {
+    beforeEach(async () => {
         name = `John-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
@@ -17,23 +17,20 @@ describe.only('logic - register card', () => {
         number = Math.random()
         expiration = new Date()
 
-        return User.deleteMany()
-            .then(() => User.create({ name , surname , email , password }))
-            .then(user => userId = user.id)
+        await User.deleteMany()
+        const user = await User.create({ name , surname , email , password })
+        userId = user.id
     })
 
-    it('should succeed on correct data', () =>
-        logic.registerCard(userId , number , expiration)
-            .then(cardId => {
-                expect(cardId).to.exist
-                return User.findById({ _id :userId })
-            })
-            .then(user => {
-                expect(user.cards.length).to.equal(1)
-                expect(user.cards[0].number).to.equal(number)
-                expect(user.cards[0].expiration).to.deep.equal(expiration)
-            })
-    )
+    it('should succeed on correct data', async () =>{
+        const cardId = await logic.registerCard(userId , number , expiration)
+        expect(cardId).to.exist
+        
+        const user = await User.findById({ _id :userId })
+        expect(user.cards.length).to.equal(1)
+        expect(user.cards[0].number).to.equal(number)
+        expect(user.cards[0].expiration).to.deep.equal(expiration)
+    })
     
     it('should fail on unexisting user' , () =>
         logic.registerCard('5d5d5530531d455f75da9fF9' , number , expiration)

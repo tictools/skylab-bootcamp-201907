@@ -5,7 +5,7 @@ const { User } = require('../../../data')
 const { Card } = require('../../../data')
 const logic = require('../../.')
 
-describe('logic - unregister card', () => {
+describe.only('logic - unregister card', () => {
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
     let name , surname , email , password , number , expiration , userId , cardId

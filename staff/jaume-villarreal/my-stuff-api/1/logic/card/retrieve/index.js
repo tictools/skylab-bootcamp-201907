@@ -5,13 +5,15 @@ module.exports = function(userId , cardId){
     validate.string(userId , 'user id')
     validate.string(cardId , 'card id')
 
-    return User.findById(userId)
-        .then(user => {
-            if(!user) throw new Error (`user with id ${userId} does not exist`)
+    return (async () => {
+        const user = await User.findById(userId)
 
-            const card = user.cards.find( card => card.id === cardId)
-            if(!card) throw new Error (`card with id ${cardId} does not exist`)
+        if(!user) throw new Error (`user with id ${userId} does not exist`)
 
-            return card
-        })
+        const card = user.cards.find( card => card.id === cardId)
+
+        if(!card) throw new Error (`card with id ${cardId} does not exist`)
+
+        return card
+    })()
 }
