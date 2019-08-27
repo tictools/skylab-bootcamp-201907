@@ -4,7 +4,7 @@ const { expect } = require('chai')
 const { Vehicle } = require('../../../data')
 const logic = require('../../.')
 
-describe.only('logic - retrieve vehicle', () => {
+describe('logic - retrieve vehicle', () => {
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
     let brand , model , year , type , color , license , vehicleId

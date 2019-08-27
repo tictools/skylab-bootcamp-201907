@@ -5,8 +5,9 @@ module.exports = function(vehicleId , userId){
     validate.string(vehicleId , 'vehicle id')
     validate.string(userId , 'user id')
 
-    return Promise.all([ User.findOne({ _id : userId }) , Vehicle.findOne({ _id : vehicleId }) ])
-        .then(([ user , vehicle ]) => {
+    return(async () =>{
+        const promises = await Promise.all([ User.findOne({ _id : userId }) , Vehicle.findOne({ _id : vehicleId }) ])
+        const [ user , vehicle ] = promises
             
             if(!user) throw new Error (`user with id ${userId} does not exist`)
 
@@ -14,8 +15,8 @@ module.exports = function(vehicleId , userId){
 
             if(!vehicle.owner.includes(userId)) throw new Error (`user with id ${userId} is not owner of vehicle with id ${vehicleId}`)
 
-            return Vehicle.deleteOne({ _id : vehicle._id })
-        })
+            return await Vehicle.deleteOne({ _id : vehicle._id })
+    })()
 }
 
 
