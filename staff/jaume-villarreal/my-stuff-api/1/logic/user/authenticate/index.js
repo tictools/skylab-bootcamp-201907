@@ -14,12 +14,13 @@ module.exports = function (email, password) {
     validate.email(email , 'email')
     validate.string(password , 'password')
 
-    return User.findOne({ email })
-        .then(user => {
-            if (!user) throw new Error(`user with e-mail ${email} does not exist`)
+    return(async () =>{
+        const user = await User.findOne({ email })
+            
+        if (!user) throw new Error(`user with e-mail ${email} does not exist`)
+        
+        if (user.password !== password) throw new Error('wrong credentials')
 
-            if (user.password !== password) throw new Error('wrong credentials')
-
-            return user.id
-        })
+        return await user.id
+    })()
 }

@@ -20,15 +20,18 @@ module.exports = function( userId , address , m2 , year , cadastre ){
     validate.number(year , 'year')
     validate.string(cadastre , 'cadastre')
 
-    return Promise.all([ User.findOne({ _id : userId }) , Property.findOne({ cadastre }) ])
-        .then(([ user , property ]) => {
-            if(!user) throw new Error (`user with id ${userId} does not exist`)
+    return(async () =>{
+        const promises = await Promise.all([ User.findOne({ _id : userId }) , Property.findOne({ cadastre }) ])
+        const [ user , property ] = promises
+        
+        if(!user) throw new Error (`user with id ${userId} does not exist`)
 
-            if(property) throw new Error(`property with cadastre ${cadastre} already exists`)
+        if(property) throw new Error(`property already exists`)
 
-            const newProperty = new Property({ address , m2 , year , cadastre })
-            newProperty.owners.push(user.id)
-            return newProperty.save()
-        })
+        const newProperty = await new Property({ address , m2 , year , cadastre })
+        newProperty.owners.push(user.id)
+
+        return await newProperty.save()
+    })()
 }
         

@@ -37,11 +37,11 @@ describe('logic - retrieve card', () => {
         expect(card.expiration).to.deep.equal(expiration)
     })
 
-    it("should fail on unexisting user" , () => {
-        expect(async () => {
-            await logic.retrieveCard('5d5d5530531d455f75da9fF9' , cardId).should.be.rejected()
-        })
-    })
+    // it("should fail on unexisting user" , () => {
+    //     expect(async () => {
+    //         await logic.retrieveCard('5d5d5530531d455f75da9fF9' , cardId).should.be.rejected()
+    //     })
+    // })
     
     it("should fail on unexisting user" , async () => {
         try{

@@ -9,7 +9,7 @@ describe('logic - register vehicle', () => {
      let userId , name, surname , email , password , brand , model , year , type , color , license 
      let types = ['tourism' , 'suv' , 'van' , 'coupe' , 'cabrio' , 'roadster' , 'truck']
 
-    beforeEach(() => {
+    beforeEach(async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
@@ -22,38 +22,38 @@ describe('logic - register vehicle', () => {
         color = `color-${Math.random()}`
         license = `license-${Math.random()}`
 
-        return User.deleteMany()
-            .then(() => User.create({ name , surname , email , password }))
-            .then(user =>{
-                userId = user.id
-                return Vehicle.deleteMany()
-            })
+        await User.deleteMany()
+
+        const user = await User.create({ name , surname , email , password })
+        userId = user.id
+
+        await Vehicle.deleteMany()
     })
 
-    it('should succeed on correct data', () =>
-        logic.registerVehicle(userId , brand , model , year , type , color , license)
-            .then(result => {
-                expect(result).to.exist
-                return Vehicle.findOne({ license })
-            })
-            .then(vehicle => {
-                expect(vehicle).to.exist
-                expect(vehicle.brand).to.equal(brand)
-                expect(vehicle.model).to.equal(model)
-                expect(vehicle.year).to.equal(year)
-                expect(vehicle.type).to.equal(type)
-                expect(vehicle.color).to.equal(color)
-                expect(vehicle.license).to.equal(license)
-                expect(vehicle.owner[0].toString()).to.equal(userId)
-            })
-    )
+    it('should succeed on correct data', async () =>{
+        const result = await logic.registerVehicle(userId , brand , model , year , type , color , license)
+            expect(result).to.exist
+        
+        const vehicle = await Vehicle.findOne({ license }) 
+            expect(vehicle).to.exist
+            expect(vehicle.brand).to.equal(brand)
+            expect(vehicle.model).to.equal(model)
+            expect(vehicle.year).to.equal(year)
+            expect(vehicle.type).to.equal(type)
+            expect(vehicle.color).to.equal(color)
+            expect(vehicle.license).to.equal(license)
+            expect(vehicle.owner[0].toString()).to.equal(userId)   
+    })
     
-    it('should fail on unexisting user', () =>
-        logic.registerVehicle('5d5d5530531d455f75da9fF9' , brand , model , year , type , color , license)
-            .catch( ({ message}) => expect(message).to.equal('user with id 5d5d5530531d455f75da9fF9 does not exist'))
-    )
+    it('should fail on unexisting user', async () =>{
+        try{
+            await logic.registerVehicle('5d5d5530531d455f75da9fF9' , brand , model , year , type , color , license)
+        } catch({ message }){
+            expect(message).to.equal('user with id 5d5d5530531d455f75da9fF9 does not exist')
+        }
+    })
 
-    it('should fail on existing vehicle', () =>{
+    it('should fail on existing vehicle', async() =>{
         brand = `brand-${Math.random()}`
         model = `model-${Math.random()}`
         year = Math.random()
@@ -61,11 +61,12 @@ describe('logic - register vehicle', () => {
         color = `color-${Math.random()}`
         license = `license-${Math.random()}`
 
-        return Vehicle.create({ brand , model , year , type , color , license })
-            .then(vehicle => logic.registerVehicle(userId , brand , model , year , type , color , license))
-            .catch( ({ message }) => expect(message).to.equal(`vehicle with license ${license} already exists`))
+        try{
+            await Vehicle.create({ brand , model , year , type , color , license })
+        } catch({ message }){
+            expect(message).to.equal(`vehicle with license ${license} already exists`)
         }
-    )
+    })
 
     it('should fail on empty user id', () => 
         expect(() => logic.registerVehicle("" , brand , model , year , type , color , license)).to.throw('user id is empty or blank')

@@ -8,7 +8,7 @@ describe('logic - update user', () => {
 
     let name, surname, email, password, id, body
 
-    beforeEach(() => {
+    beforeEach(async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
@@ -22,34 +22,32 @@ describe('logic - update user', () => {
             extra: `extra-${Math.random()}`
         }
 
-        return User.deleteMany()
-            .then(() => User.create({ name, surname, email, password }))
-            .then(user => id = user.id)
+        await User.deleteMany()
+        const user = await User.create({ name, surname, email, password })
+        id = user.id
     })
 
-    it('should succeed on correct data', () =>
-        logic.updateUser(id, body)
-            .then(result => {
-                expect(result.nModified).to.exist
+    it('should succeed on correct data', async () =>{
+        const result = await logic.updateUser(id, body)
+            expect(result.nModified).to.exist
 
-                return User.findById(id)
-            })
-            .then(user => {
-                expect(user).to.exist
-                expect(user.name).to.equal(body.name)
-                expect(user.surname).to.equal(body.surname)
-                expect(user.email).to.equal(body.email)
-                expect(user.password).to.equal(body.password)
-                expect(user.extra).not.to.exist
-            })
-    )
+        const user = await User.findById(id)
+            expect(user).to.exist
+            expect(user.name).to.equal(body.name)
+            expect(user.surname).to.equal(body.surname)
+            expect(user.email).to.equal(body.email)
+            expect(user.password).to.equal(body.password)
+            expect(user.extra).not.to.exist
+    })
 
-    it('should fail on non-existing user', () => {
+    it('should fail on non-existing user', async () => {
         id = '5d5d5530531d455f75da9fF9'
 
-        return logic.updateUser(id, body)
-            .then(() => { throw new Error('should not reach this point') })
-            .catch(({ message }) => expect(message).to.equal(`user with id ${id} does not exist`))
+        try{
+            await logic.updateUser(id, body)
+        } catch({ message }){
+            expect(message).to.equal(`user with id ${id} does not exist`)
+        }
     })
 
     it('should fail on empty id', () => 

@@ -8,7 +8,7 @@ describe('logic - register property', () => {
 
      let name, surname, email, password , address , m2 , year , cadastre , userId
 
-    beforeEach(() => {
+    beforeEach(async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
@@ -19,34 +19,41 @@ describe('logic - register property', () => {
         year = Math.random()
         cadastre = `cadastre-${Math.random()}`
 
-        return User.deleteMany()
-            .then(() => User.create({ name , surname , email , password }))
-            .then(user =>{
-                userId = user.id
-                return Property.deleteMany()
-            })
+        await User.deleteMany()
+        const user = await User.create({ name , surname , email , password })
+        userId = user.id
+        return await Property.deleteMany()
     })
 
-    it('should succeed on correct data', () =>
-        logic.registerProperty(userId , address , m2 , year , cadastre)
-            .then(result => {
-                expect(result).to.exist
-                return Property.findOne({ cadastre })
-            })
-            .then(property => {
-                expect(property).to.exist
-                expect(property.address).to.equal(address)
-                expect(property.m2).to.equal(m2)
-                expect(property.year).to.equal(year)
-                expect(property.cadastre).to.equal(cadastre)
-                expect(property.owners[0].toString()).to.equal(userId)
-            })
-    )
+    it('should succeed on correct data', async () =>{
+        const result = await logic.registerProperty(userId , address , m2 , year , cadastre)
+            expect(result).to.exist
+        
+        const property = await Property.findOne({ cadastre })
+            expect(property).to.exist
+            expect(property.address).to.equal(address)
+            expect(property.m2).to.equal(m2)
+            expect(property.year).to.equal(year)
+            expect(property.cadastre).to.equal(cadastre)
+            expect(property.owners[0].toString()).to.equal(userId)
+    })
     
-    it('should fail on unexisting user', () =>
-        logic.registerProperty('5d5d5530531d455f75da9fF9' , address , m2 , year , cadastre)
-            .catch( ({ message}) => expect(message).to.equal('user with id 5d5d5530531d455f75da9fF9 does not exist'))
-    )
+    it('should fail on unexisting user', async () =>{
+        try{
+            await logic.registerProperty('5d5d5530531d455f75da9fF9' , address , m2 , year , cadastre)
+        } catch({ message }){
+           expect(message).to.equal('user with id 5d5d5530531d455f75da9fF9 does not exist')
+        }
+    })
+    
+    it('should fail on existing property', async () =>{
+        await logic.registerProperty(userId , address , m2 , year , cadastre)
+        try{
+            await logic.registerProperty(userId , address , m2 , year , cadastre)
+        } catch({ message }){
+           expect(message).to.equal('property already exists')
+        }
+    })
 
     it('should fail on empty user id', () => 
         expect(() => 

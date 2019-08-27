@@ -9,7 +9,7 @@ describe('logic - retrieve property', () => {
 
     let adress , m2 , year , cadastre , owners , id0 , id1 , propertyId
 
-    beforeEach(() => {
+    beforeEach(async () => {
         address = `address-${Math.random()}`
         m2 = Math.random()
         year = Math.random()
@@ -17,34 +17,36 @@ describe('logic - retrieve property', () => {
         id0 = "5d618ad961578b67fbb70bb7"
         id1 = "5d618ad961578b67fbb70bb8"
 
-        return Property.deleteMany()
-            .then(() => {
-                const property = new Property({ address , m2 , year , cadastre })
-                property.owners.push(id0,id1)
-                return property.save()
-            })
-            .then(property => propertyId = property.id)
+        await Property.deleteMany()
+            
+        const property = await new Property({ address , m2 , year , cadastre })
+        property.owners.push(id0,id1)
+        
+        await property.save()
+            
+        propertyId = property.id
     })
 
-    it('should succeed on correct data', () =>
-        logic.retrieveProperty(propertyId)
-            .then(property => {
-                expect(property).to.exist
-                expect(property._id).not.to.exist
-                expect(property.address).to.equal(address)
-                expect(property.m2).to.equal(m2)
-                expect(property.year).to.equal(year)
-                expect(property.cadastre).to.equal(cadastre)
-                expect(property.owners).to.exist
-                expect(property.owners[0].toString()).to.equal(id0)
-                expect(property.owners[1].toString()).to.equal(id1)
-            })
-    )
+    it('should succeed on correct data', async () =>{
+        const property = await logic.retrieveProperty(propertyId)    
+            expect(property).to.exist
+            expect(property._id).not.to.exist
+            expect(property.address).to.equal(address)
+            expect(property.m2).to.equal(m2)
+            expect(property.year).to.equal(year)
+            expect(property.cadastre).to.equal(cadastre)
+            expect(property.owners).to.exist
+            expect(property.owners[0].toString()).to.equal(id0)
+            expect(property.owners[1].toString()).to.equal(id1)       
+    })
 
-    it("should fail on unexisting property" , () => {
+    it("should fail on unexisting property" , async () => {
         propertyId = '5d5d5530531d455f75da9fF9'
-        logic.retrieveProperty(propertyId)
-            .catch(({ message }) => expect(message).to.equal('property with id 5d5d5530531d455f75da9fF9 does not exist'))
+        try{
+            await logic.retrieveProperty(propertyId)
+        } catch({ message }){
+            expect(message).to.equal('property with id 5d5d5530531d455f75da9fF9 does not exist')
+        }
     })
 
      it('should fail on empty property id', () => 

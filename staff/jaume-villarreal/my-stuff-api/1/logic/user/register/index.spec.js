@@ -8,30 +8,35 @@ describe('logic - register user', () => {
 
     let name, surname, email, password
 
-    beforeEach(() => {
+    beforeEach(async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
         password = `password-${Math.random()}`
 
-        return User.deleteMany()
+        await User.deleteMany()
     })
 
-    it('should succeed on correct data', () =>
-        logic.registerUser(name, surname, email, password)
-            .then(result => {
-                expect(result).not.to.exist
+    it('should succeed on correct data', async () =>{
+        const result = await logic.registerUser(name, surname, email, password)
+        expect(result).to.exist
 
-                return User.findOne({ email })
-            })
-            .then(user => {
-                expect(user).to.exist
-                expect(user.name).to.equal(name)
-                expect(user.surname).to.equal(surname)
-                expect(user.email).to.equal(email)
-                expect(user.password).to.equal(password)
-            })
-    )
+        const user = await User.findOne({ email })
+            expect(user).to.exist
+            expect(user.name).to.equal(name)
+            expect(user.surname).to.equal(surname)
+            expect(user.email).to.equal(email)
+            expect(user.password).to.equal(password)
+    })
+
+    it('should fail on exixting user' , async ()=>{
+        await logic.registerUser(name, surname, email, password)
+        try{
+            await logic.registerUser(name, surname, email, password)
+        } catch({ message }){
+            expect(message).to.equal(`user already exists`)
+        }
+    })
 
     it('should fail on empty name', () => 
         expect(() => logic.registerUser("", surname, email, password)).to.throw('name is empty or blank')

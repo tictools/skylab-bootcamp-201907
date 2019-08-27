@@ -12,14 +12,15 @@ const mongoose = require('mongoose')
 module.exports = function (userId) {
 
     validate.string(userId , 'user id')
-    // 
-    return User.findOne({ _id: userId }, { _id: 0, password: 0 }).lean()
-        .then(user => {
-            if (!user) throw new Error(`user with id ${userId} not found`)
 
-            user.id = userId
+    return(async ()=>{
+        const user = await User.findOne({ _id: userId }, { _id: 0, password: 0 }).lean()
+        
+        if (!user) throw new Error(`user with id ${userId} not found`)
 
-            return user
-        })
+        user.id = userId
+
+        return user
+    })() 
 }
 

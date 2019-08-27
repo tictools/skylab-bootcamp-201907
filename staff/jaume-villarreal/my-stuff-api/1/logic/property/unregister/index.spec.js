@@ -8,7 +8,7 @@ describe('logic - unregister property', () => {
 
     let userId , userId2 , name , surname , email , password , propertyId , address , m2 , year , cadastre
 
-    beforeEach(() => {
+    beforeEach(async () => {
         name = `name-${Math.random()}`
         surname = `surname-${Math.random()}`
         email = `email-${Math.random()}@domain.com`
@@ -19,82 +19,79 @@ describe('logic - unregister property', () => {
         year = Math.random()
         cadastre = `cadastre-${Math.random()}`
 
-        return User.deleteMany()
-            .then(() => User.create({ name , surname , email , password }))
-            .then(user =>{
-                userId = user.id
-                return Property.deleteMany()
-            })
-            .then(() => {
-                const property = new Property({ address, m2 , year , cadastre })
-                propertyId = property.id
-                property.owners.push(userId)
-                return property.save()
-            })
+        await User.deleteMany()
+        const user = await User.create({ name , surname , email , password })
+        userId = user.id
+        await Property.deleteMany()
+          
+        const property = await new Property({ address, m2 , year , cadastre })
+        propertyId = property.id
+        property.owners.push(userId)
+        return await property.save()
+           
     })
 
-    it('should succeed on correct data', () =>
-        logic.unregisterProperty(propertyId , userId)
-            .then(result => Property.findOne({ propertyId }))
-            .then(property => {
-                expect(property).not.to.exist
-            })
-    )
+    it('should succeed on correct data', async () =>{
+        await logic.unregisterProperty(propertyId , userId)
+        const property = await Property.findOne({ propertyId })
+            expect(property).not.to.exist
+        })
 
-    it('should fail on right cadastre and unexisting user', () =>
-        logic.unregisterProperty(propertyId , '5d5d5530531d455f75da9fF9')
-            .then(() => { throw Error('should not reach this point') })
-            .catch(({ message }) => expect(message).to.equal(`user with id 5d5d5530531d455f75da9fF9 does not exist`))
-    )
+    it('should fail on right cadastre and unexisting user', async () =>{
+        try{
+            await logic.unregisterProperty(propertyId , '5d5d5530531d455f75da9fF9')
+        } catch({ message }){
+            expect(message).to.equal(`user with id 5d5d5530531d455f75da9fF9 does not exist`)
+        }
+    })
 
-    it('should fail on existing user, but wrong property id', () =>{
-        return logic.unregisterProperty('5d5d5530531d455f75da9fF9' , userId)
-            .then(() => { throw Error('should not reach this point') })
-            .catch(({ message }) => expect(message).to.equal('property with id 5d5d5530531d455f75da9fF9 does not exist'))
-
+    it('should fail on existing user, but wrong property id', async () =>{
+        try{
+            await logic.unregisterProperty('5d5d5530531d455f75da9fF9' , userId)
+        } catch({ message }){
+            expect(message).to.equal(`property with id 5d5d5530531d455f75da9fF9 does not exist`)
+        }
     })
     
-    it('should fail on existing more than one owner on property', () =>{
-        return User.deleteMany()
-            .then(() => User.create({ name , surname , email , password }))
-            .then(user =>{
-                userId = user.id
-                return Property.deleteMany()
-            })
-            .then(() => {
-                const property = new Property({ address, m2 , year , cadastre })
-                property.owners.push(userId , '5d5d5530531d455f75da9fF9')
-                return property.save()
-            })
-            .then(property => logic.unregisterProperty(property.id , userId))
-            .then(() => { throw Error('should not reach this point') })
-            .catch(({ message }) => expect(message).to.equal('invalid action: there are two or more owners for this property'))
+    it('should fail on existing more than one owner on property', async() =>{
+        await User.deleteMany()
+        const user = await User.create({ name , surname , email , password })
+        userId = user.id
+        await Property.deleteMany()
+    
+        let property = await new Property({ address, m2 , year , cadastre })
+        property.owners.push(userId , '5d5d5530531d455f75da9fF9')
+        await property.save()
 
+        try{
+            await logic.unregisterProperty(property.id , userId)
+        } catch({ message }){
+            expect(message).to.equal('invalid action: there are two or more owners for this property')
+        }
     })
 
-    it("should fail on unregistering a property by a user who is not an owner" , () => {
+    it("should fail on unregistering a property by a user who is not an owner" , async () => {
         let _name = `name-${Math.random()}`
         let _surname = `surname-${Math.random()}`
         let _email = `email-${Math.random()}@domain.com`
         let _password = `password-${Math.random()}`
 
-        return Promise.all([ User.create({ name , surname , email , password }) , User.create({ name : _name , surname : _surname , email : _email , password : _password }) ])
-            .then(([user1 , user2]) =>{
-                userId = user1.id
-                userId2 = user2.id
+        const promises = await Promise.all([ User.create({ name , surname , email , password }) , User.create({ name : _name , surname : _surname , email : _email , password : _password }) ])
+        const [user1 , user2] = promises
+        userId = user1.id
+        userId2 = user2.id
 
-                const property = new Property({ address, m2 , year , cadastre })
-                propertyId = property.id
-                property.owners.push(userId)
+        const property = await new Property({ address, m2 , year , cadastre })
+        propertyId = property.id
+        property.owners.push(userId)
 
-                return property.save()
-            })
-        .then(property => {
-            logic.unregisterProperty( property.id , userId2 ) 
-            .catch(({ message }) => {
-                expect(message).to.equal(`user with id ${userId2} is not owner of property with id ${property.id}`)
-            })
-        })
+        await property.save()
+
+        try{
+            await logic.unregisterProperty( propertyId , userId2 ) 
+        } catch({ message }){
+            expect(message).to.equal(`user with id ${userId2} is not owner of property with id ${property.id}`)
+        }
     })
 
 
