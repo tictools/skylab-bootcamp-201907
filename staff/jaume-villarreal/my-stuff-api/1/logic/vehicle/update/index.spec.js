@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const { User , Vehicle } = require('../../../data')
 const logic = require('../../.')
 
-describe.only('logic - update vehicle', () => {
+describe('logic - update vehicle', () => {
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
      let userId1 , userId2 , name, surname , email , password , brand , model , year , type , color , license 
