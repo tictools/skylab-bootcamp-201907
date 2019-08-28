@@ -7,6 +7,8 @@
 
 module.exports = {
    registerProperty: require('./register'),
+   registerNewPropertyOwner: require('./register-owner'),
+   unregisterPropertyOwner: require('./unregister-owner'),
    retrieveProperty: require('./retrieve'),
    updateProperty: require('./update'),
    unregisterProperty: require('./unregister')

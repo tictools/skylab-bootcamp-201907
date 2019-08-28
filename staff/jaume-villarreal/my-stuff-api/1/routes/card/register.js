@@ -2,11 +2,11 @@ const logic = require('../../logic')
 
 module.exports = function(req, res) {
 
-    const { body: { address, m2, year, cadastre }, params: { id } } = req
+    const { params: { id }, body: { number, expiry } } = req
 
     try {
-        logic.registerProperty(id, address, m2, year, cadastre)
-            .then(() => res.status(201).json({ message: 'Property registered successfully'}))
+        logic.card.register(id, number, expiry)
+            .then(cardId => res.status(201).json({ message: 'Card registered successfully', id: cardId}))
             .catch(({ message }) => res.status(400).json({ error: message }))
     } catch({ message }) {
         res.status(400).json({ error: message })

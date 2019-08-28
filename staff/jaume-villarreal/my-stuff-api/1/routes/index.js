@@ -7,7 +7,9 @@ const jsonBodyParser = bodyParser.json()
 const jwtMiddleware = require('../helpers/token-middleware.js')
 
 const { registerUser , authenticateUser , retrieveUser , updateUser , unregisterUser } = require('./user')
-const { registerProperty } = require('./property')
+// const { registerProperty , registerNewPropertyOwner , retrieveProperty , updateProperty , unregisterProperty } = require('./property')
+// const { registerVehicle , retrieveVehicle , updateVehicle , unregisterVehicle } = require('./vehicle')
+// const { registerCard , retrieveCard , updateCard , unregisterCard } = require('./card')
 
 // USER routes
 router.post('/users' , jsonBodyParser , registerUser)
