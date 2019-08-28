@@ -9,5 +9,6 @@ module.exports = {
    registerVehicle: require('./register'),
    retrieveVehicle: require('./retrieve'),
    updateVehicle: require('./update'),
+   retrieveAllOwnerVehicles: require('./retrieve-all'),
    unregisterVehicle: require('./unregister')
 }

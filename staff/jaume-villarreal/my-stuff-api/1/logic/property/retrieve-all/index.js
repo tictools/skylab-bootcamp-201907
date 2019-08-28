@@ -1,5 +1,5 @@
 const validate = require('../../../utils/validate')
-const { Property } = require('../../../models')
+const { Property } = require('../../../data')
 
 /**
  * 
@@ -8,17 +8,20 @@ const { Property } = require('../../../models')
  * @returns {Promise}
 */
 
-module.exports = function(id) {
+module.exports = function(ownerId) {
     
-    validate.string(id, 'User id')
+    validate.string(ownerId, 'user id')
 
-    return Property.find({ owner : id }, { __v: 0 }).lean()
-        .then(properties => {
-            if (!properties) throw Error(`User with id ${id} does not own any car.`)
-            properties.forEach(property => {
+    return(async ()=> {
+        const properties = await Property.find({ owner : ownerId }, { __v: 0 }).lean()
+        
+        if (!properties) throw Error(`User with id ${ownerId} does not own any property.`)
+            
+        properties.forEach(property => {
                 property.id = property._id
                 delete property._id
             })
-            return property
-        })
+        
+        return properties
+    })()
 }

@@ -11,7 +11,7 @@ module.exports = {
    unregisterPropertyOwner: require('./unregister-owner'),
    retrieveProperty: require('./retrieve'),
    updateProperty: require('./update'),
-   // retrieveAllProperties: require('./retrieve-all'),
+   retrieveAllOwnerProperties: require('./retrieve-all'),
    unregisterProperty: require('./unregister')
 }
 

@@ -7,7 +7,7 @@ describe('logic', () => {
 
     before(() => mongoose.connect('mongodb://localhost:27017/my-api-test', { useNewUrlParser: true }))
 
-    describe.only('remove an owner on an existing property', () => {
+    describe('remove an owner on an existing property', () => {
         let name1 , surname1 , email1 , password1
         let name2 , surname2 , email2 , password2
         let name3 , surname3 , email3 , password3
