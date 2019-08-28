@@ -17,7 +17,7 @@ module.exports = function(ownerId) {
         
         if (!vehicles) throw Error(`User with id ${ownerId} does not own any property.`)
             
-        vehicles.forEach(property => {
+        vehicles.forEach(vehicle => {
                 vehicle.id = vehicle._id
                 delete vehicle._id
             })

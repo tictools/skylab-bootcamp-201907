@@ -2,11 +2,11 @@ const logic = require('../../logic')
 
 module.exports = function(req, res) {
 
-    const { body: { make, model, year, type, color, electric, plate },
+    const { body: { brand , model,  year , type , color , license },
             params: { id } } = req
 
     try {
-        logic.vehicle.register(id, make, model, year, type, color, electric, plate)
+        logic.registerVehicle(id, brand, model, year, type, color , license)
             .then(vehicleId => res.status(201).json({ message: 'Vehicle registered successfully', id: vehicleId }))
             .catch(({ message }) => res.status(400).json({ error: message }))
     } catch({ message }) {

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const { registerUser, authenticateUser, 
         retrieveUser, updateUser, unregisterUser } = require('./user')
     
-const { registerVehicle, retrieveAllVehicle,
+const { registerVehicle, retrieveAllOwnerVehicles,
         retrieveVehicle, updateVehicle, unregisterVehicle } = require('./vehicle')
     
 const { registerProperty, retrieveAllProperty,
@@ -26,10 +26,10 @@ router.patch ('/users/:id', [tokenMiddleware, jsonBodyParser], updateUser)
 router.delete ('/users/:id', [tokenMiddleware, jsonBodyParser], unregisterUser)
 
 /* VEHICLE */
-// router.post('/users/:id/vehicles', [tokenMiddleware, jsonBodyParser], registerVehicle)
-// router.get('/users/:id/vehicles/', [tokenMiddleware, jsonBodyParser], retrieveAllVehicle)
-// router.get('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], retrieveVehicle)
-// router.patch ('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], updateVehicle)
+router.post('/users/:id/vehicles', [tokenMiddleware, jsonBodyParser], registerVehicle)
+router.get('/users/:id/vehicles/', [tokenMiddleware, jsonBodyParser], retrieveAllOwnerVehicles)
+router.get('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], retrieveVehicle)
+router.patch ('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], updateVehicle)
 // router.delete ('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], unregisterVehicle)
 
 /* PROPERTY */ 

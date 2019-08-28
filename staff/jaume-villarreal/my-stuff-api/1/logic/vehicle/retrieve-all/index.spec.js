@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const { User , Property } = require('../../../data')
 const logic = require('../.')
 
-describe.only('logic', () => {
+describe('logic', () => {
     let client, users
 
     before(() => mongoose.connect('mongodb://localhost:27017/my-api-test', { useNewUrlParser: true }))
@@ -24,7 +24,7 @@ describe.only('logic', () => {
         })
 
         it('should succeed on correct data', async () =>{
-            const properties = await logic.retrieveAllOwnerProperties(userId)
+            const properties = await logic.retrieveAllOwnerVehicles(userId)
                 expect(properties).to.exist  
         })
     })

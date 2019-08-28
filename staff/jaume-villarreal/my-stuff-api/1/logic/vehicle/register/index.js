@@ -19,7 +19,7 @@ module.exports = function(userId , brand , model , year , type , color , license
         if(vehicle) throw new Error(`vehicle with license ${license} already exists`)
 
         const _vehicle = await new Vehicle({ brand , model , year , type , color , license })
-        _vehicle.owner.push(user._id)
+        _vehicle.owner.push(user.id)
         
         return await _vehicle.save()
     })()

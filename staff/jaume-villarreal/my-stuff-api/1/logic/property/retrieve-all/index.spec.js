@@ -3,12 +3,12 @@ const { expect } = require('chai')
 const { User , Property } = require('../../../data')
 const logic = require('../.')
 
-describe.only('logic', () => {
+describe('logic', () => {
     let client, users
 
     before(() => mongoose.connect('mongodb://localhost:27017/my-api-test', { useNewUrlParser: true }))
 
-    describe('retrieve user', () => {
+    describe('retrieve all properties', () => {
         let userId, name, surname, email, password
 
         beforeEach(async () => {

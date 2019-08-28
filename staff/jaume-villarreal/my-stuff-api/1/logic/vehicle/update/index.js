@@ -1,21 +1,17 @@
 const validate = require('../../../utils/validate')
 const { User , Vehicle  } = require('../../../data')
 
-module.exports = function(userId , license , data){
-    validate.string(userId , 'user id')
-    validate.string(license , 'license')
+module.exports = function(id , fieldsToUpdate){
+    validate.string(id , 'user id')
     // validate.string(data , 'data')
 
     return(async ()=>{
-        const promises = await Promise.all([ User.findById({ _id : userId }) , Vehicle.findOne({ license })])
-        const [user , vehicle] = promises
+        const vehicle = await Vehicle.findOne({id})
+        // debugger 
 
-        if(!user) throw new Error ('wrong credentials')
-
-        if(!vehicle) throw new Error(`vehicle with license ${license} does not exist`)
-
-        if(!vehicle.owner.includes(userId)) throw new Error(`user with id ${id} is not the owner of vehicle with license ${license}`)
+        if(!vehicle) throw new Error(`vehicle with license ${id} does not exist`)
         
-        return await Vehicle.updateOne({ _id : vehicle._id } , { $set: data })
+        await Vehicle.updateOne({ id } , { $set: fieldsToUpdate })
+        // await Vehicle.findByIdAndUpdate(id, fieldsToUpdate)
     })()
 }
