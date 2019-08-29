@@ -1,7 +1,7 @@
 const validate = require('../../../utils/validate')
 const { User , Vehicle} = require('../../../data')
 
-module.exports = function(vehicleId , userId){
+module.exports = function(userId , vehicleId){
     validate.string(vehicleId , 'vehicle id')
     validate.string(userId , 'user id')
 

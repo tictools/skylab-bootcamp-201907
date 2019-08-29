@@ -2,10 +2,10 @@ const logic = require('../../logic')
 
 module.exports = (req, res) => {
 
-    const { params: { vehicleId } } = req
+    const { params: { id , vehicleId } } = req
 
     try {
-        logic.vehicle.unregister(vehicleId)
+        logic.unregisterVehicle(id , vehicleId)
             .then(() => res.json({ message: 'Vehicle unregistered successfully'}))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch({ message }) {

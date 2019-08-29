@@ -30,7 +30,7 @@ router.post('/users/:id/vehicles', [tokenMiddleware, jsonBodyParser], registerVe
 router.get('/users/:id/vehicles/', [tokenMiddleware, jsonBodyParser], retrieveAllOwnerVehicles)
 router.get('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], retrieveVehicle)
 router.patch ('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], updateVehicle)
-// router.delete ('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], unregisterVehicle)
+router.delete ('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser], unregisterVehicle)
 
 /* PROPERTY */ 
 // router.post('/users/:id/properties', [tokenMiddleware, jsonBodyParser], registerProperty)
