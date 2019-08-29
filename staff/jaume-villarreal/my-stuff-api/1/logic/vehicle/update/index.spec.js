@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const { User , Vehicle } = require('../../../data')
 const logic = require('../../.')
 
-describe.only('logic - update vehicle', () => {
+describe('logic - update vehicle', () => {
     before(() => mongoose.connect('mongodb://localhost/my-api-test', { useNewUrlParser: true }))
 
      let userId1 , userId2 , name, surname , email , password , vehicleId , brand , model , year , type , color , license 
@@ -36,18 +36,17 @@ describe.only('logic - update vehicle', () => {
         
         const user = await User.create({ name , surname , email , password })
         userId1 = user.id
-        const vehicle = new Vehicle({ brand , model , year , type , color , license })
+        const vehicle = await new Vehicle({ brand , model , year , type , color , license })
         vehicleId = vehicle.id
-        // debugger
         vehicle.owner.push(userId1)
-        return vehicle.save()
+        await vehicle.save()
     })
 
     it('should succeed on correct data', async () =>{
         const result = await logic.updateVehicle(vehicleId , updatedData)
-        // debugger
-            expect(result.nModified).to.exist
+        //     expect(result.nModified).to.exist
 
+        // const vehicle = await Vehicle.findOne({ _id : vehicleId })
         const vehicle = await Vehicle.findOne({ _id : vehicleId })
             expect(vehicle).to.exist
             expect(vehicle.brand).to.equal(updatedData.brand)
@@ -61,32 +60,22 @@ describe.only('logic - update vehicle', () => {
             expect(vehicle.extra).not.to.exist
     })
 
-    // it('should fail on non-existing user', async() => {
-    //     userId1 = '5d5d5530531d455f75da9fF9'
-    //     try{
-    //         await logic.updateVehicle(vehicleId , updatedData)
-    //     }catch({ message }){
-    //         expect(message).to.equal(`wrong credentials`)
-    //     }
-    // })
+    it('should fail on non-existing user', async() => {
+        userId1 = '5d5d5530531d455f75da9fF9'
+        try{
+            await logic.updateVehicle(vehicleId , updatedData)
+        }catch({ message }){
+            expect(message).to.equal(`wrong credentials`)
+        }
+    })
     
-    // it('should fail on non-existing vehicle', async () => {
-    //     try{
-    //         await logic.updateVehicle('5d5d5530531d455f75da9fF9' , updatedData)
-    //     }catch({ message }){
-    //         expect(message).to.equal(`vehicle with license 123 does not exist`)
-    //     }
-    // })
-    
-    // it('should fail on non owner user', () => {
-    //     return User.create({ name , surname , email , password })
-    //         .then(user => {
-    //             userId2 = user._id
-    //             return logic.updateVehicle(userId2, license , updatedData)
-    //         })
-    //         .then(() => { throw new Error('should not reach this point') })
-    //         .catch(({ message }) => expect(message).to.equal(`user with id ${userId2} is not the owner of vehicle with license ${license}`))
-    // })
+    it('should fail on non-existing vehicle', async () => {
+        try{
+            await logic.updateVehicle('5d5d5530531d455f75da9fF9' , updatedData)
+        }catch({ message }){
+            expect(message).to.equal(`vehicle with id 5d5d5530531d455f75da9fF9 does not exist`)
+        }
+    })
     
     // it('should fail on empty license', () => 
     //     expect(() => logic.updateVehicle(userId1, "" , updatedData)).to.throw('license is empty or blank')

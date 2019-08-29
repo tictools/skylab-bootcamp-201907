@@ -12,7 +12,7 @@ const { registerProperty, retrieveAllProperty,
         retrieveProperty, updateProperty, unregisterProperty,
         registerPropertyOwner, unregisterPropertyOwner } = require('./property')
 
-const { registerCard, retrieveAllCard,
+const { registerCard, retrieveAllOwnerCards,
         retrieveCard, unregisterCard } = require('./card')
 
 const router = Router()
@@ -42,9 +42,9 @@ router.patch ('/users/:id/vehicles/:vehicleId', [tokenMiddleware, jsonBodyParser
 // router.delete ('/users/:id/properties/:propertyId', [tokenMiddleware, jsonBodyParser], unregisterProperty)
 
 //CARD
-// router.post('/users/:id/cards', [tokenMiddleware, jsonBodyParser], registerCard)
-// router.get('/users/:id/cards/', [tokenMiddleware, jsonBodyParser], retrieveAllCard)
-// router.get('/users/:id/cards/:cardId', [tokenMiddleware, jsonBodyParser], retrieveCard)
-// router.delete ('/users/:id/cards/:cardId', [tokenMiddleware, jsonBodyParser], unregisterCard)
+router.post('/users/:id/cards', [tokenMiddleware, jsonBodyParser], registerCard)
+router.get('/users/:id/cards/', [tokenMiddleware, jsonBodyParser], retrieveAllOwnerCards)
+router.get('/users/:id/cards/:cardId', [tokenMiddleware, jsonBodyParser], retrieveCard)
+router.delete ('/users/:id/cards/:cardId', [tokenMiddleware, jsonBodyParser], unregisterCard)
 
 module.exports = router

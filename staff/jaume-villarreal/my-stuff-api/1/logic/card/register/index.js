@@ -4,7 +4,7 @@ const { User , Card } = require('../../../data')
 module.exports = function(userId , number , expiration){
     validate.string(userId , 'user id')
     validate.number(number , 'number')
-    validate.date(expiration , 'date')
+    // validate.date(expiration , 'date')
 
     return (async () => {
         const user = await User.findById(userId)

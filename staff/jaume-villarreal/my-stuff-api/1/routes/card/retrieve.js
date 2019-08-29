@@ -2,10 +2,10 @@ const logic = require('../../logic')
 
 module.exports = (req, res) => {
 
-    const { params: { cardId } } = req
+    const { params: { id , cardId } } = req
 
     try {
-        logic.card.retrieve(cardId)
+        logic.retrieveCard(id , cardId)
             .then(card => res.json({ message: 'Card retrieved correctly', card }))
             .catch(({ message }) => res.status(404).json({ error: message }))
     } catch ({ message }) {

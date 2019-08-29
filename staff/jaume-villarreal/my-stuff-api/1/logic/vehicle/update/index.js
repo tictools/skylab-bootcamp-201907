@@ -6,12 +6,11 @@ module.exports = function(id , fieldsToUpdate){
     // validate.string(data , 'data')
 
     return(async ()=>{
-        const vehicle = await Vehicle.findOne({id})
-        // debugger 
+        const vehicle = await Vehicle.findOne({_id : id})
 
-        if(!vehicle) throw new Error(`vehicle with license ${id} does not exist`)
+        if(!vehicle) throw new Error(`vehicle with id ${id} does not exist`)
         
-        await Vehicle.updateOne({ id } , { $set: fieldsToUpdate })
+        await Vehicle.updateOne({ _id : id } , { $set: fieldsToUpdate })
         // await Vehicle.findByIdAndUpdate(id, fieldsToUpdate)
     })()
 }
