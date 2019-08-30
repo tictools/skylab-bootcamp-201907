@@ -1,17 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export default function({onView}){
+export default function(){
     return  <>
                 <h1>landing</h1>
                 <p>landing page</p>
-                    <button onClick={event =>{
-                        event.preventDefault()
-                        onView('register')
-                    }}>register</button>
-
-                    <button onClick = {event =>{
-                        event.preventDefault()
-                        onView('login')
-                    }}>login</button>
+                    <button><Link to="/register">Register</Link></button>
+                    <button><Link to="/login">Login</Link></button>
             </>
 }

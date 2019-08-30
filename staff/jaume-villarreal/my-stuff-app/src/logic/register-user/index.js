@@ -5,10 +5,10 @@ export default function (name, surname, email, password) {
     // validate fields
 
     return (async () => {
-        const response = await call(`${REACT_APP_API_URL}/users` , 'post' , { 'content-type': 'application/json' }, { name, surname, email, password })
+        const response= await call(`${REACT_APP_API_URL}/users` , 'post' , { 'content-type': 'application/json' }, { name, surname, email, password })
 
-        if (response.status !== 201) {
-            const { error } = await response.json()
+        if (response.message !== "user correctly registered") {
+            const { error } = response
 
             throw Error(error)
         }
