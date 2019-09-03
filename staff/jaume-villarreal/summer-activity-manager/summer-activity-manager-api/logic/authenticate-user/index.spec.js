@@ -8,6 +8,7 @@ const authenticateUser = require('.')
 const { env : { DB_URL_TEST } } = process
 
 describe("logic - authenticate user" , ()=>{
+    
     before( ()=> database.connect(DB_URL_TEST))
 
     let name , surname , email , password , userId
@@ -33,4 +34,6 @@ describe("logic - authenticate user" , ()=>{
         expect(id).to.exist
         expect(id).to.equal(userId)
     })
+
+    after(database.disconnect())
 })

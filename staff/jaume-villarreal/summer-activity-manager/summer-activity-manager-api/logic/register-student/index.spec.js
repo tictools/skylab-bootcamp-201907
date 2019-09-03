@@ -110,4 +110,6 @@ describe('logic - register user' , ()=>{
         expect(enrollment.week3).to.deep.equal(week3)
         expect(enrollment.week4).to.deep.equal(week4)
     })
+    
+    after(database.disconnect())
 })
