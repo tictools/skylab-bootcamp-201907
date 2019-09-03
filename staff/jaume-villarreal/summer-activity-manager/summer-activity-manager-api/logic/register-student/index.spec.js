@@ -1,46 +1,44 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const { database , models : { Course } } = require('../../data')
+const { database , models : { Student , Tutor , Enrollment } } = require('../../data')
 const { boolean , value } = require('../../utils/random')
-const regsiterStudent = require('.')
-
-const { models : { Student } } = require('../../data/index')
+const registerStudent = require('.')
 
 const { env : { DB_URL_TEST } } = process
 
-describe('logic - register user' , () => {
+describe('logic - register user' , ()=>{
     before( () => database.connect(DB_URL_TEST))
 
-    let tutorName , tutorSurname , dni , phone1 , phone2 , email
+    let tutorName , tutorSurname , tutorDNI , phone1 , phone2 , email
     let studentName , studentSurname , birthdate , shirt , school , group , healthcard
-    let illness , medication , allergic , observations
-    let imageAuthorization , excursionAuthorization
+    let illness , medication , allergy , observations
+    let imageAuth , excursionAuth
     let activity , week1 , week2 , week3 , week4
 
     beforeEach( async () => {
 
         tutorName = `tutor-name-${Math.random()}`
         tutorSurname = `tutor-surname-${Math.random()}`
-        dni = `dni-${Math.random()}`
+        tutorDNI = `tutor-dni-${Math.random()}`
         phone1 = `phone1-${Math.random()}`
         phone2 = `phone2-${Math.random()}`
-        email = `email-${Math.random()}@mail.com`
+        email = `tutor-email-${Math.random()}@mail.com`
 
         studentName = `student-name-${Math.random()}`
         studentSurname = `student-surname-${Math.random()}`
         birthdate = new Date()
-        shirt  = `shirt-${Math.random()}`
+        healthcard  = `healtcard-${Math.random()}`
+
         school  = `school-${Math.random()}`
         group  = `group-${Math.random()}`
-        healthcard  = `healtcard-${Math.random()}`
-        allergic  = `allergic-${Math.random()}`
+        shirt  = `shirt-${Math.random()}`
+        allergy  = `allergy-${Math.random()}`
         illness  = `illness-${Math.random()}`
         medication  = `medication-${Math.random()}`
         observations  = `observations-${Math.random()}`
-        
-        imageAuthorization = boolean()
-        excursionAuthorization = boolean()
+        imageAuth = boolean()
+        excursionAuth = boolean()
 
         activity  = value("Casalet EI" , "Casalet EP" , "Casal EP" , "Casal ESO" , "Campus de Futbol" , "Campus de Bàsquet" , "Campus de Judo")
 
@@ -75,7 +73,7 @@ describe('logic - register user' , () => {
     })
 
     it("should succeed on correct data" , async ()=> {
-        const idStudent = await registerStudent(tutorName, tutorSurname, dni, phone1 , phone2, email , studentName , studentSurname , birthdate , shirt , school , group , healthcard , allergic , illness , medication ,  observations , imageAuthorization , excursionAuthorization , activity , week1 , week2 , week3 , week4 )
+        const idStudent = await registerStudent(tutorName, tutorSurname, tutorDNI, phone1 , phone2, email , studentName , studentSurname , birthdate , shirt , school , group , healthcard , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , week1 , week2 , week3 , week4 )
 
         expect(idStudent).to.exist
 
@@ -89,7 +87,7 @@ describe('logic - register user' , () => {
 
         expect(tutor.name).to.equal(tutorName)
         expect(tutor.surname).to.equal(tutorSurname)
-        expect(tutor.dni).to.equal(dni)
+        expect(tutor.dni).to.equal(tutorDNI)
         expect(tutor.phone1).to.equal(phone1)
         expect(tutor.phone2).to.equal(phone2)
         expect(tutor.email).to.equal(email)
@@ -100,11 +98,11 @@ describe('logic - register user' , () => {
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
         expect(enrollment.healthcard).to.equal(healthcard)
-        expect(enrollment.allergic).to.equal(allergic)
+        expect(enrollment.allergy).to.equal(allergy)
         expect(enrollment.illness).to.equal(illness)
         expect(enrollment.medication).to.equal(medication)
-        expect(enrollment.imageAuthorization).to.equal(imageAuthorization)
-        expect(enrollment.excursionAuthorization).to.equal(excursionAuthorization)
+        expect(enrollment.imageAuth).to.equal(imageAuth)
+        expect(enrollment.excursionAuth).to.equal(excursionAuth)
         expect(enrollment.activity).to.equal(activity)
 
         expect(enrollment.week1).to.deep.equal(week1)

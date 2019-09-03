@@ -12,6 +12,11 @@ module.exports = new Schema({
         type: String,
         required : true
     },
+    shirt : {
+        type: String,
+        enum : ['4' , '6' , '8' , '10' , '12' , 'XS' , 'S' , 'M' , 'L' , 'XL'],
+        ref : 'Shirt'
+    },
     allergy : {
         type: String,
         required : true
@@ -28,20 +33,14 @@ module.exports = new Schema({
         type: String,
         required : true
     },
-    imageAuthorization : {
+    imageAuth : {
         type: boolean,
         required : true
     },
-    excursionAuthorization : {
+    excursionAuth : {
         type: boolean,
         required : true
     },
-    shirt : {
-        type: String,
-        enum : ['4' , '6' , '8' , '10' , '12' , 'XS' , 'S' , 'M' , 'L' , 'XL'],
-        ref : 'Shirt'
-    },
-    weeks : [weekSchema],
     activity : {
         type: ObjectId,
         ref : 'Activity'
@@ -53,5 +52,6 @@ module.exports = new Schema({
     student : {
         type: ObjectId,
         ref : 'Student'
-    }
+    },
+    weeks : [weekSchema]
 })
