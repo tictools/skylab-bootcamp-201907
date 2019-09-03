@@ -1,5 +1,5 @@
-const { validate } = require('../../utils')
-const { models : { Student , Tutor , Enrollment , Activity , Course }} = require('../../data')
+const { validate } = require('utils')
+const { models : { Student , Tutor , Enrollment , Activity , Course }} = require('data')
 
 /**
  * Register a student

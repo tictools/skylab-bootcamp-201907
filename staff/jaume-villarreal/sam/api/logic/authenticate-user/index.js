@@ -1,5 +1,5 @@
 const { validate } = require('../../utils')
-const { models : { User } } = require('../../data')
+const { models : { User } } = require('data')
 
 /**
  * Authenticates a user by its credentials.

@@ -1,8 +1,8 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const { database , models : { Student , Tutor , Enrollment } } = require('../../data')
-const { boolean , value } = require('../../utils/random')
+const { database , models : { Student , Tutor , Enrollment } } = require('data')
+const { random : { boolean , value } } = require('utils')
 const registerStudent = require('.')
 
 const { env : { DB_URL_TEST } } = process
