@@ -24,9 +24,5 @@ const guardianSchema = ({
     email : {
         type: String,
         required: true
-    },
-    student : {
-        type: ObjectId,
-        ref : 'Student'
     }
 })

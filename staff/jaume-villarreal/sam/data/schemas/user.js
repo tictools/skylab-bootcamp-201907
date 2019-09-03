@@ -23,7 +23,7 @@ module.exports = new Schema({
         required : true
     },
     role : {
-        type : String,
+        type : Number,
         required : true
     },
     activity : {

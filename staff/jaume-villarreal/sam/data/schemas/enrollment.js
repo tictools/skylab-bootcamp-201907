@@ -45,13 +45,10 @@ module.exports = new Schema({
         type: ObjectId,
         ref : 'Activity'
     },
-    tutor : {
-        type: ObjectId,
-        ref : 'Tutor'
-    },
     student : {
         type: ObjectId,
-        ref : 'Student'
+        ref : 'Student',
+        required: true
     },
     weeks : [weekSchema]
 })
