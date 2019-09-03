@@ -20,6 +20,7 @@ module.exports = new Schema({
     },
     tutor : {
         type: ObjectId,
-        ref : 'Tutor'
+        ref : 'Tutor',
+        required: true
     }
 })

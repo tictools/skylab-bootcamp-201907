@@ -12,7 +12,7 @@ module.exports = new Schema({
         required : true
     },
     afternooonPermanence : {
-        type : booelean,
+        type : boolean,
         required : true
     },
     lunch : {
