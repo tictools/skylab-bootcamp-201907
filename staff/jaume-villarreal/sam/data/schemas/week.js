@@ -8,7 +8,7 @@ module.exports = new Schema({
         required : true
     },
     morningPermanence : {
-        type : booelean,
+        type : boolean,
         required : true
     },
     afternooonPermanence : {
