@@ -7,12 +7,11 @@ const { random : { value } } = require('utils')
 
 const registerUser = require('.')
 
-describe.only("logic - register user" , ()=>{
+describe("logic - register user" , ()=>{
     
-    before( ()=> database.connect(DB_URL_TEST))
+    before.only( ()=> database.connect(DB_URL_TEST))
 
     let name , surname , dni , accreditation , age , role , activity , email , password
-    let activityId , userId
 
     beforeEach( async ()=> {
         name = `name-${Math.random()}`
@@ -26,12 +25,12 @@ describe.only("logic - register user" , ()=>{
         password = `password-${Math.random()}`
 
         await User.deleteMany()
-        activityId = await Activity.findOne({ name : activity })
+        debugger
     })
 
     it('should succeed on correct data' , async ()=>{
-        const result = await registerUser(name , surname , dni , accreditation , age , role , activityId , email , password)
-        expect(result).not.to.exist
+        const result = await registerUser(name , surname , dni , accreditation , age , role , activity , email , password)
+        expect(result).to.exist
 
         const user = await User.findOne({ email })
         expect(user).to.exist
@@ -41,9 +40,27 @@ describe.only("logic - register user" , ()=>{
         expect(user.accreditation).to.equal(accreditation)
         expect(user.age).to.equal(age)
         expect(user.role).to.equal(role)
+        expect(user.activityId).to.equal(activityId)
+        expect(user.email).to.equal(email)
+        expect(user.password).to.equal(password)        
+    })
+    
+    it('should fail on unexisting activity' , async ()=>{
+        activity = "Casal handbol"
+        try{
+            await registerUser(name , surname , dni , accreditation , age , role , activity , email , password)
+        }catch({ message }){
+            expect(message).to.equal(`activity ${activity} does not exist`)
+        }   
+    })
 
-
-        
+    it("should fail on  existing user" , async () => {
+        await User.create(name , surname , dni , accreditation , age , role , activity , email , password)
+        try{
+            await registerUser(name , surname , dni , accreditation , age , role , activity , email , password)
+        }catch({ message }){
+            expect(message).to.equal(`user with email ${email} already exists.`)
+        }
     })
 
     after(database.disconnect())

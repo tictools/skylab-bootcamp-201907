@@ -1,43 +1,50 @@
-// require ('dotenv').config()
-// const { expect } = require('chai')
+require ('dotenv').config()
+const { expect } = require('chai')
 
-// const { database , models : { User }} = require('data')
+const { database , models : { User }} = require('data')
 // const { random : { value } } = require('utils')
 
-// const authenticateUser = require('.')
+const authenticateUser = require('.')
 
-// const { env : { DB_URL_TEST } } = process
+const { env : { DB_URL_TEST } } = process
 
-// describe.only("logic - register user" , ()=>{
+describe("logic - authenticate user" , ()=>{
     
-//     before( ()=> database.connect(DB_URL_TEST))
+    before( ()=> database.connect(DB_URL_TEST))
 
-//     let name , surname , email , password , userId
-
-
-//     beforeEach( async ()=> {
-//         name = `name-${Math.random()}`
-//         surname = `surname-${Math.random()}`
-//         dni = `dni-${Math.random()}`
-//         accreditation = `accreditation-${Math.random()}`
-//         age = Math.random()
-//         role = value(0,1)
-//         activity  = value("Casalet EI" , "Casalet EP" , "Casal EP" , "Casal ESO" , "Campus Futbol" , "Campus Bàsquet" , "Campus Judo")
-//         email = `user-email-${Math.random()}@mail.com`
-//         password = `password-${Math.random()}`
+    let name , surname , email , password , userId
 
 
-//         await User.deleteMany()
-//         const 
-//         const user = User.create(name , surname , dni , accreditation , age , role , activity , email , password)
-//         userId = user.id
-//     })
+    beforeEach( async ()=> {
+        email = `user-email-${Math.random()}@mail.com`
+        password = `password-${Math.random()}`
 
-//     it('should succeed on correct data' , async ()=>{
-//         const id = await authenticateUser(email , password)
-//         expect(id).to.exist
-//         expect(id).to.equal(userId)
-//     })
+        await User.deleteMany()
+        const user = await User.create(name , surname , dni , accreditation , age , role , activity , email , password)
+        userId = user.id
+    })
 
-//     after(database.disconnect())
-// })
+    it('should succeed on correct data' , async()=>{
+        const id = await authenticateUser(email , password)
+        expect(id).to.exist
+        expect(id).to.equal(userId)
+    })
+
+    it('should fail on unexisting user' , async()=>{
+        try{
+            await authenticateUser("unexisting@mail.com" , password)
+        }catch({ message }){
+            expect(message).to.equal(`user with email unexixting@mail.com does not exist`)
+        }
+    })
+    
+    it('should fail on wrong credentials' , async()=>{
+        try{
+            await authenticateUser(email , '123')
+        }catch({ message }){
+            expect(message).to.equal("wrong credentials")
+        }
+    })
+
+    after(database.disconnect())
+})
