@@ -30,6 +30,7 @@ describe("logic - authenticate admin" , ()=>{
 
         const _activity = await Activity.findOne({ name : activity })
         activityId = _activity.id
+        debugger
 
         const admin = await Admin.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password })
         adminId = admin.id
@@ -56,6 +57,26 @@ describe("logic - authenticate admin" , ()=>{
             expect(message).to.equal("wrong credentials")
         }
     })
+
+    it('should fail on empty email' , () =>
+        expect(() => authenticateAdmin("" , password)).to.throw('email is empty or blank')
+    )
+    
+    it('should fail on wrong email type' , () =>
+        expect(() => authenticateAdmin(123 , password)).to.throw('email with value 123 is not a string')
+    )
+    
+    it('should fail on wrong email format' , () =>
+        expect(() => authenticateAdmin("123@mailcom" , password)).to.throw('email with value 123@mailcom is not a valid e-mail')
+    )
+    
+    it('should fail on empty password' , () =>
+        expect(() => authenticateAdmin(email , "")).to.throw('password is empty or blank')
+    )
+    
+    it('should fail on wrong password wrong' , () =>
+        expect(() => authenticateAdmin( email , 123)).to.throw('password with value 123 is not a string')
+    )
 
     after(database.disconnect())
 })

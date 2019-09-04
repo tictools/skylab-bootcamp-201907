@@ -71,5 +71,78 @@ describe("logic - register admin" , ()=>{
         }
     })
 
+    it('should fail on empty name' , () =>
+        expect(() => registerAdmin( "" , surname , dni , accreditation , age , role , activity , email , password) ).to.throw('name is empty or blank')
+    )
+    
+    it('should fail on wrong name type' , () =>
+        expect(() => registerAdmin(123 , surname , dni , accreditation , age , role , activity , email , password) ).to.throw('name with value 123 is not a string')
+    )
+
+    it('should fail on empty surname' , ( )=>
+        expect(() => registerAdmin( name , "" , dni , accreditation , age , role , activity , email , password ) ).to.throw('surname is empty or blank')
+    )
+
+    it('should fail on wrong surname type' , () =>
+        expect(() => registerAdmin( name , 123 , dni , accreditation , age , role , activity , email , password )).to.throw('surname with value 123 is not a string')
+    )
+    
+    it('should fail on empty dni' , () =>
+        expect(() => registerAdmin( name , surname , "" , accreditation , age , role , activity , email , password)).to.throw('dni is empty or blank')
+    )
+    
+    it('should fail on wrong dni type' , () =>
+        expect(() => registerAdmin( name , surname , 123 , accreditation , age , role , activity , email , password )).to.throw('dni with value 123 is not a string')
+    )
+    
+    it('should fail on empty accreditation' , () =>
+        expect(() => registerAdmin( name , surname , dni , "" , age , role , activity , email , password)).to.throw('accreditation is empty or blank')
+    )
+
+    it('should fail on wrong accreditation type' , () =>
+        expect(() => registerAdmin( name , surname , dni , 123 , age , role , activity , email , password)).to.throw('accreditation with value 123 is not a string')
+    )
+    
+    it('should fail on empty age' , () =>
+        expect(() => registerAdmin( name , surname , dni , accreditation , "123" , role , activity , email , password )).to.throw('age with value 123 is not a number')
+    )
+    
+    it('should fail on empty role' , () =>
+        expect(() => registerAdmin( name , surname , dni , accreditation , age , "role" , activity , email , password )).to.throw('role with value role is not a number')
+    )
+    
+    it('should fail on empty activity' , () =>
+        expect(() => registerAdmin( name , surname , dni , accreditation , age , role , "" , email , password )).to.throw('activity is empty or blank')
+    )
+    
+    it('should fail on wrong activity type' , () =>
+        expect(() => registerAdmin( name , surname , dni , accreditation , age , role , 123 , email , password )).to.throw('activity with value 123 is not a string')
+    )
+
+    it('should fail on empty email' , () =>
+    expect(() => registerAdmin( name , surname , dni , accreditation , age , role , activity , "" , password )).to.throw('email is empty or blank')
+    )
+
+    it('should fail on wrong email type' , () =>
+        expect(() => registerAdmin( name , surname , dni , accreditation , age , role , activity , 123 , password )).to.throw('email with value 123 is not a string')
+    )
+
+    it('should fail on empty email' , () =>
+        expect(() => registerAdmin( name , surname , dni , accreditation , age , role , activity , "123@mailcom" , password )).to.throw('email with value 123@mailcom is not a valid e-mail')
+    )
+
+    it('should fail on empty password' , () =>
+        expect(() => registerAdmin( name , surname , dni , accreditation , age , role , activity , email , "")).to.throw('password is empty or blank')
+    )
+
+    it('should fail on wrong password type' , () =>
+        expect(() => registerAdmin( name , surname , dni , accreditation , age , role , activity , email , 123 )).to.throw('password with value 123 is not a string')
+    )
+
     after(database.disconnect())
 })
+
+
+
+
+
