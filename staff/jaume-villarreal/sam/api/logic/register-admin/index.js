@@ -1,5 +1,5 @@
 const { validate } = require('utils')
-const { models : { User , Activity }} = require('data')
+const { models : { Admin , Activity }} = require('data')
 
 
 /**
@@ -31,9 +31,9 @@ const { models : { User , Activity }} = require('data')
      validate.string(password , "password")
 
      return(async ()=> {
-         const user = await User.findOne({ email })
+         const user = await Admin.findOne({ email })
 
-         if(user) throw new Error (`user with email ${email} already exists`)
+         if(user) throw new Error (`admin with email ${email} already exists`)
 
          const _activity = await Activity.findOne({ name : activity })
         debugger
@@ -42,7 +42,7 @@ const { models : { User , Activity }} = require('data')
 
          const activityId = _activity.id
 
-         await User.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password })
+         await Admin.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password })
 
          return { } 
      })()
