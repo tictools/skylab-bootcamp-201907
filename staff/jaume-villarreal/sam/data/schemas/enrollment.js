@@ -34,11 +34,11 @@ module.exports = new Schema({
         required : true
     },
     imageAuth : {
-        type: boolean,
+        type: Boolean,
         required : true
     },
     excursionAuth : {
-        type: boolean,
+        type: Boolean,
         required : true
     },
     activity : {
