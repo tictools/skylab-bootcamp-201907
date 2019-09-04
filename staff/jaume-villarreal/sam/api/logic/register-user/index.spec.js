@@ -1,17 +1,16 @@
-require ('dotenv').config()
+require('dotenv').config()
 const { expect } = require('chai')
 
 const { env : { DB_URL_TEST } } = process
-const { database , models : { User }} = require('data')
+const { database , models : { User , Activity }} = require('data')
 const { random : { value } } = require('utils')
 
 const registerUser = require('.')
 
-describe("logic - register user" , ()=>{
-    
+describe.only("logic - register user" , ()=>{
     before( ()=> database.connect(DB_URL_TEST))
 
-    let name , surname , dni , accreditation , age , role , activity , email , password
+    let name , surname , dni , accreditation , age , role , activity , email , password , activityId
 
     beforeEach( async ()=> {
         name = `name-${Math.random()}`
@@ -25,14 +24,19 @@ describe("logic - register user" , ()=>{
         password = `password-${Math.random()}`
 
         await User.deleteMany()
-        debugger
     })
 
     it('should succeed on correct data' , async ()=>{
+        const _activity = await Activity.findOne({ name : activity })
+        activityId = _activity.id
+        
         const result = await registerUser(name , surname , dni , accreditation , age , role , activity , email , password)
         expect(result).to.exist
-
+        
         const user = await User.findOne({ email })
+
+        debugger
+
         expect(user).to.exist
         expect(user.name).to.equal(name)
         expect(user.surname).to.equal(surname)
@@ -40,7 +44,7 @@ describe("logic - register user" , ()=>{
         expect(user.accreditation).to.equal(accreditation)
         expect(user.age).to.equal(age)
         expect(user.role).to.equal(role)
-        expect(user.activityId).to.equal(activityId)
+        expect(user.activity.toString()).to.equal(activityId)
         expect(user.email).to.equal(email)
         expect(user.password).to.equal(password)        
     })
@@ -55,11 +59,15 @@ describe("logic - register user" , ()=>{
     })
 
     it("should fail on  existing user" , async () => {
-        await User.create({ name , surname , dni , accreditation , age , role , activity , email , password })
+        const _activity = await Activity.findOne({ name : activity })
+        activityId = _activity.id
+
+        await User.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password })
+
         try{
             await registerUser(name , surname , dni , accreditation , age , role , activity , email , password)
         }catch({ message }){
-            expect(message).to.equal(`user with email ${email} already exists.`)
+            expect(message).to.equal(`user with email ${email} already exists`)
         }
     })
 

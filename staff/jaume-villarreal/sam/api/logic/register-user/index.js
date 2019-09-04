@@ -30,18 +30,19 @@ const { models : { User , Activity }} = require('data')
      validate.email(email , "email")
      validate.string(password , "password")
 
-     rerturn(async ()=> {
+     return(async ()=> {
          const user = await User.findOne({ email })
 
          if(user) throw new Error (`user with email ${email} already exists`)
 
          const _activity = await Activity.findOne({ name : activity })
+        debugger
 
-         if (!activity) throw new Error (`activity ${activity} does not exist`)
+         if (!_activity) throw new Error (`activity ${activity} does not exist`)
 
-         const activityId = activity.id
+         const activityId = _activity.id
 
-         await User.create({ name , surname , dni , accreditation , age , role , activityId , email , password })
+         await User.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password })
 
          return { } 
      })()

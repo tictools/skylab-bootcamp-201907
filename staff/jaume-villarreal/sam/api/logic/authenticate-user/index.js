@@ -1,4 +1,4 @@
-const { validate } = require('../../utils')
+const { validate } = require('utils')
 const { models : { User } } = require('data')
 
 /**
