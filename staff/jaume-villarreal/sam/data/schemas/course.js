@@ -3,7 +3,7 @@ const { Schema , Schema : { Types : { ObjectId } } } = mongoose
 
 module.exports = new Schema({
     year : {
-        type : Date,
+        type : Number,
         required : true
     },
     shirt : {
