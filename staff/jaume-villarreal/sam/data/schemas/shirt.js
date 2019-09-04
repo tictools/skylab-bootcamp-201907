@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const { Schema , Schema : { Types : { ObjectId } } } = mongoose
 
 module.exports = new Schema({
-    model : {
+    model: {
         type: String,
-        required : true
+        required: true
     }
 })
