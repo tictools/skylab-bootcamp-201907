@@ -1,43 +1,43 @@
-require ('dotenv').config()
-const { expect } = require('chai')
+// require ('dotenv').config()
+// const { expect } = require('chai')
 
-const { database , models : { User }} = require('data')
-const { random : { value } } = require('utils')
+// const { database , models : { User }} = require('data')
+// const { random : { value } } = require('utils')
 
-const authenticateUser = require('.')
+// const authenticateUser = require('.')
 
-const { env : { DB_URL_TEST } } = process
+// const { env : { DB_URL_TEST } } = process
 
-describe.only("logic - authenticate user" , ()=>{
+// describe.only("logic - register user" , ()=>{
     
-    before( ()=> database.connect(DB_URL_TEST))
+//     before( ()=> database.connect(DB_URL_TEST))
 
-    let name , surname , email , password , userId
-    debugger
-
-    beforeEach( async ()=> {
-        name = `name-${Math.random()}`
-        surname = `surname-${Math.random()}`
-        dni = `dni-${Math.random()}`
-        accreditation = `accreditation-${Math.random()}`
-        age = Math.random()
-        // role = value(0,1)
-        role = 1
-        activity  = value("Casalet EI" , "Casalet EP" , "Casal EP" , "Casal ESO" , "Campus de Futbol" , "Campus de Bàsquet" , "Campus de Judo")
-        email = `user-email-${Math.random()}@mail.com`
-        password = `password-${Math.random()}`
+//     let name , surname , email , password , userId
 
 
-        await User.deleteMany()
-        const user = User.create(name , surname , dni , accreditation , age , role , activity , email , password)
-        userId = user.id
-    })
+//     beforeEach( async ()=> {
+//         name = `name-${Math.random()}`
+//         surname = `surname-${Math.random()}`
+//         dni = `dni-${Math.random()}`
+//         accreditation = `accreditation-${Math.random()}`
+//         age = Math.random()
+//         role = value(0,1)
+//         activity  = value("Casalet EI" , "Casalet EP" , "Casal EP" , "Casal ESO" , "Campus Futbol" , "Campus Bàsquet" , "Campus Judo")
+//         email = `user-email-${Math.random()}@mail.com`
+//         password = `password-${Math.random()}`
 
-    it('should succeed on correct data' , async ()=>{
-        const id = await authenticateUser(email , password)
-        expect(id).to.exist
-        expect(id).to.equal(userId)
-    })
 
-    after(database.disconnect())
-})
+//         await User.deleteMany()
+//         const 
+//         const user = User.create(name , surname , dni , accreditation , age , role , activity , email , password)
+//         userId = user.id
+//     })
+
+//     it('should succeed on correct data' , async ()=>{
+//         const id = await authenticateUser(email , password)
+//         expect(id).to.exist
+//         expect(id).to.equal(userId)
+//     })
+
+//     after(database.disconnect())
+// })
