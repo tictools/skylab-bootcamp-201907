@@ -2,14 +2,14 @@ const mongoose = require('mongoose')
 const { Schema , Schema : { Types : { ObjectId } } } = mongoose
 
 module.exports = new Schema({
-    year : {
-        type : Number,
-        required : true
+    year: {
+        type: Number,
+        required: true
     },
-    shirt : {
-        type : ObjectId,
-        ref : 'Shirt'
+    shirt: {
+        type: ObjectId,
+        ref: 'Shirt'
     },
-    activities : [{ ObjectId , ref: 'Activity' }],
-    enrollments : [{ ObjectId , ref: 'Enrollment' }],
+    activities: [{ type: ObjectId , ref: 'Activity' }],
+    enrollments: [{ type: ObjectId , ref: 'Enrollment' }],
 })
