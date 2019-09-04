@@ -1,5 +1,5 @@
 const { validate } = require('utils')
-const { models : { User ,Tutor}} = require('data')
+const { models : { Tutor } } = require('data')
 
 /**
  * Register a student
@@ -14,22 +14,22 @@ const { models : { User ,Tutor}} = require('data')
  * @returns {Promise}
  */
 
- module.exports = function(name , surname , dni , phone1 ,  email , passwor ) {
+ module.exports = function(name , surname , dni , phone1 ,  email , password) {
      validate.string(name , "name")
      validate.string(surname , "surname")
      validate.string(dni , "dni")
-     validate.string(phone1 , "accreditation")
+     validate.string(phone1 , "phone1")
      validate.string(email , "email")
      validate.email(email , "email")
      validate.string(password , "password")
 
-     rerturn(async ()=> {
-         const tutor = await Tutor.findOne({ email })
+     return(async ()=>{
+        const tutor = await Tutor.findOne({ email })
+         
+        if(tutor) throw new Error (`tutor with email ${email} already exists`)
 
-         if(tutor) throw new Error (`tutor with email ${email} already exists`)
+        await Tutor.create({ name , surname , dni , phone1 , email , password })
 
-         await Tutor.create({ name , surname , dni , phone1 ,  email , password })
-
-         return { } 
+        return { }
      })()
  }
