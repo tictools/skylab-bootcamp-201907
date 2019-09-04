@@ -1,5 +1,13 @@
 module.exports = {
     registerStudent : require('./register-student'),
-    authenticateUser : require('./authenticate-user'),
-    registerTutor : require('./register-tutor')
+    retrieveStudent : require('./retrieve-student'),
+    updateStudent : require('./update-student'),
+    registerAdmin : require('./register-admin'),
+    retrieveAdmin : require('./retrieve-admin'),
+    authenticateAdmin : require('./authenticate-admin'),
+    updateAdmin : require('./update-admin'),
+    registerTutor : require('./register-tutor'),
+    retrieveTutor : require('./retrieve-tutor'),
+    authenticateTutor : require('./authenticate-tutor'),
+    updateTutor : require('./update-tutor')
 }

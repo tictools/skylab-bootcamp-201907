@@ -35,8 +35,6 @@ describe("logic - register admin" , ()=>{
         
         const admin = await Admin.findOne({ email })
 
-        debugger
-
         expect(admin).to.exist
         expect(admin.name).to.equal(name)
         expect(admin.surname).to.equal(surname)

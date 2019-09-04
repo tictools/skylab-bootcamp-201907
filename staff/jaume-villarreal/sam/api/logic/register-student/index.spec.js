@@ -7,7 +7,7 @@ const registerStudent = require('.')
 
 const { env : { DB_URL_TEST } } = process
 
-describe('logic - register user' , ()=>{
+describe.skip('logic - register user' , ()=>{
     before( () => database.connect(DB_URL_TEST))
 
     let tutorName , tutorSurname , tutorDNI , phone1 , phone2 , email

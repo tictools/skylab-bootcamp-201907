@@ -30,13 +30,13 @@ describe("logic - authenticate admin" , ()=>{
 
         const _activity = await Activity.findOne({ name : activity })
         activityId = _activity.id
-        debugger
-
+        
         const admin = await Admin.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password })
         adminId = admin.id
     })
-
+    
     it('should succeed on correct data' , async()=>{
+
         const id = await authenticateAdmin(email , password)
         expect(id).to.exist
         expect(id).to.equal(adminId)
