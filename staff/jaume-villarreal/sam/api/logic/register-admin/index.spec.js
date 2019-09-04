@@ -7,7 +7,7 @@ const { random : { value } } = require('utils')
 
 const registerAdmin = require('.')
 
-describe.only("logic - register admin" , ()=>{
+describe("logic - register admin" , ()=>{
     before( ()=> database.connect(DB_URL_TEST))
 
     let name , surname , dni , accreditation , age , role , activity , email , password , activityId

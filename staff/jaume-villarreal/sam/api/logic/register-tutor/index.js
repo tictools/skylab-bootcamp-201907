@@ -7,10 +7,7 @@ const { models : { User ,Tutor}} = require('data')
  * @param {string} name 
  * @param {string} surname 
  * @param {string} dni 
- * @param {string} accreditation 
- * @param {Number} age 
- * @param {Number} role 
- * @param {string} activity
+ * @param {string} phone1
  * @param {string} email 
  * @param {string} password
  * 
