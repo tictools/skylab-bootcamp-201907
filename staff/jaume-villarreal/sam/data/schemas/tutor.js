@@ -18,9 +18,6 @@ const guardianSchema = ({
         type: String,
         required: true
     },
-    phone2 : {
-        type: String
-    },
     email : {
         type: String,
         required: true
