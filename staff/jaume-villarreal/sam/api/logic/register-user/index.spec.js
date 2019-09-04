@@ -9,7 +9,7 @@ const registerUser = require('.')
 
 describe("logic - register user" , ()=>{
     
-    before.only( ()=> database.connect(DB_URL_TEST))
+    before( ()=> database.connect(DB_URL_TEST))
 
     let name , surname , dni , accreditation , age , role , activity , email , password
 
@@ -55,7 +55,7 @@ describe("logic - register user" , ()=>{
     })
 
     it("should fail on  existing user" , async () => {
-        await User.create(name , surname , dni , accreditation , age , role , activity , email , password)
+        await User.create({ name , surname , dni , accreditation , age , role , activity , email , password })
         try{
             await registerUser(name , surname , dni , accreditation , age , role , activity , email , password)
         }catch({ message }){

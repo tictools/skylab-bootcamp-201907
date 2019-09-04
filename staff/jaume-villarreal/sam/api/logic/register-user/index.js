@@ -41,7 +41,7 @@ const { models : { User , Activity }} = require('data')
 
          const activityId = activity.id
 
-         await User.create(name , surname , dni , accreditation , age , role , activityId , email , password)
+         await User.create({ name , surname , dni , accreditation , age , role , activityId , email , password })
 
          return { } 
      })()
