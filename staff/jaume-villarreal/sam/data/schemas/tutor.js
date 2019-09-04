@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema , Schema : {Types : {ObjectId} } } = mongoose
 
-const guardianSchema = ({
+module.exports = new Schema({
     name: {
         type: String,
         required: true
