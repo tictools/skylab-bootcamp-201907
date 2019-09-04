@@ -2,25 +2,25 @@ const mongoose = require('mongoose')
 const { Schema , Schema : {Types : { ObjectId } } } = mongoose 
 
 module.exports = new Schema({
-    name : {
+    name: {
         type: String,
-        required : true
+        required: true
     },
-    surname : {
+    surname: {
         type: String,
-        required : true
+        required: true
     },
-    birthdate : {
+    birthdate: {
         type: String,
-        required : true
+        required: true
     },
-    healthcard : {
+    healthcard: {
         type: String,
-        required : true
+        required: true
     },
-    tutor : {
+    tutor: {
         type: ObjectId,
-        ref : 'Tutor',
+        ref: 'Tutor',
         required: true
     }
 })

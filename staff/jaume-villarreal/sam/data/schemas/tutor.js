@@ -2,23 +2,23 @@ const mongoose = require('mongoose')
 const { Schema , Schema : {Types : {ObjectId} } } = mongoose
 
 const guardianSchema = ({
-    name : {
+    name: {
         type: String,
         required: true
     },
-    surname : {
+    surname: {
         type: String,
         required: true
     },
-    dni : {
+    dni: {
         type: String,
         required: true
     },
-    phone1 : {
+    phone1: {
         type: String,
         required: true
     },
-    email : {
+    email: {
         type: String,
         required: true
     }
