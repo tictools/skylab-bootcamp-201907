@@ -10,6 +10,7 @@ module.exports = new Schema({
         type: ObjectId,
         ref: 'Shirt'
     },
+    admins: [{ type: ObjectId , ref: 'Admin' }],
     activities: [{ type: ObjectId , ref: 'Activity' }],
     enrollments: [{ type: ObjectId , ref: 'Enrollment' }],
 })
