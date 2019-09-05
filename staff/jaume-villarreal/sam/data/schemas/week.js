@@ -8,7 +8,7 @@ module.exports = new Schema({
     },
     category: {
         type: String,
-        enum: ['part' , 'full'],
+        enum: ['empty' , 'part' , 'full'],
         required: true
     },
     morningPermanence: {
