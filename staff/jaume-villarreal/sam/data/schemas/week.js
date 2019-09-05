@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 module.exports = new Schema({
+    number: {
+        type: Number,
+        required: true
+    },
     category: {
         type: String,
         enum: ['part' , 'full'],
