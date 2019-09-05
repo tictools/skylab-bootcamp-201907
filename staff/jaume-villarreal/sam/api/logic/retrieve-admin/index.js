@@ -2,7 +2,7 @@ const {validate} = require('utils')
 const { models : { Admin } } = require('data')
 
 /**
- * Retrieves a user by its id.
+ * Retrieves an admin by its id.
  * 
  * @param {string} adminId 
  * 

@@ -25,7 +25,7 @@ describe("logic - register tutor" , ()=>{
     })
 
     it('should succeed on correct data' , async()=>{
-        const result = await registerTutor( name , surname , dni , phone1 ,  email , password)
+        const result = await registerTutor(name , surname , dni , phone1 ,  email , password)
         expect(result).to.exist
 
         const tutor = await Tutor.findOne({ email })

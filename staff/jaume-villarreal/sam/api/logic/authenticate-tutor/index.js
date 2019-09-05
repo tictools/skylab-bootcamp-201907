@@ -2,7 +2,7 @@ const { validate } = require('utils')
 const { models : { Tutor } } = require('data')
 
 /**
- * Authenticates a user by its credentials.
+ * Authenticates a tutor by its credentials.
  * 
  * @param {string} email 
  * @param {string} password 

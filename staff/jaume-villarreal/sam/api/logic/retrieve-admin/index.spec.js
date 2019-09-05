@@ -8,7 +8,7 @@ const retrieveAdmin = require('.')
 
 const { env : { DB_URL_TEST } } = process
 
-describe.only('logic - retrieve admin', () => {
+describe('logic - retrieve admin', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let name , surname , dni , accreditation , age , role , activityName , email , password

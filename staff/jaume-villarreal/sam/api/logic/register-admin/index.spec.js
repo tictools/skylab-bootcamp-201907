@@ -1,11 +1,11 @@
 require('dotenv').config()
 const { expect } = require('chai')
-
 const { env : { DB_URL_TEST } } = process
+
 const { database , models : { Admin , Activity }} = require('data')
 const { random : { value } } = require('utils')
-
 const registerAdmin = require('.')
+
 
 describe("logic - register admin" , ()=>{
     before( ()=> database.connect(DB_URL_TEST))

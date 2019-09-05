@@ -2,7 +2,7 @@ const { validate } = require('utils')
 const { models : { Tutor } } = require('data')
 
 /**
- * Register a student
+ * Register a tutor
  * 
  * @param {string} name 
  * @param {string} surname 

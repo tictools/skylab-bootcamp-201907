@@ -2,7 +2,7 @@ const {validate} = require('utils')
 const { models : { Tutor } } = require('data')
 
 /**
- * Retrieves a user by its id.
+ * Retrieves a tutor by its id.
  * 
  * @param {string} tutorId 
  * 

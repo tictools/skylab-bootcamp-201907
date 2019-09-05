@@ -3,7 +3,7 @@ const { models : { Admin , Activity }} = require('data')
 
 
 /**
- * Register a student
+ * Register an admin
  * 
  * @param {string} name 
  * @param {string} surname 

@@ -2,7 +2,7 @@ const { validate } = require('utils')
 const { models : { Admin } } = require('data')
 
 /**
- * Authenticates a user by its credentials.
+ * Authenticates an admin by its credentials.
  * 
  * @param {string} email 
  * @param {string} password 
