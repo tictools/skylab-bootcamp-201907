@@ -1,49 +1,42 @@
 const { validate } = require('utils')
-const { models : { Student , Tutor , Enrollment , Activity , Course }} = require('data')
+const { models : { Activity , Course , Enrollment , Student , Week } } = require('data')
 
 /**
- * Register a student
+ * Register a enrollment
  * 
- * @param {string} tutorName 
- * @param {string} tutorSurname 
- * @param {string} tutorDNI 
- * @param {string} phone1 
- * @param {string} phone2 
- * @param {string} email 
- * @param {string} studentName 
- * @param {string} studentSurname 
- * @param {date} birthdate
- * @param {string} shirt
- * @param {string} school
- * @param {string} group
- * @param {string} healthcard
- * @param {string} allergy
- * @param {string} illness
- * @param {string} medication
- * @param {string} observations
- * @param {boolean} imageAuth
- * @param {boolean} excursionAuth
- * @param {string} activity
- * @param {Array} week1
- * @param {Array} week2
- * @param {Array} week3
- * @param {Array} week4
+ * @param {String} school 
+ * @param {String} group 
+ * @param {String} shirt 
+ * @param {String} allergy 
+ * @param {String} illness 
+ * @param {String} medication 
+ * @param {String} observations 
+ * @param {Boolean} imageAuth 
+ * @param {Boolean} excursionAuth 
+ * @param {String} activity 
+ * @param {String} studentId 
+ * @param {String} weekOption1 
+ * @param {Boolean} morningPerm1 
+ * @param {Boolean} afternoonPerm1 
+ * @param {Boolean} lunch1 
+ * @param {String} weekOption2 
+ * @param {Boolean} morningPerm2 
+ * @param {Boolean} afternoonPerm2 
+ * @param {Boolean} lunch2 
+ * @param {String} weekOption3 
+ * @param {Boolean} morningPerm3 
+ * @param {Boolean} afternoonPerm3 
+ * @param {Boolean} lunch3
+ * @param {String} weekOption4 
+ * @param {Boolean} morningPerm4 
+ * @param {Boolean} afternoonPerm4 
+ * @param {Boolean} lunch4 
  */
-module.exports =function(tutorName, tutorSurname, tutorDNI, phone1 , phone2, email , studentName , studentSurname , birthdate , shirt , school , group , healthcard , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , week1 , week2 , week3 , week4 ){
-    validate.string(tutorName , "tutor name")
-    validate.string(tutorSurname , "tutor surname") 
-    validate.string(tutorDNI , "dni") 
-    validate.string(phone1 , "phone 1") 
-    validate.string(phone2 , "phone2") 
-    validate.string(email , "email")  
-    validate.email(email , "email")  
-    validate.string(studentName , "student name") 
-    validate.string(studentSurname , "student surname") 
-    validate.date(birthdate , "bitrh date")
-    validate.string(shirt , "shirt")
+module.exports =function( school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4){
+
     validate.string(school , "school")
     validate.string(group , "group")
-    validate.string(healthcard , "health card")
+    validate.string(shirt , "shirt")
     validate.string(allergy , "allergy")
     validate.string(illness , "illness")
     validate.string(medication , "medication")
@@ -51,30 +44,69 @@ module.exports =function(tutorName, tutorSurname, tutorDNI, phone1 , phone2, ema
     validate.boolean(imageAuth , "image authorization")
     validate.boolean(excursionAuth , "excursion authorization")
     validate.string(activity , "activity")
-    validate.array(week1 , "week 1")
-    validate.array(week2 , "week 2")
-    validate.array(week3 , "week 3")
-    validate.array(week4 , "week 4")
+    validate.string(studentId , "student")
+    validate.string(weekOption1 , "week option 1")
+    validate.boolean(morningPerm1 , "morning perm 1")
+    validate.boolean(afternoonPerm1 , "afternoon perm 1")
+    validate.boolean(lunch1 , "lunch 1")
+    validate.string(weekOption2 , "week option 2")
+    validate.boolean(morningPerm2 , "morning perm 2")
+    validate.boolean(afternoonPerm2 , "afternoon perm 2")
+    validate.boolean(lunch2 , "lunch 2")
+    validate.string(weekOption3 , "week option 3")
+    validate.boolean(morningPerm3 , "morning perm 3")
+    validate.boolean(afternoonPerm3 , "afternoon perm 3")
+    validate.boolean(lunch3 , "lunch 3")
+    validate.string(weekOption4 , "week option 4")
+    validate.boolean(morningPerm4 , "morning perm 4")
+    validate.boolean(afternoonPerm4 , "afternoon perm 4")
+    validate.boolean(lunch4 , "lunch 4")
 
     return( async ()=>{
-        const currentdate = new Date()
-        const year = currentdate.getFullYear()
-        const course = await Course.findOne({ year })
+        const _activity = await Activity.findOne({ name : activity })
+        if(!_activity) throw new Error (`activity with value ${activity} does not exist`)
+        const activityId = _activity.id
 
-        const tutor = await new tutor({name : tutorName , surname : tutorSurname , dni : tutorDNI , phone1 , phone2 , email })
-        const student = await new Student({ name : studentName , surname : studentSurname , birthdate , healthcard })
-        const enrollment = await new Enrollment({ school , group , shirt , allergy , illness , medication , observations , imageAuth , excursionAuth })
+        const student = await Student.findOne({ _id : studentId })
+        if(!student) throw new Error (`student with id ${studentId} does not exist`)
+        
+        const enrollment = await new Enrollment({ school , group , shirt , allergy , illness , medication , observations , imageAuth , excursionAuth , activityId , student : studentId })
 
-        tutor.student = student.id
-        student.tutor = tutor.id
-        enrollment.activity = activity.id
-        enrollment.tutor = tutor.id
-        enrollment.student = student.id
-        enrollment.weeks.push(week1 , week2 , week3 , week4)
-        course.enrollments.push(enrollment)
-        await tutor.save()
-        await student.save()
+        if(weekOption1) {
+            const week1 = await Week.create({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
+            enrollment.weeks.push(week1)
+        }
+
+        if(weekOption2) {
+            const week2 = await Week.create({number : 2 , category : weekOption2 , morningPermanence : morningPerm2 , afternoonPermanence : afternoonPerm2 , lunch : lunch2 })
+            enrollment.weeks.push(week2)
+        }
+        
+        if(weekOption3) {
+            const week3 = await Week.create({number : 3 , category : weekOption3 , morningPermanence : morningPerm3 , afternoonPermanence : afternoonPerm3 , lunch : lunch3 })
+            enrollment.weeks.push(week3)
+        }
+        
+        if(weekOption4) {
+            const week4 = await Week.create({number : 4 , category : weekOption4 , morningPermanence : morningPerm4 , afternoonPermanence : afternoonPerm4 , lunch : lunch4 })
+            enrollment.weeks.push(week4)
+        }
+        
+        // for(let i = 1 ; i<=4 ; i++){
+        //     if(`weekOption${i}`){
+        //         const week = await Week.create({number : i , category : `weekOption${i}` , morningPermanence : `morningPerm${i}` , afternoonPermanence : `afternoonPerm${i}` , lunch : `lunch${i}` })
+        //         enrollment.weeks.push(week)
+        //     }
+        // }
         await enrollment.save()
+
+        const currentDate = new Date()
+        const currentYear = currentDate.getFullYear() 
+        const course = Course.findOne({ year : currentYear})
+        
+        course.enrollments.push(enrollment.id)
         await course.save()
+
+        return { }
     })()
 }

@@ -36,7 +36,6 @@ const { models : { Admin , Activity }} = require('data')
          if(user) throw new Error (`admin with email ${email} already exists`)
 
          const _activity = await Activity.findOne({ name : activity })
-        debugger
 
          if (!_activity) throw new Error (`activity ${activity} does not exist`)
 
