@@ -15,9 +15,6 @@ describe.only('logic - register enrollment' , ()=>{
 
     let school , group , shirt , allergy , illness , medication , observations , imageAuth , excursionAuth , activity
     
-    let activities = ["Casalet EI" , "Casalet EP" , "Casal EP" , "Casal ESO" , "Campus de Futbol" , "Campus de Bàsquet" , "Campus de Judo"]
-    let groups = ["P3" , "P4" , "P5", "1EP" , "2EP" , "3EP" , "4EP" , "5EP" , "6EP" , "1ESO" , "2ESO" , "3ESO" , "4ESO"]
-    let shirts = ["4" , "6" , "8", "10" , "12" , "XS" , "S" , "M" , "L" , "XL"]
     let categories = ["empty" , "part" , "full"]
     
     let weekOption1 , morningPerm1 , afternoonPerm1 , lunch1
@@ -44,8 +41,8 @@ describe.only('logic - register enrollment' , ()=>{
 
         // enrollment data
         school = `school-${Math.random()}`
-        group = `group-${value(groups)}`
-        shirt = `shirt-${value(shirts)}`
+        group = value("P3" , "P4" , "P5", "1EP" , "2EP" , "3EP" , "4EP" , "5EP" , "6EP" , "1ESO" , "2ESO" , "3ESO" , "4ESO")
+        shirt = value("4" , "6" , "8", "10" , "12" , "XS" , "S" , "M" , "L" , "XL")
         allergy = `allergy-${Math.random()}`
         illness = `illness-${Math.random()}`
         medication = `medication-${Math.random()}`

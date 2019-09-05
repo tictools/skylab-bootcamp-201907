@@ -102,9 +102,9 @@ module.exports =function( school , group , shirt , allergy , illness , medicatio
 
         const currentDate = new Date()
         const currentYear = currentDate.getFullYear() 
-        const course = Course.findOne({ year : currentYear})
+        const course = await Course.findOne({ year : currentYear})
         
-        course.enrollments.push(enrollment.id)
+        course.enrollments.push(enrollment._id)
         await course.save()
 
         return { }
