@@ -7,8 +7,8 @@ module.exports = new Schema({
         required: true
     },
     shirt: {
-        type: ObjectId,
-        ref: 'Shirt'
+        type: String,
+        required: true
     },
     admins: [{ type: ObjectId , ref: 'Admin' }],
     activities: [{ type: ObjectId , ref: 'Activity' }],
