@@ -1,4 +1,4 @@
-const { validate } = require('utils')
+const { validate , formatDate } = require('utils')
 const { models : { Student , Tutor }} = require('data')
 
 
@@ -7,42 +7,32 @@ const { models : { Student , Tutor }} = require('data')
  * 
  * @param {string} name 
  * @param {string} surname 
- * @param {string} dni 
- * @param {string} accreditation 
- * @param {Number} age 
- * @param {Number} role 
- * @param {string} activity
- * @param {string} email 
- * @param {string} password
+ * @param {string} birthdate 
+ * @param {string} healthcard 
+ * @param {Number} tutorId
  * 
  * @returns {Promise}
  */
 
- module.exports = function(name , surname , dni , accreditation , age , role , activity , email , password) {
+ module.exports = function(name , surname , birthdate , healthcard , tutorId) {
      validate.string(name , "name")
      validate.string(surname , "surname")
-     validate.string(dni , "dni")
-     validate.string(accreditation , "accreditation")
-     validate.number(age , "age")
-     validate.number(role , "role")
-     validate.string(activity , "activity")
-     validate.string(email , "email")
-     validate.email(email , "email")
-     validate.string(password , "password")
+     validate.string(birthdate , "birth date")
+     validate.string(healthcard , "health card")
+     validate.string(tutorId , "tutor id")
+
+    debugger
 
      return(async ()=> {
-         const user = await Admin.findOne({ email })
+         const student = await Student.findOne({ healthcard })
 
-         if(user) throw new Error (`admin with email ${email} already exists`)
+         if(student) throw new Error (`student with healthcard ${healthcard} already exists`)
 
-         const _activity = await Activity.findOne({ name : activity })
-        debugger
+         const tutor = await Tutor.findOne({ _id : tutorId })
+         if (!tutor)  throw new Error (`tutor with id ${tutorId} does not exist`)
+         tutorId = tutor.id
 
-         if (!_activity) throw new Error (`activity ${activity} does not exist`)
-
-         const activityId = _activity.id
-
-         await Admin.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password })
+         await Student.create({ name , surname , birthdate , healthcard , tutor : tutorId })
 
          return { } 
      })()

@@ -2,8 +2,8 @@ require('dotenv').config()
 const { env : { DB_URL_TEST } } = process
 const { expect } = require('chai')
 
-const { database , models : { Student , Tutor  } } = require('data')
-const { random : { boolean , value } } = require('utils')
+const { database , models : { Student , Tutor } } = require('data')
+const { formatDate } = require('utils')
 const registerStudent = require('.')
 
 
@@ -11,13 +11,13 @@ describe('logic - register student' , ()=>{
     before( () => database.connect(DB_URL_TEST))
 
     let studentName , studentSurname , birthdate , healthcard
-    let studenytId , tutorId
+    let studentId , tutorId
     let tutorName , tutorSurname , tutorDNI , phone1 , email, password
 
     beforeEach( async () => {
         studentName = `student-name-${Math.random()}`
         studentSurname = `student-surname-${Math.random()}`
-        birthdate = new Date()
+        birthdate = formatDate(new Date())
         healthcard  = `healtcard-${Math.random()}`
 
         tutorName = `tutor-name-${Math.random()}`
@@ -30,32 +30,73 @@ describe('logic - register student' , ()=>{
         await Student.deleteMany()
         await Tutor.deleteMany()
 
-        const tutor = tutor.create({ tutorName , tutorSurname , tutorDNI , phone1 , email, password })
+        const tutor = await Tutor.create({ name : tutorName , surname : tutorSurname , dni : tutorDNI , phone1 , email, password })
         tutorId = tutor.id
     })
     
     it("should succeed on correct data" , async ()=> {
         const result = await registerStudent(studentName , studentSurname , birthdate , healthcard , tutorId )
-        studenytId = result.id
+        studentId = result.id
 
         expect(result).to.exist
 
-        const student = await Student.findOne({ _id : idStudent })
+        const student = await Student.findOne({ healthcard })
 
         expect(student.name).to.equal(studentName)
         expect(student.surname).to.equal(studentSurname)
         expect(student.birthdate).to.equal(birthdate)
         expect(student.healthcard).to.equal(healthcard)
-
-        const tutor = await Tutor.findOne({ student : tutorId })
-
-        expect(tutor.name).to.equal(tutorName)
-        expect(tutor.surname).to.equal(tutorSurname)
-        expect(tutor.dni).to.equal(tutorDNI)
-        expect(tutor.phone1).to.equal(phone1)
-        expect(tutor.phone2).to.equal(phone2)
-        expect(tutor.email).to.equal(email)
+        expect(student.tutor.toString()).to.equal(tutorId)
     })
+
+    it("should fail on existing student" , async () => {
+        await Student.create({ name : studentName , surname : studentSurname , birthdate , healthcard , tutor : tutorId })
+        try{
+            await registerStudent(studentName , studentSurname , birthdate , healthcard , tutorId)
+        }catch({ message }){
+            expect(message).to.equal(`student with healthcard ${healthcard} already exists`)
+        }
+    })
+
+    it('should fail on empty name' , () =>
+        expect(() => registerStudent("" ,  studentSurname , birthdate , healthcard , tutorId)).to.throw('name is empty or blank')
+    )
+    
+    it('should fail on wrong name type' , () =>
+        expect(() => registerStudent(123 ,  studentSurname , birthdate , healthcard , tutorId)).to.throw('name with value 123 is not a string')
+    )
+
+    it('should fail on empty surname' , ( )=>
+        expect(() => registerStudent(studentName , "" , birthdate , healthcard , tutorId)).to.throw('surname is empty or blank')
+    )
+
+    it('should fail on wrong surname type' , () =>
+        expect(() => registerStudent(studentName , 123 , birthdate , healthcard , tutorId)).to.throw('surname with value 123 is not a string')
+    )
+    
+    it('should fail on empty birthdate' , ( )=>
+        expect(() => registerStudent(studentName , studentSurname , "" , healthcard , tutorId)).to.throw('birth date is empty or blank')
+    )
+
+    it('should fail on wrong birthdate type' , () =>
+        expect(() => registerStudent(studentName , studentSurname , 123 , healthcard , tutorId)).to.throw('birth date with value 123 is not a string')
+    )
+    
+    it('should fail on empty healthcard' , ( )=>
+        expect(() => registerStudent(studentName , studentSurname , birthdate , "" , tutorId)).to.throw('health card is empty or blank')
+    )
+
+    it('should fail on wrong healthcard type' , () =>
+        expect(() => registerStudent(studentName , studentSurname , birthdate , 123 , tutorId)).to.throw('health card with value 123 is not a string')
+    )
+    
+    it('should fail on empty tutorId' , ( )=>
+        expect(() => registerStudent(studentName , studentSurname , birthdate , healthcard , "")).to.throw('tutor id is empty or blank')
+    )
+
+    it('should fail on wrong tutorId type' , () =>
+        expect(() => registerStudent(studentName , studentSurname , birthdate , healthcard , 123)).to.throw('tutor id with value 123 is not a string')
+    )
     
     after(database.disconnect())
 })

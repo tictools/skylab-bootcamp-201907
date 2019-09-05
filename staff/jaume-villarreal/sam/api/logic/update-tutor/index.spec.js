@@ -4,7 +4,7 @@ const { expect } = require('chai')
 const { env : { DB_URL_TEST } } = process
 
 const { database , models : { Tutor }} = require('data')
-const { random : { value } } = require('utils')
+// const { random : { value } } = require('utils')
 
 const updateTutor = require('.')
 

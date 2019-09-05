@@ -5,7 +5,7 @@ const { validate } = require('utils')
  * Updates a tutor.
  * 
  * @param {string} id
- * @param {Object} data
+ * @param {Object} body
  * 
  * @returns {Promise}
  */

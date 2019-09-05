@@ -7,7 +7,7 @@ const { random : { boolean , value } } = require('utils')
 const registerStudent = require('.')
 
 
-describe('logic - register student' , ()=>{
+describe.skip('logic - register enrollment' , ()=>{
     before( () => database.connect(DB_URL_TEST))
 
     let name , surname , birthdate , healtcard , tutorId
