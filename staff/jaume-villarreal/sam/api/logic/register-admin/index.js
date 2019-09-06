@@ -1,6 +1,6 @@
 const { validate } = require('utils')
 const { models : { Admin , Activity }} = require('data')
-
+const bcrypt = require('bcryptjs')
 
 /**
  * Register an admin
@@ -41,7 +41,9 @@ const { models : { Admin , Activity }} = require('data')
 
          const activityId = _activity.id
 
-         await Admin.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password })
+         const hash = await bcrypt.hash(password ,10)
+
+         await Admin.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password : hash })
 
          return { } 
      })()

@@ -1,4 +1,5 @@
 const { validate } = require('utils')
+const bcrypt = require('bcryptjs')
 const { models : { Tutor } } = require('data')
 
 /**
@@ -20,7 +21,9 @@ module.exports =  function(email , password){
 
         if(!tutor) throw new Error (`tutor with email ${email} does not exist`)
 
-        if(tutor.password !== password) throw new Error ('wrong credentials')
+        const match = bcrypt.compare(password , tutor.password)
+
+        if(!match) throw new Error ('wrong credentials')
         
         return tutor.id
     })()

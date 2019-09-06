@@ -1,4 +1,5 @@
 require ('dotenv').config()
+const bcrypt = require('bcryptjs')
 const { expect } = require('chai')
 
 const { env : { DB_URL_TEST } } = process
@@ -42,8 +43,9 @@ describe('logic - update admin', () => {
         const _activity = await Activity.findOne({ name : activity })
         activityId = _activity.id
 
-        const admin = await Admin.create({ name , surname , dni , accreditation , age , role , activityId , email , password })
+        const admin = await Admin.create({ name , surname , dni , accreditation , age , role , activityId , email , password : await bcrypt.hash(password,10) })
         adminId = admin.id
+        debugger
     })
 
     it('should succeed on correct data', async () =>{
@@ -59,7 +61,10 @@ describe('logic - update admin', () => {
             expect(_admin.age).to.equal(body.age)
             expect(_admin.role).to.equal(body.role)
             expect(_admin.email).to.equal(body.email)
-            expect(_admin.password).to.equal(body.password)
+
+            const match = await bcrypt.compare(body.password , _admin.password)
+            expect(match).to.be.true
+    
             expect(_admin.extra).not.to.exist
     })
 

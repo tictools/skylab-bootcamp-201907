@@ -1,4 +1,5 @@
 require ('dotenv').config()
+const bcrypt = require('bcryptjs')
 const { expect } = require('chai')
 
 const { env : { DB_URL_TEST } } = process
@@ -39,7 +40,7 @@ describe('logic - update student', () => {
         await Student.deleteMany()
         await Tutor.deleteMany()
 
-        const tutor = await Tutor.create({ name : tutorName , surname : tutorSurname , dni : tutorDNI , phone1 , email, password })
+        const tutor = await Tutor.create({ name : tutorName , surname : tutorSurname , dni : tutorDNI , phone1 , email, password : await bcrypt.hash(password,10) })
         tutorId = tutor.id
 
         const student = await Student.create({ name : studentName , surname : studentSurname , birthdate , healthcard , tutor:tutorId})

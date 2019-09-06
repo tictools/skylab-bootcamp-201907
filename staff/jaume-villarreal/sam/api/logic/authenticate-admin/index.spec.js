@@ -1,4 +1,5 @@
 require ('dotenv').config()
+const bcrypt = require('bcryptjs')
 const { expect } = require('chai')
 
 const { database , models : { Admin , Activity }} = require('data')
@@ -31,15 +32,15 @@ describe("logic - authenticate admin" , ()=>{
         const _activity = await Activity.findOne({ name : activity })
         activityId = _activity.id
         
-        const admin = await Admin.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password })
+        const admin = await Admin.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password : await bcrypt.hash(password,10) })
         adminId = admin.id
     })
     
     it('should succeed on correct data' , async()=>{
-
         const id = await authenticateAdmin(email , password)
         expect(id).to.exist
         expect(id).to.equal(adminId)
+        const match = bcrypt.compare(password , )
     })
 
     it('should fail on unexisting admin' , async()=>{

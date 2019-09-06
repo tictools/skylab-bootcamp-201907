@@ -1,4 +1,6 @@
 require('dotenv').config()
+const bcrypt = require('bcryptjs')
+
 const { expect } = require('chai')
 const { env : { DB_URL_TEST } } = process
 
@@ -44,7 +46,10 @@ describe("logic - register admin" , ()=>{
         expect(admin.role).to.equal(role)
         expect(admin.activity.toString()).to.equal(activityId)
         expect(admin.email).to.equal(email)
-        expect(admin.password).to.equal(password)        
+
+        const hashed = await bcrypt.compare(password , admin.password)
+        expect(hashed).to.be.true
+
     })
     
     it('should fail on unexisting activity' , async ()=>{

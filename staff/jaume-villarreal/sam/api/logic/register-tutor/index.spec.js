@@ -1,4 +1,5 @@
 require ('dotenv').config()
+const bcrypt = require('bcryptjs')
 const { expect } = require('chai')
 
 const { database , models : { Tutor }} = require('data')
@@ -35,7 +36,9 @@ describe("logic - register tutor" , ()=>{
         expect(tutor.dni).to.equal(dni)
         expect(tutor.phone1).to.equal(phone1)
         expect(tutor.email).to.equal(email)
-        expect(tutor.password).to.equal(password)
+        
+        const match = await bcrypt.compare(password,tutor.password)
+        expect(match).to.be.true
     })
 
     it("should fail on existing tutor" , async () => {

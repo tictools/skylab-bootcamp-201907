@@ -1,4 +1,5 @@
 const { validate } = require('utils')
+const bcrypt = require('bcryptjs')
 const { models : { Tutor } } = require('data')
 
 /**
@@ -28,7 +29,9 @@ const { models : { Tutor } } = require('data')
          
         if(tutor) throw new Error (`tutor with email ${email} already exists`)
 
-        await Tutor.create({ name , surname , dni , phone1 , email , password })
+        const hash = await bcrypt.hash(password,10)
+
+        await Tutor.create({ name , surname , dni , phone1 , email , password : hash })
 
         return { }
      })()

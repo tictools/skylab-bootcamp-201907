@@ -1,5 +1,6 @@
 require('dotenv').config()
 const { env : { DB_URL_TEST } } = process
+const bcrypt = require('bcryptjs')
 const { expect } = require('chai')
 
 const { database , models : { Course , Enrollment , Student , Tutor , Activity } } = require('data')
@@ -60,7 +61,7 @@ describe('logic - register enrollment' , ()=>{
         
         const course = await Course.create({ year , shirt : "new model" , admins : [] , activities : [] , enrollments : [] })
 
-        const tutor = await Tutor.create({ name : tutorName , surname : tutorSurname , dni , phone1 , email , password })
+        const tutor = await Tutor.create({ name : tutorName , surname : tutorSurname , dni , phone1 , email , password : await bcrypt.hash(password,10) })
         tutorId = tutor.id
 
         const student = await Student.create({name : studentName , surname : studentSurname , birthdate , healthcard , tutor : tutorId})

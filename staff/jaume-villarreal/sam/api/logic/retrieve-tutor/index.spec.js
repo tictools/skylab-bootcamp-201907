@@ -1,4 +1,5 @@
 require ('dotenv').config()
+const bcrypt = require('bcryptjs')
 const { expect } = require('chai')
 
 const { database , models : { Tutor }} = require('data')
@@ -23,7 +24,7 @@ describe('logic - retrieve tutor', () => {
 
         await Tutor.deleteMany()
 
-        const newTutor = await Tutor.create({ name , surname , dni , phone1 , email , password })
+        const newTutor = await Tutor.create({ name , surname , dni , phone1 , email , password : await bcrypt.hash(password,10) })
         tutorId = newTutor.id
     })
 

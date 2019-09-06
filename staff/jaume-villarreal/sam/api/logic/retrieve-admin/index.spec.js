@@ -1,4 +1,5 @@
 require ('dotenv').config()
+const bcrypt = require ('bcryptjs')
 const { expect } = require('chai')
 
 const { database , models : { Admin , Activity }} = require('data')
@@ -30,7 +31,7 @@ describe('logic - retrieve admin', () => {
 
         await Admin.deleteMany()
 
-        const newAdmin = await Admin.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password })
+        const newAdmin = await Admin.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password : await bcrypt.hash(password,10) })
         adminId = newAdmin.id
         debugger
     })
