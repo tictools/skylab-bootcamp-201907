@@ -37,7 +37,7 @@ describe('logic - retrieve tutor', () => {
         expect(tutor.password).not.to.exist
     })
 
-    it('should fail on a non existing user' , async () =>{
+    it('should fail on a non existing tutor' , async () =>{
         id = '5d5d5530531d455f75da9fF9'
         try{
             await retrieveTutor(tutorId)
