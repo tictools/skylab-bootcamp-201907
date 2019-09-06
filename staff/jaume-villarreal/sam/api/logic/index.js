@@ -9,5 +9,6 @@ module.exports = {
     registerTutor : require('./register-tutor'),
     retrieveTutor : require('./retrieve-tutor'),
     authenticateTutor : require('./authenticate-tutor'),
-    registerEnrollment : require('./register-enrollment')
+    registerEnrollment : require('./register-enrollment'),
+    retrieveEnrollment : require('./retrieve-enrollment')
 }

@@ -73,32 +73,34 @@ module.exports =function( school , group , shirt , allergy , illness , medicatio
         const enrollment = await new Enrollment({ school , group , shirt , allergy , illness , medication , observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
 
         if(weekOption1 !== "empty") {
-            const week1 = await Week.create({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
-            enrollment.weeks.push(week1)
+            const week = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
+            enrollment.weeks.push(week)
         }
 
         if(weekOption2 !== "empty") {
-            const week2 = await Week.create({number : 2 , category : weekOption2 , morningPermanence : morningPerm2 , afternoonPermanence : afternoonPerm2 , lunch : lunch2 })
-            enrollment.weeks.push(week2)
+            const week = await new Week({number : 2 , category : weekOption2 , morningPermanence : morningPerm2 , afternoonPermanence : afternoonPerm2 , lunch : lunch2 })
+            enrollment.weeks.push(week)
         }
         
         if(weekOption3 !== "empty") {
-            const week3 = await Week.create({number : 3 , category : weekOption3 , morningPermanence : morningPerm3 , afternoonPermanence : afternoonPerm3 , lunch : lunch3 })
-            enrollment.weeks.push(week3)
+            const week = await new Week({number : 3 , category : weekOption3 , morningPermanence : morningPerm3 , afternoonPermanence : afternoonPerm3 , lunch : lunch3 })
+            enrollment.weeks.push(week)
         }
         
         if(weekOption4 !== "empty") {
-            const week4 = await Week.create({number : 4 , category : weekOption4 , morningPermanence : morningPerm4 , afternoonPermanence : afternoonPerm4 , lunch : lunch4 })
-            enrollment.weeks.push(week4)
+            const week = await new Week({number : 4 , category : weekOption4 , morningPermanence : morningPerm4 , afternoonPermanence : afternoonPerm4 , lunch : lunch4 })
+            enrollment.weeks.push(week)
         }
         
         // for(let i = 1 ; i<=4 ; i++){
         //     if(`weekOption${i}`){
-        //         const week = await Week.create({number : i , category : `weekOption${i}` , morningPermanence : `morningPerm${i}` , afternoonPermanence : `afternoonPerm${i}` , lunch : `lunch${i}` })
+        //         const week = await new Week({number : i , category : `weekOption${i}` , morningPermanence : `morningPerm${i}` , afternoonPermanence : `afternoonPerm${i}` , lunch : `lunch${i}` })
         //         enrollment.weeks.push(week)
         //     }
         // }
+
         await enrollment.save()
+        debugger
 
         const currentDate = new Date()
         const currentYear = currentDate.getFullYear() 
