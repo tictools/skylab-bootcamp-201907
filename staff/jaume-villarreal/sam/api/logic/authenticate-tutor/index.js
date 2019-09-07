@@ -22,7 +22,7 @@ module.exports =  function(email , password){
         if(!tutor) throw new Error (`tutor with email ${email} does not exist`)
 
         const match = await bcrypt.compare(password , tutor.password)
-        debugger
+        
 
         if(!match) throw new Error ('wrong credentials')
         

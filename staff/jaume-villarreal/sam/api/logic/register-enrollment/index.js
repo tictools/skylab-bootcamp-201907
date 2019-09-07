@@ -102,14 +102,14 @@ module.exports =function( school , group , shirt , allergy , illness , medicatio
         // }
 
         await enrollment.save()
-        debugger
+        
 
         const currentDate = new Date()
         const currentYear = currentDate.getFullYear() 
         const course = await Course.findOne({ year : currentYear})
-        debugger
+        
         course.enrollments.push(enrollment.id)
-        debugger
+        
         await course.save()
 
         return { }

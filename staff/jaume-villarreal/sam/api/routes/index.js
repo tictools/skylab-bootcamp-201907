@@ -14,7 +14,29 @@ const updateTutor = require('./update-tutor')
 
 router.post('/tutors' , jsonBodyParser , registerTutor)
 router.post('/tutors/auth' , jsonBodyParser , authenticateTutor)
-router.get('/tutors' , [jsonBodyParser , tokenMiddleware] , retrieveTutor)
+router.get('/tutors' , tokenMiddleware , retrieveTutor)
 router.patch('/tutors' , [jsonBodyParser , tokenMiddleware] , updateTutor)
+
+// ADMIN
+const registerAdmin = require('./register-admin')
+const authenticateAdmin = require('./authenticate-admin')
+const retrieveAdmin = require('./retrieve-admin')
+const updateAdmin = require('./update-admin') 
+
+router.post('/admins' , jsonBodyParser , registerAdmin)
+router.post('/admins/auth' , jsonBodyParser , authenticateAdmin)
+router.get('/admins' , tokenMiddleware , retrieveAdmin)
+router.patch('/admins' , [jsonBodyParser , tokenMiddleware] , updateAdmin)
+
+// STUDENT
+// const registerAdmin = require('./register-admin')
+// const authenticateAdmin = require('./authenticate-admin')
+// const retrieveAdmin = require('./retrieve-admin')
+// const updateAdmin = require('./update-admin') 
+
+// router.post('/admins' , jsonBodyParser , registerAdmin)
+// router.post('/admins/auth' , jsonBodyParser , authenticateAdmin)
+// router.get('/admins' , tokenMiddleware , retrieveAdmin)
+// router.patch('/admins' , [jsonBodyParser , tokenMiddleware] , updateAdmin)
 
 module.exports = router

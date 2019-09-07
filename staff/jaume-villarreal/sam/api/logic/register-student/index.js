@@ -21,8 +21,6 @@ const { models : { Student , Tutor }} = require('data')
      validate.string(healthcard , "health card")
      validate.string(tutorId , "tutor id")
 
-    debugger
-
      return(async ()=> {
          const student = await Student.findOne({ healthcard })
 

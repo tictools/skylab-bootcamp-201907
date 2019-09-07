@@ -1,7 +1,7 @@
 const logic = require('../../logic')
 
 /**
- * Returns tutor id and token.
+ * Returns message on updated admin.
  * 
  * @param {string} req 
  * @param {string} res 
@@ -9,14 +9,14 @@ const logic = require('../../logic')
  * @returns {Promise}
  */
 
-module.exports = function(req , res){
+ module.exports = function(req ,res){
     const { userId , body } = req
 
     try{
-        logic.updateTutor(userId , body)
-            .then(() => res.status(200).json({ message : "tutor correctly updated"}))
+        logic.updateAdmin(userId , body)
+            .then(() => res.status(200).json({ message : "admin correctly updated" }))
             .catch(({ message }) => res.status(404).json({ error : message}))
     }catch({ message }){
         res.status(404).json({ error : message })
     }
-}
+ }

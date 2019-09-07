@@ -15,7 +15,7 @@ database.connect(DB_URL)
 
         app.use('/api' , routes)
 
-        app.listen(PORT , () => console.log(`${name} ${version}: ${description} up and running on port {PORT}`))
+        app.listen(PORT , () => console.log(`${name} ${version}: ${description} up and running on port ${PORT}`))
     })
 
 process.on('SIGINT' , ()=>{

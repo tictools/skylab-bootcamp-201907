@@ -33,7 +33,6 @@ describe('logic - retrieve admin', () => {
 
         const newAdmin = await Admin.create({ name , surname , dni , accreditation , age , role , activity : activityId , email , password : await bcrypt.hash(password,10) })
         adminId = newAdmin.id
-        debugger
     })
 
     it('should succeed on correct data', async () =>{

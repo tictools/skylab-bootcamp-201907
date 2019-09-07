@@ -50,9 +50,8 @@ describe('logic - update student', () => {
     it('should succeed on correct data', async () =>{
         const result = await updateStudent(studentId, body)
             expect(result.nModified).to.exist
-            debugger
+            
         const _student = await Student.findById(studentId)
-        debugger
             expect(_student).to.exist
             expect(_student.name).to.equal(body.name)
             expect(_student.surname).to.equal(body.surname)
