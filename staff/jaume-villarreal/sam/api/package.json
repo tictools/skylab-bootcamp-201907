@@ -1,7 +1,7 @@
 {
-  "name": "my-api-mongoose",
+  "name": "sam-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "summer activity manager",
   "main": "index.js",
   "scripts": {
     "start": "node .",
