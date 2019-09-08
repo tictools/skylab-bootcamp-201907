@@ -17,6 +17,7 @@ router.post('/tutors/auth' , jsonBodyParser , authenticateTutor)
 router.get('/tutors' , tokenMiddleware , retrieveTutor)
 router.patch('/tutors' , [jsonBodyParser , tokenMiddleware] , updateTutor)
 
+
 // ADMIN
 const registerAdmin = require('./register-admin')
 const authenticateAdmin = require('./authenticate-admin')
@@ -28,13 +29,14 @@ router.post('/admins/auth' , jsonBodyParser , authenticateAdmin)
 router.get('/admins' , tokenMiddleware , retrieveAdmin)
 router.patch('/admins' , [jsonBodyParser , tokenMiddleware] , updateAdmin)
 
+
 // STUDENT
 const registerStudent = require('./register-student')
 const retrieveStudent = require('./retrieve-student')
-// const updateAdmin = require('./update-admin') 
+const updateStudent = require('./update-student') 
 
 router.post('/students' , jsonBodyParser , registerStudent)
-router.get('/students/:id' , tokenMiddleware , retrieveStudent)
-// router.patch('/admins' , [jsonBodyParser , tokenMiddleware] , updateAdmin)
+router.get('/students/:id' , jsonBodyParser , retrieveStudent)
+router.patch('/students/:id' , jsonBodyParser , updateStudent)
 
 module.exports = router
