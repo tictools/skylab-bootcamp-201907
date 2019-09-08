@@ -390,7 +390,7 @@ describe.only('logic - register enrollment' , ()=>{
         expect(() => registerEnrollment("" , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('school is empty or blank')
     )
     
-    it('should fail on empty school' , () =>
+    it('should fail on wrong school type' , () =>
         expect(() => registerEnrollment(123 , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('school with value 123 is not a string')
     )
     
@@ -398,7 +398,7 @@ describe.only('logic - register enrollment' , ()=>{
         expect(() => registerEnrollment(school , "" , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('group is empty or blank')
     )
     
-    it('should fail on empty school' , () =>
+    it('should fail on wrong group type' , () =>
         expect(() => registerEnrollment(school , 123 , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('group with value 123 is not a string')
     )
 
@@ -406,17 +406,9 @@ describe.only('logic - register enrollment' , ()=>{
         expect(() => registerEnrollment(school , group , "" , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('shirt is empty or blank')
     )
 
-    it('should fail on empty school' , () =>
+    it('should fail on wrong shirt type' , () =>
         expect(() => registerEnrollment(school , group , 123 , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('shirt with value 123 is not a string')
     )
-
-    it('should fail on empty allergy' , () =>
-        expect(() => registerEnrollment(school , group , shirt , "" , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('allergy is empty or blank')
-    )
-
-    it('should fail on empty allergy' , () =>
-        expect(() => registerEnrollment(school , group , shirt , 123 , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('allergy with value 123 is not a string')
-)
 
     it('should fail on empty illness' , () =>
         expect(() => registerEnrollment(school , group , shirt , allergy , "" , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('illness is empty or blank')

@@ -42,9 +42,9 @@ router.patch('/students/:id' , jsonBodyParser , updateStudent)
 
 // ENROLLMENT
 const registerEnrollment = require('./register-enrollment')
-// const retrieveStudent = require('./retrieve-student')
+const retrieveEnrollment = require('./retrieve-enrollment')
 
 router.post('/enrollments' , jsonBodyParser , registerEnrollment)
-// router.get('/students/:id' , jsonBodyParser , retrieveStudent)
+router.get('/enrollments/:id' , jsonBodyParser , retrieveEnrollment)
 
 module.exports = router
