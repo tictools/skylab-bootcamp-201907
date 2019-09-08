@@ -4,6 +4,10 @@ const weekSchema = require('./week')
 
 
 module.exports = new Schema({
+    year:{
+        type: Number,
+        required: true
+    },
     school: {
         type: String,
         required: true
