@@ -4,11 +4,15 @@ const { models : { Enrollment , Course } } = require('data')
 module.exports = function(year){
     validate.number(year , 'course')
 
-    const course = Course.findOne({ year })
+   return (async ()=>{
+        const course = await Course.findOne({ year })
 
-    if(!course) throw new Error (`course ${year} does not exist `)
+        if(!course) throw new Error (`course ${year} does not exist `)
 
-    const enrollments = Enrollment.find({ year })
+        const enrollments = await Enrollment.find({ year })
 
-    return enrollments
+        debugger
+
+        return enrollments
+   })()
 }

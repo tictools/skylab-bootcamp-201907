@@ -16,5 +16,5 @@ module.exports = {
     
     registerEnrollment : require('./register-enrollment'),
     retrieveEnrollment : require('./retrieve-enrollment'),
-    retrieveAEnrollmentsByYear : require('./retrieve-enrollments-by-year')
+    retrieveEnrollmentsByYear : require('./retrieve-enrollments-by-year')
 }

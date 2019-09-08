@@ -222,7 +222,7 @@ describe('logic - retrieve enrollments by year', () => {
         try{
             await retrieveEnrollmentsByYear(currentYear)
         } catch({ message }){
-            expect(message).to.equal(`course ${year} does not exist `)
+            expect(message).to.equal(`course ${currentYear} does not exist `)
         }
     })
 
