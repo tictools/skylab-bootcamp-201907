@@ -8,7 +8,7 @@ const { random : { boolean , value } , formatDate} = require('utils')
 const registerEnrollment = require('.')
 
 
-describe('logic - register enrollment' , ()=>{
+describe.only('logic - register enrollment' , ()=>{
     before( () => database.connect(DB_URL_TEST))
 
     let studentName , studentSurname , birthdate , healthcard , studentId

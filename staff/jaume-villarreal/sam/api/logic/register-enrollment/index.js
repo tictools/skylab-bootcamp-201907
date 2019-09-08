@@ -112,6 +112,6 @@ module.exports =function( school , group , shirt , allergy , illness , medicatio
         
         await course.save()
 
-        return { }
+        return enrollment.id
     })()
 }

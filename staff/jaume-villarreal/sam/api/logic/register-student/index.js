@@ -30,8 +30,8 @@ const { models : { Student , Tutor }} = require('data')
          if (!tutor)  throw new Error (`tutor with id ${tutorId} does not exist`)
          tutorId = tutor.id
 
-         await Student.create({ name , surname , birthdate , healthcard , tutor : tutorId })
+         const newStudent = await Student.create({ name , surname , birthdate , healthcard , tutor : tutorId })
 
-         return { } 
+         return newStudent.id
      })()
  }

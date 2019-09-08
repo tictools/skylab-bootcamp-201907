@@ -36,13 +36,13 @@ describe('logic - register student' , ()=>{
     })
     
     it("should succeed on correct data" , async ()=> {
+        // const result = await registerStudent(studentName , studentSurname , birthdate , healthcard , tutorId )
+        // studentId = result.id
+        
         const result = await registerStudent(studentName , studentSurname , birthdate , healthcard , tutorId )
-        studentId = result.id
-
         expect(result).to.exist
 
         const student = await Student.findOne({ healthcard })
-
         expect(student.name).to.equal(studentName)
         expect(student.surname).to.equal(studentSurname)
         expect(student.birthdate).to.equal(birthdate)
