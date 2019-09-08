@@ -12,9 +12,9 @@ module.exports = {
     retrieveTutor : require('./retrieve-tutor'),
     updateTutor : require('./update-tutor'),
     authenticateTutor : require('./authenticate-tutor'),
+    retrieveStudentsByTutor : require('./retrieve-students-by-tutor'),
     
     registerEnrollment : require('./register-enrollment'),
     retrieveEnrollment : require('./retrieve-enrollment'),
-
-    retrieveStudentsByTutor : require('./retrieve-students-by-tutor')
+    retrieveAEnrollmentsByYear : require('./retrieve-enrollments-by-year')
 }

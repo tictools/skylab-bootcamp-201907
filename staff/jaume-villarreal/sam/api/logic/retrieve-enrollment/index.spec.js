@@ -17,7 +17,9 @@ describe('logic - retrieve enrollment', () => {
 
     let school , group , shirt , allergy , illness , medication , observations , imageAuth , excursionAuth , activity
     
-    let activityId , studentId , enrollmentId, courseId
+    let activityId , studentId , enrollmentId
+
+    let currentYear
     
     let weekOption1 , morningPerm1 , afternoonPerm1 , lunch1
     let weekOption2 , morningPerm2 , afternoonPerm2 , lunch2
@@ -57,9 +59,9 @@ describe('logic - retrieve enrollment', () => {
          await Course.deleteMany()
          
          let currentDate = new Date()
-         let year = currentDate.getFullYear()
+         currentYear = currentDate.getFullYear()
          
-         const course = await Course.create({ year , shirt : "new model" , admins : [] , activities : [] , enrollments : [] })
+         const course = await Course.create({ year : currentYear , shirt : "new model" , admins : [] , activities : [] , enrollments : [] })
          courseId = course.id
          
          const tutor = await Tutor.create({ name : tutorName , surname : tutorSurname , dni , phone1 , email , password : await bcrypt.hash(password,10) })
@@ -78,7 +80,7 @@ describe('logic - retrieve enrollment', () => {
         afternoonPerm1 = boolean()
         lunch1 = boolean()
         
-        const newEnrollment = await new Enrollment({ school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
+        const newEnrollment = await new Enrollment({ year : currentYear , school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
         enrollmentId = newEnrollment.id
 
         const week1 = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
@@ -125,7 +127,7 @@ describe('logic - retrieve enrollment', () => {
         afternoonPerm2 = boolean()
         lunch2 = boolean()
         
-        const newEnrollment = await new Enrollment({ school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
+        const newEnrollment = await new Enrollment({ year : currentYear , school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
         enrollmentId = newEnrollment.id
 
         const week1 = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
@@ -191,7 +193,7 @@ describe('logic - retrieve enrollment', () => {
         // afternoonPerm4 = false
         // lunch4 = false
         
-        const newEnrollment = await new Enrollment({ school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
+        const newEnrollment = await new Enrollment({ year : currentYear , school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
         enrollmentId = newEnrollment.id
 
         const week1 = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
@@ -266,7 +268,7 @@ describe('logic - retrieve enrollment', () => {
         afternoonPerm4 = boolean()
         lunch4 = boolean()
         
-        const newEnrollment = await new Enrollment({ school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
+        const newEnrollment = await new Enrollment({ year : currentYear , school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
         enrollmentId = newEnrollment.id
 
         const week1 = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
@@ -340,7 +342,7 @@ describe('logic - retrieve enrollment', () => {
         afternoonPerm3 = boolean()
         lunch3 = boolean()
         
-        const newEnrollment = await new Enrollment({ school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
+        const newEnrollment = await new Enrollment({ year : currentYear , school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
         enrollmentId = newEnrollment.id
 
         const week1 = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })

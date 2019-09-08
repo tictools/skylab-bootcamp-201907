@@ -21,6 +21,8 @@ describe('logic - register enrollment' , ()=>{
     let weekOption3 , morningPerm3 , afternoonPerm3 , lunch3
     let weekOption4 , morningPerm4 , afternoonPerm4 , lunch4
 
+    let currentYear
+
     beforeEach( async () => {
         // tutor data
         tutorName = `tutor-name-${Math.random()}`
@@ -56,16 +58,17 @@ describe('logic - register enrollment' , ()=>{
         await Enrollment.deleteMany()
         await Course.deleteMany()
         
-        let currentDate = new Date()
-        let year = currentDate.getFullYear()
         
-        const course = await Course.create({ year , shirt : "new model" , admins : [] , activities : [] , enrollments : [] })
+        const date = new Date()
+        currentYear = date.getFullYear()
+        await Course.create({ year : currentYear , shirt : "new model" , admins : [] , activities : [] , enrollments : [] })
 
         const tutor = await Tutor.create({ name : tutorName , surname : tutorSurname , dni , phone1 , email , password : await bcrypt.hash(password,10) })
         tutorId = tutor.id
 
         const student = await Student.create({name : studentName , surname : studentSurname , birthdate , healthcard , tutor : tutorId})
         studentId = student.id
+
     })
 
     it("should succeed on correct data for first week enrollment" , async ()=> {
@@ -95,6 +98,7 @@ describe('logic - register enrollment' , ()=>{
 
         const enrollment = await Enrollment.findOne({ student : studentId })
 
+        expect(enrollment.year).to.equal(currentYear)
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
         expect(enrollment.shirt).to.equal(shirt)
@@ -141,6 +145,7 @@ describe('logic - register enrollment' , ()=>{
 
         const enrollment = await Enrollment.findOne({ student : studentId })
 
+        expect(enrollment.year).to.equal(currentYear)
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
         expect(enrollment.shirt).to.equal(shirt)
@@ -193,6 +198,7 @@ describe('logic - register enrollment' , ()=>{
 
         const enrollment = await Enrollment.findOne({ student : studentId })
 
+        expect(enrollment.year).to.equal(currentYear)
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
         expect(enrollment.shirt).to.equal(shirt)
@@ -251,6 +257,7 @@ describe('logic - register enrollment' , ()=>{
 
         const enrollment = await Enrollment.findOne({ student : studentId })
 
+        expect(enrollment.year).to.equal(currentYear)
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
         expect(enrollment.shirt).to.equal(shirt)
@@ -315,6 +322,7 @@ describe('logic - register enrollment' , ()=>{
 
         const enrollment = await Enrollment.findOne({ student : studentId })
 
+        expect(enrollment.year).to.equal(currentYear)
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
         expect(enrollment.shirt).to.equal(shirt)
@@ -361,6 +369,7 @@ describe('logic - register enrollment' , ()=>{
 
         const enrollment = await Enrollment.findOne({ student : studentId })
 
+        expect(enrollment.year).to.equal(currentYear)
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
         expect(enrollment.shirt).to.equal(shirt)

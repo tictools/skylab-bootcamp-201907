@@ -71,8 +71,11 @@ module.exports =function( school , group , shirt , allergy , illness , medicatio
 
         const student = await Student.findOne({ _id : studentId })
         if(!student) throw new Error (`student with id ${studentId} does not exist`)
+
+        const date = new Date()
+        const year = date.getFullYear()
         
-        const enrollment = await new Enrollment({ school , group , shirt , allergy , illness , medication , observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
+        const enrollment = await new Enrollment({ year , school , group , shirt , allergy , illness , medication , observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
 
         if(weekOption1 !== "empty") {
             const week = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
