@@ -14,5 +14,7 @@ module.exports = {
     authenticateTutor : require('./authenticate-tutor'),
     
     registerEnrollment : require('./register-enrollment'),
-    retrieveEnrollment : require('./retrieve-enrollment')
+    retrieveEnrollment : require('./retrieve-enrollment'),
+
+    retrieveStudentsByTutor : require('./retrieve-students-by-tutor')
 }

@@ -40,7 +40,7 @@ describe("logic - authenticate admin" , ()=>{
         const id = await authenticateAdmin(email , password)
         expect(id).to.exist
         expect(id).to.equal(adminId)
-        const match = bcrypt.compare(password , )
+        // const match = await bcrypt.compare(password , )
     })
 
     it('should fail on unexisting admin' , async()=>{

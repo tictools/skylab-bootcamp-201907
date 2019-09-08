@@ -23,7 +23,6 @@ module.exports =  function(email , password){
 
         const match = await bcrypt.compare(password , tutor.password)
         
-
         if(!match) throw new Error ('wrong credentials')
         
         return tutor.id

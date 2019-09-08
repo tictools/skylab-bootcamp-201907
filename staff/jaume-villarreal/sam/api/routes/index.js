@@ -11,10 +11,12 @@ const registerTutor = require('./register-tutor')
 const authenticateTutor = require('./authenticate-tutor')
 const retrieveTutor = require('./retrieve-tutor')
 const updateTutor = require('./update-tutor') 
+const retrieveStudentsByTutor = require('./retrieve-students-by-tutor')
 
 router.post('/tutors' , jsonBodyParser , registerTutor)
 router.post('/tutors/auth' , jsonBodyParser , authenticateTutor)
 router.get('/tutors' , tokenMiddleware , retrieveTutor)
+router.get('/tutors/students' , tokenMiddleware , retrieveStudentsByTutor)
 router.patch('/tutors' , [jsonBodyParser , tokenMiddleware] , updateTutor)
 
 
@@ -33,7 +35,7 @@ router.patch('/admins' , [jsonBodyParser , tokenMiddleware] , updateAdmin)
 // STUDENT
 const registerStudent = require('./register-student')
 const retrieveStudent = require('./retrieve-student')
-const updateStudent = require('./update-student') 
+const updateStudent = require('./update-student')
 
 router.post('/students' , jsonBodyParser , registerStudent)
 router.get('/students/:id' , jsonBodyParser , retrieveStudent)
