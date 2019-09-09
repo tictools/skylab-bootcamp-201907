@@ -1,0 +1,36 @@
+import utils from 'utils'
+
+const { validate } = utils
+
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+
+export default function (name , surname , dni , phone1 , email, password , repassword) {
+
+    validate.string(name, 'name')
+    validate.string(surname, 'surname')
+    validate.string(dni, 'dni')
+    validate.string(phone1, 'phone1')
+    validate.string(email, 'email')
+    validate.email(email, 'email')
+    validate.string(password, 'password')
+    validate.string(repassword, 'repassword')
+    
+    if(password !== repassword) throw Error ("Les contrassenyes no coincideixen.")
+
+    return (async () => {
+        
+        const response = await fetch(`${REACT_APP_API_URL}/tutors`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ name , surname , dni , phone1 , email, password })
+        })
+        
+        if (response.status !== 201) {
+            const { error } = await response.json()
+            throw Error(error)
+        }
+        else {
+            return await response.json()
+        }   
+    })()
+}
