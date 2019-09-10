@@ -14,13 +14,16 @@ function Login({ history }){
 
     async function handleLogin(email , password){
         try{
-            const result = await logic.authenticateTutor(email , password)
+            const { message , id , token } = await logic.authenticateTutor(email , password)
             logic.userCredentials = {id , token}
-            history.pnush('/home')
-            console.log (result.message)
+            console.log("message" , message)
+            console.log("id" , sessionStorage.id)
+            console.log("token" , sessionStorage.token)
+            history.push('/')
         }
-        catch(error){
-            setError(error.message)
+        catch({ message }){
+            let translatedMessage = logic.translateError(message , email)
+            setError(translatedMessage)
         }
     }
 

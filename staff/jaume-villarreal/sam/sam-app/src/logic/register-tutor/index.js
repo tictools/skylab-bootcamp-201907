@@ -7,9 +7,9 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 export default function (name , surname , dni , phone1 , email, password , repassword) {
     
     validate.string(name, 'name')
-    validate.alphabetic('name')
+    validate.alphabetic(name , 'name')
     validate.string(surname, 'surname')
-    validate.alphabetic('surname')
+    validate.alphabetic(surname , 'surname')
     validate.string(dni, 'dni')
     validate.string(phone1, 'phone1')
     validate.string(email, 'email')

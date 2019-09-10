@@ -11,20 +11,23 @@ export default function (email, password) {
     validate.string(password, 'password')
 
     return (async () => {
-        
+
+        const headers = { "content-type" : "application/json" }
+        const body = JSON.stringify({ email, password })
+
         const response = await fetch(`${REACT_APP_API_URL}/tutors/auth`, {
             method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ email, password })
+            headers: headers,
+            body: body
         })
         
-        if (response.status !== 201) {
+        if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)
         }
         else {
-            const { id  , token } = await response.json()
-            return { id , token }        
+            const { message , id  , token } = await response.json()
+            return { message , id , token }        
         }   
     })()
 }

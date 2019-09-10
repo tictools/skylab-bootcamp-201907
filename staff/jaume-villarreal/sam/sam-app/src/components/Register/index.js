@@ -21,7 +21,6 @@ function Register({ history }){
         }
         catch({ message }){
             console.log("error" , message)
-            // debugger
             const translatedMessage = logic.translateError(message , email)
             setError(translatedMessage)
         }
@@ -54,7 +53,7 @@ function Register({ history }){
                 </form>
                 <button><Link to="/">Torna</Link></button>
 
-                {error !== undefined && <Feedback message ={error}/>}
+                {error && <Feedback message ={error}/>}
                 </div>
             }
 
