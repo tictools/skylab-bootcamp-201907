@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function(){
+function Landing (){
     return  <>
-                <h1>landing</h1>
-                <p>landing page</p>
-                    <button><Link to="/register">Register</Link></button>
-                    <button><Link to="/login">Login</Link></button>
+                <button><Link to="/register">Registra't</Link></button>
+                <button><Link to="/login">Accedeix</Link></button>
             </>
 }
+
+export default Landing

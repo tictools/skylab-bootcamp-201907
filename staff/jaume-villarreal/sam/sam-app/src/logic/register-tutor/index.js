@@ -5,7 +5,7 @@ const { validate } = utils
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 export default function (name , surname , dni , phone1 , email, password , repassword) {
-
+    
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(dni, 'dni')
@@ -15,7 +15,7 @@ export default function (name , surname , dni , phone1 , email, password , repas
     validate.string(password, 'password')
     validate.string(repassword, 'repassword')
     
-    if(password !== repassword) throw Error ("Les contrassenyes no coincideixen.")
+    if(password !== repassword) throw Error ("passwords don't match")
 
     return (async () => {
         

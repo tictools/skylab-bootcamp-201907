@@ -1,5 +1,5 @@
 function isUserLogged(){
-    return sessionStorage.token && sessionStorage.id
+    return !!sessionStorage.token // !! cast into boolean type 
 }
 
 export default isUserLogged

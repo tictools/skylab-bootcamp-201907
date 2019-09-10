@@ -1,27 +1,26 @@
 import React, { useState } from 'react'
-import { withRouter , Route } from 'react-router-dom'
-// import React, { useEffect } from 'react'
-import MyContext from '../Provider-Context';
+import { HashRouter as Router , withRouter , Route } from 'react-router-dom'
+import MyContext from '../ProviderContext';
 
 import Landing from '../Landing'
 import Register from '../Register'
-import Login from '../Login'
+// import Login from '../Login'
 
 import './index.sass'
 
 function App() {
-  const [credentials,setCredentials] = useState('')
+  const [credentials,setCredentials] = useState(undefined)
 
-  return  <MyContext.Provider value={{credentials, setCredentials}} >  
+  return  <MyContext.Provider value={{ credentials, setCredentials }}>  
               <div className="App">
-                <p>credentials: {credentials}</p>
-                <Route exact path="/" component={Landing} />
-                <Route path="/register" component={Register} />
-                <Route path="/login" component={Login} />
-              </div>
-          </MyContext.Provider>
-}
-
-export default withRouter(App)
+                <Router>
+                  <Route exact path="/" component={Landing} />
+                  <Route path="/register" component={Register} />
+                  </Router>
+                  </div>
+                  </MyContext.Provider>
+                }
+                export default withRouter(App)
+                // <Route path="/login" component={Login} />
 
 // <Route path="/login" render={() => credentials?<Login />:another component} />
