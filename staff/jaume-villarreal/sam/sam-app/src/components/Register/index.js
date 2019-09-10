@@ -11,7 +11,6 @@ function Register({ history }){
     function handleSubmit(event){
         event.preventDefault()
         const { target : { name : { value : name } , surname : { value : surname } , dni : { value : dni } , phone1 : { value : phone1 } , email : { value : email } , password : { value : password } , repassword : { value : repassword } }} = event
-        debugger
         handleRegister(name , surname , dni , phone1 , email , password , repassword)
     }
 
