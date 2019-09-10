@@ -37,6 +37,9 @@ function translateError(message , email){
             errorMessage = "Les contrasenyes no coincideixen"
             // errorMessage = ""
             break;
+        default:
+                errorMessage = message
+            break;
         }
     return errorMessage
 }

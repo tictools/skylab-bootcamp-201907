@@ -15,7 +15,7 @@ export default function (name , surname , dni , phone1 , email, password , repas
     validate.string(password, 'password')
     validate.string(repassword, 'repassword')
     
-    if(password !== repassword) throw Error ("passwords don't match")
+    if(password !== repassword) throw new Error ("passwords don't match")
 
     return (async () => {
         
@@ -24,7 +24,6 @@ export default function (name , surname , dni , phone1 , email, password , repas
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ name , surname , dni , phone1 , email, password })
         })
-        
         if (response.status !== 201) {
             const { error } = await response.json()
             throw Error(error)
