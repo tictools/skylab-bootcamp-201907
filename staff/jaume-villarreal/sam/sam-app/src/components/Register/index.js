@@ -17,7 +17,7 @@ function Register({ history }){
     async function handleRegister(name , surname , dni , phone1 , email , password , repassword){
         try{
             const result = await logic.registerTutor(name , surname , dni , phone1 , email , password , repassword)
-            history.push('/')
+            history.push('/register-success')
         }
         catch({ message }){
             console.log("error" , message)
@@ -51,7 +51,7 @@ function Register({ history }){
                         <button>Registra't</button>
                     </fieldset>
                 </form>
-                <button><Link to="/">Torna</Link></button>
+                <Link className="btn" to="/">Torna</Link>
 
                 {error && <Feedback message ={error}/>}
                 </div>

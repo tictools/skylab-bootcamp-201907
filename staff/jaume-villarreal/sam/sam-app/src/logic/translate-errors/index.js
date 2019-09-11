@@ -19,6 +19,9 @@ function translateError(message , email){
         case `email with value ${email} is not a valid e-mail`:
             errorMessage = `El correu electrònic amb valor ${email} no té un format correcte`
             break;
+        case `tutor with email ${email} already exists`:
+            errorMessage = `L'ususari amb el correu electrònic ${email} ja existeix`
+            break;
         case 'password is empty or blank':
             errorMessage = "La contrasenya està buida"
             break;
@@ -30,6 +33,12 @@ function translateError(message , email){
             break;
         case 'wrong credentials':
             errorMessage = "Credentials incorrectes"
+            break;
+        case 'name is not a valid string':
+            errorMessage = "El nom no té un format correcte"
+            break;
+        case 'surname is not a valid string':
+            errorMessage = "El cognom no té un format correcte"
             break;
         default:
                 errorMessage = message
