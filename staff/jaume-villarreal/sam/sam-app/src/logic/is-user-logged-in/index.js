@@ -1,3 +1,3 @@
 export default function(){
-    return !!sessionStorage.token
+    return !!this.__token__
 }

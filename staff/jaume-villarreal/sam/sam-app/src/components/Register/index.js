@@ -16,12 +16,11 @@ function Register({ history }){
 
     async function handleRegister(name , surname , dni , phone1 , email , password , repassword){
         try{
-            const result = await logic.registerTutor(name , surname , dni , phone1 , email , password , repassword)
+            const response = await logic.registerTutor(name , surname , dni , phone1 , email , password , repassword)
             history.push('/register-success')
         }
         catch({ message }){
-            console.log("error" , message)
-            const translatedMessage = logic.translateError(message , email)
+            const translatedMessage = logic.translateMessage(message , email)
             setError(translatedMessage)
         }
     }

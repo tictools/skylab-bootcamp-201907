@@ -4,6 +4,15 @@ const { validate } = utils
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Retrieves all students by tutor id.
+ * 
+ * @param {string} email 
+ * @param {string} password 
+ * 
+ * @returns {Promise}
+ */
+
 export default function (email, password) {
 
     validate.string(email, 'email')
@@ -24,10 +33,11 @@ export default function (email, password) {
         if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)
-        }
+        } 
         else {
-            const { id  , token } = await response.json()
-            return { id , token }        
+            const { id , token } = await response.json()
+            this.__token__ = (token)
+            return      
         }   
     })()
 }

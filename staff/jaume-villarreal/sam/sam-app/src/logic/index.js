@@ -3,23 +3,26 @@ import authenticateTutor from './authenticate-tutor'
 import registerTutor from './register-tutor'
 import retrieveTutor from './retrieve-tutor'
 import retrieveStudentsByTutor from './retreive-students-by-tutor'
+import retrieveStudent from './retrieve-student'
+import updateStudent from './update-student'
 import isUserLoggedIn from './is-user-logged-in'
-import isUserLoggedOut from './is-user-logged-out'
-import translateError from './translate-errors'
+import userLoggedOut from './user-logged-out'
+import translateMessage from './translate-message'
 
 export default {
     
-    set userCredentials(token){
+    set __token__(token){
         sessionStorage.token = token
     },
     
-    get userCredentials(){
+    get __token__(){
         return sessionStorage.token 
     },
     
-    translateError, isUserLoggedIn , isUserLoggedOut ,
+    translateMessage, isUserLoggedIn , userLoggedOut ,
     registerTutor, authenticateTutor , retrieveTutor , 
-    retrieveStudentsByTutor
+    retrieveStudent , retrieveStudentsByTutor , updateStudent
 }
+
       
       

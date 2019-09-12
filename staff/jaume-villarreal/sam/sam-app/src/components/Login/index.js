@@ -15,12 +15,11 @@ function Login({ history }){
 
     async function handleLogin(email , password){
         try{
-            const { token } = await logic.authenticateTutor(email , password)
-            logic.userCredentials = (token)
+            await logic.authenticateTutor(email , password)
             history.push('/home')
         }
         catch({ message }){
-            let translatedMessage = logic.translateError(message , email)
+            let translatedMessage = logic.translateMessage(message , email)
             setError(translatedMessage)
         }
     }
