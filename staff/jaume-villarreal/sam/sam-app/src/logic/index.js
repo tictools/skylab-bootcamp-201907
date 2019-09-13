@@ -2,6 +2,7 @@
 import authenticateTutor from './authenticate-tutor'
 import registerTutor from './register-tutor'
 import retrieveTutor from './retrieve-tutor'
+import registerStudent from './register-student'
 import retrieveStudentsByTutor from './retreive-students-by-tutor'
 import retrieveStudent from './retrieve-student'
 import updateStudent from './update-student'
@@ -21,7 +22,7 @@ export default {
     
     translateMessage, isUserLoggedIn , userLoggedOut ,
     registerTutor, authenticateTutor , retrieveTutor , 
-    retrieveStudent , retrieveStudentsByTutor , updateStudent
+    registerStudent , retrieveStudent , retrieveStudentsByTutor , updateStudent
 }
 
       

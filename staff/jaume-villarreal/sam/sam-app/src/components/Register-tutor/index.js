@@ -6,7 +6,7 @@ import React , { useState } from 'react'
 import Feedback from '../Feedback'
 
 function Register({ history }){
-    const  [error, setError]  = useState(undefined)
+    const [error, setError]  = useState(undefined)
 
     function handleSubmit(event){
         event.preventDefault()

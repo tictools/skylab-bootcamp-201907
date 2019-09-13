@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import logic from "../../logic"
 
 import StudentsPanel from "../Students-panel"
+import Feedback from "../Feedback"
 
 import "./index.sass"
 import "../../styles/button.sass"
@@ -12,6 +13,7 @@ function Home(){
     
     const { setTutor } = useContext(MyContext)
     const [students , setStudents] = useState(undefined)
+    const [ error , setError ] = useState(undefined)
      
     useEffect(()=> {
         async function retrieveUsers(){
@@ -21,12 +23,13 @@ function Home(){
                 const { studentsArray } = await logic.retrieveStudentsByTutor()
                 setStudents(studentsArray)
             }catch({ message }){
-                console.log(message)
+                setError(message)
             }
         }
         retrieveUsers()
     },[])
-
+    
+    // console.log(students.length)
 
     function handleLogout(){
         logic.userLoggedOut()
@@ -36,11 +39,14 @@ function Home(){
 
     return  <div className = "main">
                 <h1>Home</h1>
+                
                 {students &&    <div className="card-container">
                                     <StudentsPanel data = {students}/>
-                                </div>}
-                <button className="btn" onClick={handleLogout}><Link to="/">Sortir</Link></button>
-                </div>
+                                </div>
+                }
+                {error && <Feedback message = {error} />}
+                <button className="btn card-container" onClick={handleLogout}><Link to="/">Sortir</Link></button>
+            </div>
 }
             
 export default Home

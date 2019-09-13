@@ -1,13 +1,14 @@
 import React , { useContext , useEffect , useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import MyContext from '../ProviderContext'
 
 import Feedback from "../Feedback"
 
 import logic from "../../logic"
 
-import { Link } from "react-router-dom"
+import { Link , Redirect } from "react-router-dom"
 
-function StudentUpdate(){
+function UpdateStudent({ history }){
     const { studentId } = useContext(MyContext)
 
     const [student , setStudent] = useState(undefined)
@@ -24,10 +25,13 @@ function StudentUpdate(){
             try{
                 const response = await logic.retrieveStudent(id)
                 setStudent(response.student)
+
                 setName(response.student.name)
                 setSurname(response.student.surname)
                 setBirthdate(response.student.birthdate)
                 setHealthcard(response.student.healthcard)
+                
+                console.log(student)
             }catch({ message }){
                 console.log(message)
             }
@@ -38,15 +42,13 @@ function StudentUpdate(){
     
     function handleSubmit(event){
         event.preventDefault()
-        // const { target : { name : {value : name} , surname : { vakue : surname } , birthdate : { value : birthdate } , healthcard : { value : healthcard } } } = event
-
         handleUpdate(studentId , _name , _surname , _birthdate , _healthcard)
     }
 
     async function handleUpdate(studentId , _name , _surname , birthdate , healthcard){
         try{
             const response = await logic.updateStudent(studentId , _name , _surname , birthdate , healthcard)
-            setResult(logic.translateMessage(response.message))
+            history.push("/update-success")
         }catch({ message }){
             setResult("El procés no s'ha pogut completar. Torni-ho a intentar.")
         }
@@ -73,14 +75,15 @@ function StudentUpdate(){
                         </fieldset>
                         <button className="btn">Actualitza les dades</button>
                     </form>
-                    ||
-                    <p className='feedback--warning'>Hi ha hagut un problema amb la connexió. Torni endarrere per reprendre el procés d'actualització de dades.</p>
                 }
+                
+                {!student && <p className='feedback--warning'>Hi ha hagut un problema amb la connexió. Torni endarrere per reprendre el procés d'actualització de dades.</p>}
+                
                 {result && <Feedback message={result}/>}
                 <Link className="btn" to="/home">Torna</Link>
-            </div>
-}
+                </div>
+            }
 
-export default StudentUpdate
+            export default withRouter(UpdateStudent)
     
               

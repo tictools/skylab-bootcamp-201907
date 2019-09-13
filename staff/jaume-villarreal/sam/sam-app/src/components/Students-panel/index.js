@@ -9,23 +9,23 @@ function StudentsPanel({ history , data }){
     return  <div>
                 
                 {data.map( student =>    <ul className="card">
-                                                    <li key ={student._id}>
+                                                    <li key ={student.id}>
                                                             <p>Nom: {student.name} {student.surname}</p>
                                                             <p>Targeta sanitària: {student.healthcard}</p>
                                                             <p>Data de naixement: {student.birthdate}</p>
                                                         <div>
                                                             <Link to="/student-update" className="btn" onClick={()=>{
-                                                                setStudentId(student._id)
+                                                                setStudentId(student.id)
                                                             }}>Actualitza dades</Link>
                                                             <Link to="/student-enrollment" className="btn" onClick={()=>{
-                                                                setStudentId(student._id)
+                                                                setStudentId(student.id)
                                                             }}>Inscriu</Link>
                                                         </div>
                                                     </li>
                                                 </ul>
                                         )}
 
-                                        <div className="card">Registra un alumne</div>
+                                        <Link to="/register-student" className="card">Registra un alumne</Link>
                 
             </div>
             }
