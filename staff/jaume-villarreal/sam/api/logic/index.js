@@ -15,6 +15,6 @@ module.exports = {
     retrieveStudentsByTutor : require('./retrieve-students-by-tutor'),
     
     registerEnrollment : require('./register-enrollment'),
-    retrieveEnrollment : require('./retrieve-enrollment'),
+    retrieveCurrentEnrollment : require('./retrieve-current-enrollment'),
     retrieveEnrollmentsByYear : require('./retrieve-enrollments-by-year')
 }

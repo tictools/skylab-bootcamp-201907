@@ -4,11 +4,11 @@ const bcrypt = require('bcryptjs')
 const { expect } = require('chai')
 
 const { database , models : { Course , Enrollment , Student , Tutor , Activity , Week} } = require('data')
-const { random : { boolean , value } , formatDate} = require('utils')
+const { random : { value } , formatDate} = require('utils')
 const registerEnrollment = require('.')
 
 
-describe.only('logic - register enrollment' , ()=>{
+describe('logic - register enrollment' , ()=>{
     before( () => database.connect(DB_URL_TEST))
 
     let studentName , studentSurname , birthdate , healthcard , studentId

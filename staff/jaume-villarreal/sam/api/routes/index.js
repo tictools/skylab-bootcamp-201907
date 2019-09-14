@@ -44,11 +44,11 @@ router.patch('/students/:id' , jsonBodyParser , updateStudent)
 
 // ENROLLMENT
 const registerEnrollment = require('./register-enrollment')
-const retrieveEnrollment = require('./retrieve-enrollment')
+const retrieveCurrentEnrollment = require('./retrieve-current-enrollment')
 const retrieveEnrollmentsByYear = require('./retrieve-enrollments-by-year')
 
 router.post('/enrollments' , jsonBodyParser , registerEnrollment)
-router.get('/enrollments/:id' , jsonBodyParser , retrieveEnrollment)
+router.get('/enrollments/:id' , jsonBodyParser , retrieveCurrentEnrollment)
 router.get('/enrollments' , jsonBodyParser , retrieveEnrollmentsByYear)
 
 module.exports = router

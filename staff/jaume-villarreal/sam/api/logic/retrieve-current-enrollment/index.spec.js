@@ -9,7 +9,7 @@ const retrieveEnrollment = require('.')
 
 const { env : { DB_URL_TEST } } = process
 
-describe('logic - retrieve enrollment', () => {
+describe.only('logic - retrieve current enrollment', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let studentName , studentSurname , birthdate , healthcard
@@ -95,7 +95,7 @@ describe('logic - retrieve enrollment', () => {
         currentCourse.enrollments.push(enrollmentId)
         await currentCourse.save()
 
-        const enrollment = await retrieveEnrollment(enrollmentId)
+        const enrollment = await retrieveEnrollment(studentId)
 
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
@@ -107,7 +107,7 @@ describe('logic - retrieve enrollment', () => {
         expect(enrollment.imageAuth).to.equal(imageAuth)
         expect(enrollment.excursionAuth).to.equal(excursionAuth)
         expect(enrollment.student.toString()).to.equal(studentId)
-        expect(enrollment.activity.toString()).to.equal(activityId)
+        expect(enrollment.activity.toString()).to.equal(activity)
 
         expect(enrollment.weeks[0].number).to.equal(1)
         expect(enrollment.weeks[0].category).to.equal(weekOption1)
@@ -145,7 +145,7 @@ describe('logic - retrieve enrollment', () => {
         currentCourse.enrollments.push(enrollmentId)
         await currentCourse.save()
 
-        const enrollment = await retrieveEnrollment(enrollmentId)
+        const enrollment = await retrieveEnrollment(studentId)
 
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
@@ -157,7 +157,7 @@ describe('logic - retrieve enrollment', () => {
         expect(enrollment.imageAuth).to.equal(imageAuth)
         expect(enrollment.excursionAuth).to.equal(excursionAuth)
         expect(enrollment.student.toString()).to.equal(studentId)
-        expect(enrollment.activity.toString()).to.equal(activityId)
+        expect(enrollment.activity.toString()).to.equal(activity)
 
         expect(enrollment.weeks[0].number).to.equal(1)
         expect(enrollment.weeks[0].category).to.equal(weekOption1)
@@ -214,7 +214,7 @@ describe('logic - retrieve enrollment', () => {
         currentCourse.enrollments.push(enrollmentId)
         await currentCourse.save()
 
-        const enrollment = await retrieveEnrollment(enrollmentId)
+        const enrollment = await retrieveEnrollment(studentId)
 
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
@@ -226,7 +226,7 @@ describe('logic - retrieve enrollment', () => {
         expect(enrollment.imageAuth).to.equal(imageAuth)
         expect(enrollment.excursionAuth).to.equal(excursionAuth)
         expect(enrollment.student.toString()).to.equal(studentId)
-        expect(enrollment.activity.toString()).to.equal(activityId)
+        expect(enrollment.activity.toString()).to.equal(activity)
 
         expect(enrollment.weeks[0].number).to.equal(1)
         expect(enrollment.weeks[0].category).to.equal(weekOption1)
@@ -292,7 +292,7 @@ describe('logic - retrieve enrollment', () => {
         currentCourse.enrollments.push(enrollmentId)
         await currentCourse.save()
 
-        const enrollment = await retrieveEnrollment(enrollmentId)
+        const enrollment = await retrieveEnrollment(studentId)
 
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
@@ -304,7 +304,7 @@ describe('logic - retrieve enrollment', () => {
         expect(enrollment.imageAuth).to.equal(imageAuth)
         expect(enrollment.excursionAuth).to.equal(excursionAuth)
         expect(enrollment.student.toString()).to.equal(studentId)
-        expect(enrollment.activity.toString()).to.equal(activityId)
+        expect(enrollment.activity.toString()).to.equal(activity)
 
         expect(enrollment.weeks[0].number).to.equal(1)
         expect(enrollment.weeks[0].category).to.equal(weekOption1)
@@ -360,7 +360,7 @@ describe('logic - retrieve enrollment', () => {
         currentCourse.enrollments.push(enrollmentId)
         await currentCourse.save()
 
-        const enrollment = await retrieveEnrollment(enrollmentId)
+        const enrollment = await retrieveEnrollment(studentId)
 
         expect(enrollment.school).to.equal(school)
         expect(enrollment.group).to.equal(group)
@@ -372,7 +372,7 @@ describe('logic - retrieve enrollment', () => {
         expect(enrollment.imageAuth).to.equal(imageAuth)
         expect(enrollment.excursionAuth).to.equal(excursionAuth)
         expect(enrollment.student.toString()).to.equal(studentId)
-        expect(enrollment.activity.toString()).to.equal(activityId)
+        expect(enrollment.activity.toString()).to.equal(activity)
 
         expect(enrollment.weeks[0].number).to.equal(1)
         expect(enrollment.weeks[0].category).to.equal(weekOption1)
@@ -392,16 +392,16 @@ describe('logic - retrieve enrollment', () => {
         try{
             await retrieveEnrollment(id)
         } catch({ message }){
-            expect(message).to.equal(`enrollment with id ${id} not found`)
+            expect(message).to.equal(`student with id ${id} does not exist`)
         }
     })
 
     it('should fail on empty enrollment id', () => 
-        expect(() => retrieveEnrollment("")).to.throw('enrollment id is empty or blank')
+        expect(() => retrieveEnrollment("")).to.throw('student id is empty or blank')
     )
     
     it('should fail on wrong user id type', () => 
-        expect(() => retrieveEnrollment(123)).to.throw('enrollment id with value 123 is not a string'))
+        expect(() => retrieveEnrollment(123)).to.throw('student id with value 123 is not a string'))
 
     after(() => database.disconnect())
 })
