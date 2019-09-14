@@ -106,16 +106,16 @@ describe.only('logic - register enrollment' , ()=>{
         expect(enrollment.illness).to.equal(illness)
         expect(enrollment.medication).to.equal(medication)
         expect(enrollment.observations).to.equal(observations)
-        expect(enrollment.imageAuth).to.equal(imageAuth)
-        expect(enrollment.excursionAuth).to.equal(excursionAuth)
+        expect(enrollment.imageAuth.toString()).to.equal(imageAuth)
+        expect(enrollment.excursionAuth.toString()).to.equal(excursionAuth)
         expect(enrollment.student.toString()).to.equal(studentId)
         expect(enrollment.activity.toString()).to.equal(activityId)
 
         expect(enrollment.weeks[0].number).to.equal(1)
         expect(enrollment.weeks[0].category).to.equal(weekOption1)
-        expect(enrollment.weeks[0].morningPermanence).to.equal(morningPerm1)
-        expect(enrollment.weeks[0].afternoonPermanence).to.equal(afternoonPerm1)
-        expect(enrollment.weeks[0].lunch).to.equal(lunch1)
+        expect(enrollment.weeks[0].morningPermanence.toString()).to.equal(morningPerm1)
+        expect(enrollment.weeks[0].afternoonPermanence.toString()).to.equal(afternoonPerm1)
+        expect(enrollment.weeks[0].lunch.toString()).to.equal(lunch1)
     })
     
     it("should succeed on correct data for first and second week enrollment" , async ()=> {
@@ -153,22 +153,22 @@ describe.only('logic - register enrollment' , ()=>{
         expect(enrollment.illness).to.equal(illness)
         expect(enrollment.medication).to.equal(medication)
         expect(enrollment.observations).to.equal(observations)
-        expect(enrollment.imageAuth).to.equal(imageAuth)
-        expect(enrollment.excursionAuth).to.equal(excursionAuth)
+        expect(enrollment.imageAuth.toString()).to.equal(imageAuth)
+        expect(enrollment.excursionAuth.toString()).to.equal(excursionAuth)
         expect(enrollment.student.toString()).to.equal(studentId)
         expect(enrollment.activity.toString()).to.equal(activityId)
 
         expect(enrollment.weeks[0].number).to.equal(1)
         expect(enrollment.weeks[0].category).to.equal(weekOption1)
-        expect(enrollment.weeks[0].morningPermanence).to.equal(morningPerm1)
-        expect(enrollment.weeks[0].afternoonPermanence).to.equal(afternoonPerm1)
-        expect(enrollment.weeks[0].lunch).to.equal(lunch1)
+        expect(enrollment.weeks[0].morningPermanence.toString()).to.equal(morningPerm1)
+        expect(enrollment.weeks[0].afternoonPermanence.toString()).to.equal(afternoonPerm1)
+        expect(enrollment.weeks[0].lunch.toString()).to.equal(lunch1)
         
         expect(enrollment.weeks[1].number).to.equal(2)
         expect(enrollment.weeks[1].category).to.equal(weekOption2)
-        expect(enrollment.weeks[1].morningPermanence).to.equal(morningPerm2)
-        expect(enrollment.weeks[1].afternoonPermanence).to.equal(afternoonPerm2)
-        expect(enrollment.weeks[1].lunch).to.equal(lunch2)
+        expect(enrollment.weeks[1].morningPermanence.toString()).to.equal(morningPerm2)
+        expect(enrollment.weeks[1].afternoonPermanence.toString()).to.equal(afternoonPerm2)
+        expect(enrollment.weeks[1].lunch.toString()).to.equal(lunch2)
     })
 
     it("should succeed on correct data for first, second and third week enrollment" , async ()=> {
@@ -206,28 +206,28 @@ describe.only('logic - register enrollment' , ()=>{
         expect(enrollment.illness).to.equal(illness)
         expect(enrollment.medication).to.equal(medication)
         expect(enrollment.observations).to.equal(observations)
-        expect(enrollment.imageAuth).to.equal(imageAuth)
-        expect(enrollment.excursionAuth).to.equal(excursionAuth)
+        expect(enrollment.imageAuth.toString()).to.equal(imageAuth)
+        expect(enrollment.excursionAuth.toString()).to.equal(excursionAuth)
         expect(enrollment.student.toString()).to.equal(studentId)
         expect(enrollment.activity.toString()).to.equal(activityId)
 
         expect(enrollment.weeks[0].number).to.equal(1)
         expect(enrollment.weeks[0].category).to.equal(weekOption1)
-        expect(enrollment.weeks[0].morningPermanence).to.equal(morningPerm1)
-        expect(enrollment.weeks[0].afternoonPermanence).to.equal(afternoonPerm1)
-        expect(enrollment.weeks[0].lunch).to.equal(lunch1)
+        expect(enrollment.weeks[0].morningPermanence.toString()).to.equal(morningPerm1)
+        expect(enrollment.weeks[0].afternoonPermanence.toString()).to.equal(afternoonPerm1)
+        expect(enrollment.weeks[0].lunch.toString()).to.equal(lunch1)
         
         expect(enrollment.weeks[1].number).to.equal(2)
         expect(enrollment.weeks[1].category).to.equal(weekOption2)
-        expect(enrollment.weeks[1].morningPermanence).to.equal(morningPerm2)
-        expect(enrollment.weeks[1].afternoonPermanence).to.equal(afternoonPerm2)
-        expect(enrollment.weeks[1].lunch).to.equal(lunch2)
+        expect(enrollment.weeks[1].morningPermanence.toString()).to.equal(morningPerm2)
+        expect(enrollment.weeks[1].afternoonPermanence.toString()).to.equal(afternoonPerm2)
+        expect(enrollment.weeks[1].lunch.toString()).to.equal(lunch2)
         
         expect(enrollment.weeks[2].number).to.equal(3)
         expect(enrollment.weeks[2].category).to.equal(weekOption3)
-        expect(enrollment.weeks[2].morningPermanence).to.equal(morningPerm3)
-        expect(enrollment.weeks[2].afternoonPermanence).to.equal(afternoonPerm3)
-        expect(enrollment.weeks[2].lunch).to.equal(lunch3)
+        expect(enrollment.weeks[2].morningPermanence.toString()).to.equal(morningPerm3)
+        expect(enrollment.weeks[2].afternoonPermanence.toString()).to.equal(afternoonPerm3)
+        expect(enrollment.weeks[2].lunch.toString()).to.equal(lunch3)
     })
 
     it("should succeed on correct data for first, second, third and fourth week enrollment" , async ()=> {
@@ -265,34 +265,34 @@ describe.only('logic - register enrollment' , ()=>{
         expect(enrollment.illness).to.equal(illness)
         expect(enrollment.medication).to.equal(medication)
         expect(enrollment.observations).to.equal(observations)
-        expect(enrollment.imageAuth).to.equal(imageAuth)
-        expect(enrollment.excursionAuth).to.equal(excursionAuth)
+        expect(enrollment.imageAuth.toString()).to.equal(imageAuth)
+        expect(enrollment.excursionAuth.toString()).to.equal(excursionAuth)
         expect(enrollment.student.toString()).to.equal(studentId)
         expect(enrollment.activity.toString()).to.equal(activityId)
 
         expect(enrollment.weeks[0].number).to.equal(1)
         expect(enrollment.weeks[0].category).to.equal(weekOption1)
-        expect(enrollment.weeks[0].morningPermanence).to.equal(morningPerm1)
-        expect(enrollment.weeks[0].afternoonPermanence).to.equal(afternoonPerm1)
-        expect(enrollment.weeks[0].lunch).to.equal(lunch1)
+        expect(enrollment.weeks[0].morningPermanence.toString()).to.equal(morningPerm1)
+        expect(enrollment.weeks[0].afternoonPermanence.toString()).to.equal(afternoonPerm1)
+        expect(enrollment.weeks[0].lunch.toString()).to.equal(lunch1)
         
         expect(enrollment.weeks[1].number).to.equal(2)
         expect(enrollment.weeks[1].category).to.equal(weekOption2)
-        expect(enrollment.weeks[1].morningPermanence).to.equal(morningPerm2)
-        expect(enrollment.weeks[1].afternoonPermanence).to.equal(afternoonPerm2)
-        expect(enrollment.weeks[1].lunch).to.equal(lunch2)
+        expect(enrollment.weeks[1].morningPermanence.toString()).to.equal(morningPerm2)
+        expect(enrollment.weeks[1].afternoonPermanence.toString()).to.equal(afternoonPerm2)
+        expect(enrollment.weeks[1].lunch.toString()).to.equal(lunch2)
         
         expect(enrollment.weeks[2].number).to.equal(3)
         expect(enrollment.weeks[2].category).to.equal(weekOption3)
-        expect(enrollment.weeks[2].morningPermanence).to.equal(morningPerm3)
-        expect(enrollment.weeks[2].afternoonPermanence).to.equal(afternoonPerm3)
-        expect(enrollment.weeks[2].lunch).to.equal(lunch3)
+        expect(enrollment.weeks[2].morningPermanence.toString()).to.equal(morningPerm3)
+        expect(enrollment.weeks[2].afternoonPermanence.toString()).to.equal(afternoonPerm3)
+        expect(enrollment.weeks[2].lunch.toString()).to.equal(lunch3)
         
         expect(enrollment.weeks[3].number).to.equal(4)
         expect(enrollment.weeks[3].category).to.equal(weekOption4)
-        expect(enrollment.weeks[3].morningPermanence).to.equal(morningPerm4)
-        expect(enrollment.weeks[3].afternoonPermanence).to.equal(afternoonPerm4)
-        expect(enrollment.weeks[3].lunch).to.equal(lunch4)
+        expect(enrollment.weeks[3].morningPermanence.toString()).to.equal(morningPerm4)
+        expect(enrollment.weeks[3].afternoonPermanence.toString()).to.equal(afternoonPerm4)
+        expect(enrollment.weeks[3].lunch.toString()).to.equal(lunch4)
     })
 
     it("should succeed on correct data for only second week enrollment" , async ()=> {
@@ -330,16 +330,16 @@ describe.only('logic - register enrollment' , ()=>{
         expect(enrollment.illness).to.equal(illness)
         expect(enrollment.medication).to.equal(medication)
         expect(enrollment.observations).to.equal(observations)
-        expect(enrollment.imageAuth).to.equal(imageAuth)
-        expect(enrollment.excursionAuth).to.equal(excursionAuth)
+        expect(enrollment.imageAuth.toString()).to.equal(imageAuth)
+        expect(enrollment.excursionAuth.toString()).to.equal(excursionAuth)
         expect(enrollment.student.toString()).to.equal(studentId)
         expect(enrollment.activity.toString()).to.equal(activityId)
         
         expect(enrollment.weeks[0].number).to.equal(2)
         expect(enrollment.weeks[0].category).to.equal(weekOption2)
-        expect(enrollment.weeks[0].morningPermanence).to.equal(morningPerm2)
-        expect(enrollment.weeks[0].afternoonPermanence).to.equal(afternoonPerm2)
-        expect(enrollment.weeks[0].lunch).to.equal(lunch2)
+        expect(enrollment.weeks[0].morningPermanence.toString()).to.equal(morningPerm2)
+        expect(enrollment.weeks[0].afternoonPermanence.toString()).to.equal(afternoonPerm2)
+        expect(enrollment.weeks[0].lunch.toString()).to.equal(lunch2)
     })
 
     it("should succeed on correct data for only second and fourth week enrollment" , async ()=> {
@@ -377,22 +377,22 @@ describe.only('logic - register enrollment' , ()=>{
         expect(enrollment.illness).to.equal(illness)
         expect(enrollment.medication).to.equal(medication)
         expect(enrollment.observations).to.equal(observations)
-        expect(enrollment.imageAuth).to.equal(imageAuth)
-        expect(enrollment.excursionAuth).to.equal(excursionAuth)
+        expect(enrollment.imageAuth.toString()).to.equal(imageAuth)
+        expect(enrollment.excursionAuth.toString()).to.equal(excursionAuth)
         expect(enrollment.student.toString()).to.equal(studentId)
         expect(enrollment.activity.toString()).to.equal(activityId)
         
         expect(enrollment.weeks[0].number).to.equal(2)
         expect(enrollment.weeks[0].category).to.equal(weekOption2)
-        expect(enrollment.weeks[0].morningPermanence).to.equal(morningPerm2)
-        expect(enrollment.weeks[0].afternoonPermanence).to.equal(afternoonPerm2)
-        expect(enrollment.weeks[0].lunch).to.equal(lunch2)
+        expect(enrollment.weeks[0].morningPermanence.toString()).to.equal(morningPerm2)
+        expect(enrollment.weeks[0].afternoonPermanence.toString()).to.equal(afternoonPerm2)
+        expect(enrollment.weeks[0].lunch.toString()).to.equal(lunch2)
         
         expect(enrollment.weeks[1].number).to.equal(4)
         expect(enrollment.weeks[1].category).to.equal(weekOption4)
-        expect(enrollment.weeks[1].morningPermanence).to.equal(morningPerm4)
-        expect(enrollment.weeks[1].afternoonPermanence).to.equal(afternoonPerm4)
-        expect(enrollment.weeks[1].lunch).to.equal(lunch4)
+        expect(enrollment.weeks[1].morningPermanence.toString()).to.equal(morningPerm4)
+        expect(enrollment.weeks[1].afternoonPermanence.toString()).to.equal(afternoonPerm4)
+        expect(enrollment.weeks[1].lunch.toString()).to.equal(lunch4)
     })
 
     it("should fail if student is already registered" , async ()=> {
@@ -434,7 +434,7 @@ describe.only('logic - register enrollment' , ()=>{
         try{
             await registerEnrollment(school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4)
         }catch({ message }){
-            expect(message).to.be.equal(`this student has already registered an enrollemnt for current yea`)
+            expect(message).to.be.equal(`this student has already registered an enrollemnt for current year`)
         }
     })
 
@@ -458,22 +458,6 @@ describe.only('logic - register enrollment' , ()=>{
         morningPerm4 = "false"
         afternoonPerm4 = "false"
         lunch4 = "false"
-        
-        const enrollment = await new Enrollment({ year : currentYear , school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4 })
-        
-        const week1 = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
-        enrollment.weeks.push(week1)
-        
-        const week2 = await new Week({number : 2 , category : weekOption2 , morningPermanence : morningPerm2 , afternoonPermanence : afternoonPerm2 , lunch : lunch2 })
-        enrollment.weeks.push(week2)
-        
-        const week3 = await new Week({number : 3 , category : weekOption3 , morningPermanence : morningPerm3 , afternoonPermanence : afternoonPerm3 , lunch : lunch3 })
-        enrollment.weeks.push(week3)
-        
-        const week4 = await new Week({number : 4 , category : weekOption4 , morningPermanence : morningPerm4 , afternoonPermanence : afternoonPerm4 , lunch : lunch4 })
-        enrollment.weeks.push(week4)
-
-        await enrollment.save()
         try{
             await registerEnrollment(school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4)
         }catch({ message }){
@@ -501,32 +485,24 @@ describe.only('logic - register enrollment' , ()=>{
         expect(() => registerEnrollment(school , group , "" , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('shirt is empty or blank')
     )
 
-    it('should fail on wrong shirt type' , () =>
+    it('should fail on wrong shirt data type' , () =>
         expect(() => registerEnrollment(school , group , 123 , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('shirt with value 123 is not a string')
     )
 
-    it('should fail on empty illness' , () =>
-        expect(() => registerEnrollment(school , group , shirt , allergy , "" , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('illness is empty or blank')
+    it('should fail on wrong allergy data type' , () =>
+        expect(() => registerEnrollment(school , group , shirt , 123 , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('allergy is not a valid string')
     )
 
-    it('should fail on empty illness' , () =>
-        expect(() => registerEnrollment(school , group , shirt , allergy , 123 , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('illness with value 123 is not a string')
+    it('should fail on wrong illness data type' , () =>
+        expect(() => registerEnrollment(school , group , shirt , allergy , 123 , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('illness is not a valid string')
     )
 
-    it('should fail on empty medication' , () =>
-        expect(() => registerEnrollment(school , group , shirt , allergy , illness , "" ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('medication is empty or blank')
+    it('should fail on wrong medication data type' , () =>
+        expect(() => registerEnrollment(school , group , shirt , allergy , illness , 123 ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('medication is not a valid string')
     )
 
-    it('should fail on empty medication' , () =>
-        expect(() => registerEnrollment(school , group , shirt , allergy , illness , 123 ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('medication with value 123 is not a string')
-    )
-
-    it('should fail on empty observations' , () =>
-        expect(() => registerEnrollment(school , group , shirt , allergy , illness , medication ,  "" , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('observations is empty or blank')
-    )
-
-    it('should fail on empty observations' , () =>
-        expect(() => registerEnrollment(school , group , shirt , allergy , illness , medication ,  123 , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('observations with value 123 is not a string')
+    it('should fail on wrong observations data type' , () =>
+        expect(() => registerEnrollment(school , group , shirt , allergy , illness , medication ,  123 , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4) ).to.throw('observations is not a valid string')
     )
 
     it('should fail on wrong imageAuth type' , () =>

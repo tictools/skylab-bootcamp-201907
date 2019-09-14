@@ -37,15 +37,16 @@ const { models : { Activity , Course , Enrollment , Student , Week } } = require
 module.exports =function( school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4){
     debugger
     validate.string(school , "school")
+    validate.string(school , "school")
     validate.string(group , "group")
     validate.string(shirt , "shirt")
-    validate.observation(allergy , "allergy")
-    validate.observation(illness , "illness")
-    validate.observation(medication , "medication")
-    validate.observation(observations , "observations")
+    validate.alphabetic(allergy , "allergy")
+    validate.alphabetic(illness , "illness")
+    validate.alphabetic(medication , "medication")
+    validate.alphabetic(observations , "observations")
+    validate.string(activity , "activity")
     validate.string(imageAuth , "image authorization")
     validate.string(excursionAuth , "excursion authorization")
-    validate.string(activity , "activity")
     validate.string(studentId , "student")
     validate.string(weekOption1 , "week option 1")
     validate.string(morningPerm1 , "morning perm 1")
@@ -80,49 +81,26 @@ module.exports =function( school , group , shirt , allergy , illness , medicatio
         
         const enrollment = await new Enrollment({ year , school , group , shirt , allergy , illness , medication , observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
         
-        if(weekOption1 !== "empty" && weekOption2 !== "empty" && weekOption3 !== "empty" && weekOption4 !== "empty") throw new Error('no week selected')
+        if(weekOption1 === "empty" && weekOption2 === "empty" && weekOption3 === "empty" && weekOption4 === "empty") throw new Error('no week selected')
 
-        if(excursionAuth === "true") {excursionAuth = true}
-        else{excursionAuth = false}
-        
-        if(imageAuth === "true") {imageAuth = true}
-        else{imageAuth = false}
-        
-        if(morningPerm1 === "true") {morningPerm1 = true}
-        else{morningPerm1 = false}
-        
-        if(afternoonPerm1 === "true") {afternoonPerm1 = true}
-        else{afternoonPerm1 = false}
-        
-        if(lunch1 === "true") {lunch1 = true}
-        else{lunch1 = false}
-        
-        if(morningPerm2 === "true") {morningPerm2 = true}
-        else{morningPerm2 = false}
-        
-        if(afternoonPerm2 === "true") {afternoonPerm2 = true}
-        else{afternoonPerm2 = false}
-        
-        if(lunch2 === "true") {lunch2 = true}
-        else{lunch2 = false}
-        
-        if(morningPerm3 === "true") {morningPerm3 = true}
-        else{morningPerm3 = false}
-        
-        if(afternoonPerm3 === "true") {afternoonPerm3 = true}
-        else{afternoonPerm3 = false}
-        
-        if(lunch3 === "true") {lunch3 = true}
-        else{lunch3 = false}
-        
-        if(morningPerm4 === "true") {morningPerm4 = true}
-        else{morningPerm4 = false}
-        
-        if(afternoonPerm4 === "true") {afternoonPerm4 = true}
-        else{afternoonPerm4 = false}
-        
-        if(lunch2 === "true") {lunch2 = true}
-        else{lunch2 = false}
+        excursionAuth = excursionAuth === "true" ? true : false
+        imageAuth = imageAuth === "true" ? true : false
+
+        morningPerm1 = morningPerm1 === "true" ? true : false
+        afternoonPerm1 = afternoonPerm1 === "true" ? true : false
+        lunch1 = lunch1 === "true" ? true : false
+
+        morningPerm2 = morningPerm2 === "true" ? true : false
+        afternoonPerm2 = afternoonPerm2 === "true" ? true : false
+        lunch2 = lunch2 === "true" ? true : false
+
+        morningPerm3 = morningPerm3 === "true" ? true : false
+        afternoonPerm3 = afternoonPerm3 === "true" ? true : false
+        lunch3 = lunch3 === "true" ? true : false
+
+        morningPerm4 = morningPerm4 === "true" ? true : false
+        afternoonPerm4 = afternoonPerm4 === "true" ? true : false
+        lunch4 = lunch4 === "true" ? true : false
 
         if(weekOption1 !== "empty") {
             const week = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
