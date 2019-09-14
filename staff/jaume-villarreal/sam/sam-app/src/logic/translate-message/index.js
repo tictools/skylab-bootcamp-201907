@@ -67,6 +67,9 @@ function translateMessage(message , email){
         case 'this student has already registered an enrollemnt for current year':
             translatedMessage = "L'usuari ja ha registrat una inscripció pel curs actual."
             break;
+        case 'this enrollment does not exist':
+            translatedMessage = "L'usuari encara no ha realitzat la inscripció pel curs actual."
+            break;
         default:
                 translatedMessage = message
             break;

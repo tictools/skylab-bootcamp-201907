@@ -3,13 +3,14 @@ import authenticateTutor from './authenticate-tutor'
 import registerTutor from './register-tutor'
 import retrieveTutor from './retrieve-tutor'
 import registerStudent from './register-student'
-import retrieveStudentsByTutor from './retreive-students-by-tutor'
+import retrieveStudentsByTutor from './retrieve-students-by-tutor'
 import retrieveStudent from './retrieve-student'
 import updateStudent from './update-student'
 import isUserLoggedIn from './is-user-logged-in'
 import userLoggedOut from './user-logged-out'
 import translateMessage from './translate-message'
-import resgisterEnrollment from './register-enrollment'
+import registerEnrollment from './register-enrollment'
+import retrieveCurrentEnrollment from './retrieve-current-enrollment'
 
 export default {
     
@@ -24,7 +25,7 @@ export default {
     translateMessage, isUserLoggedIn , userLoggedOut ,
     registerTutor, authenticateTutor , retrieveTutor , 
     registerStudent , retrieveStudent , retrieveStudentsByTutor , updateStudent ,
-    resgisterEnrollment
+    registerEnrollment , retrieveCurrentEnrollment
 }
 
       

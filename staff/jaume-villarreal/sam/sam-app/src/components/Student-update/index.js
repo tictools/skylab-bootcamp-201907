@@ -73,12 +73,13 @@ function UpdateStudent({ history }){
                             </section>
                         </fieldset>
                         <button className="btn">Actualitza les dades</button>
-                    </form> 
+                    </form>
                 }
-                    {result && <Feedback message={result}/> && <Link className="btn" to="/home">Torna</Link>}
-                </div>
-            }
+                {student && <Link className="btn" to="/home">Torna</Link>}
+                {result && <Feedback message={result}/>}
+            </div>
+        }
 
-            export default withRouter(UpdateStudent)
+export default withRouter(UpdateStudent)
     
               

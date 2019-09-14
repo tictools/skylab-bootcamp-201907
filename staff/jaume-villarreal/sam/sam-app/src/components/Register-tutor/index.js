@@ -16,7 +16,7 @@ function Register({ history }){
 
     async function handleRegister(name , surname , dni , phone1 , email , password , repassword){
         try{
-            const response = await logic.registerTutor(name , surname , dni , phone1 , email , password , repassword)
+            await logic.registerTutor(name , surname , dni , phone1 , email , password , repassword)
             history.push('/register-success')
         }
         catch({ message }){

@@ -5,15 +5,16 @@ import MyContext from '../ProviderContext';
 import logic from '../../logic'
 
 import Landing from '../Landing'
+import Home from '../Home'
+import Login from '../Login'
 import RegisterTutor from '../Register-tutor'
 import RegisterStudent from '../Register-student'
-import Login from '../Login'
 import RegisterSuccess from '../Register-success'
-import ProcessSuccess from "../Process-success"
 import UpdateSuccess from '../Update-success'
-import Home from '../Home'
+import ProcessSuccess from "../Process-success"
 import UpdateStudent from '../Student-update'
 import RegisterEnrollment from "../Register-enrollment"
+import CheckEnrollment from "../Check-enrollment"
 
 import './index.sass'
 
@@ -24,18 +25,19 @@ function App() {
 
   return  <MyContext.Provider value={{ tutor , setTutor , studentId , setStudentId }}>  
             <div className="App">
-              <Router>
-                <Route exact path="/" render={ () => !logic.isUserLoggedIn() ? <Landing /> : <Redirect to="/home"/> } />
-                <Route path="/register" render={ () => !logic.isUserLoggedIn() ? <RegisterTutor /> : <Redirect to="/home"/> }/>
-                <Route path="/register-student" render={ () => logic.isUserLoggedIn() ? <RegisterStudent /> : <Redirect to="/login"/> }/>
-                <Route path="/login" render={ () => !logic.isUserLoggedIn() ? <Login /> : <Redirect to="/home"/> } />
-                <Route path="/register-success" render={ () => !logic.isUserLoggedIn() ? <RegisterSuccess /> : <Redirect to="/home"/> } />
-                <Route path="/process-success" render={ () => logic.isUserLoggedIn() ? <ProcessSuccess /> : <Redirect to="/home"/> } />
-                <Route path="/update-success" render={ () => logic.isUserLoggedIn() ? <UpdateSuccess /> : <Redirect to="/login"/> } />
-                <Route path="/home" render={ () => logic.isUserLoggedIn() ? <Home /> : <Redirect to="/login"/> } />
-                <Route path="/student-update" render={ () => logic.isUserLoggedIn() ? <UpdateStudent /> : <Redirect to="/"/> } />
-                <Route path="/student-enrollment" render={ () => logic.isUserLoggedIn() ? <RegisterEnrollment /> : <Redirect to="/"/> } />
-            </Router>
+                <Router>
+                  <Route exact path="/" render={ () => !logic.isUserLoggedIn() ? <Landing /> : <Redirect to="/home"/> } />
+                  <Route path="/register" render={ () => !logic.isUserLoggedIn() ? <RegisterTutor /> : <Redirect to="/home"/> }/>
+                  <Route path="/register-student" render={ () => logic.isUserLoggedIn() ? <RegisterStudent /> : <Redirect to="/login"/> }/>
+                  <Route path="/login" render={ () => !logic.isUserLoggedIn() ? <Login /> : <Redirect to="/home"/> } />
+                  <Route path="/register-success" render={ () => !logic.isUserLoggedIn() ? <RegisterSuccess /> : <Redirect to="/home"/> } />
+                  <Route path="/process-success" render={ () => logic.isUserLoggedIn() ? <ProcessSuccess /> : <Redirect to="/home"/> } />
+                  <Route path="/update-success" render={ () => logic.isUserLoggedIn() ? <UpdateSuccess /> : <Redirect to="/login"/> } />
+                  <Route path="/home" render={ () => logic.isUserLoggedIn() ? <Home /> : <Redirect to="/login"/> } />
+                  <Route path="/student-update" render={ () => logic.isUserLoggedIn() ? <UpdateStudent /> : <Redirect to="/"/> } />
+                  <Route path="/student-enrollment" render={ () => logic.isUserLoggedIn() ? <RegisterEnrollment /> : <Redirect to="/"/> } />
+                  <Route path="/check-enrollment" render={ () => logic.isUserLoggedIn() ? <CheckEnrollment /> : <Redirect to="/"/> } />
+              </Router>
             </div>
           </MyContext.Provider>
           }

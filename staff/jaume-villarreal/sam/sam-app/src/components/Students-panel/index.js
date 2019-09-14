@@ -16,10 +16,13 @@ function StudentsPanel({ history , data }){
                             <div>
                                 <Link to="/student-update" className="btn" onClick={()=>{
                                     setStudentId(student.id)
-                                }}>Actualitza dades</Link>
+                                }}>Actualitza dades</Link><br/>
                                 <Link to="/student-enrollment" className="btn" onClick={()=>{
                                     setStudentId(student.id)
-                                }}>Inscriu</Link>
+                                }}>Inscriu</Link><br/>
+                                <Link to="/check-enrollment" className="btn" onClick={()=>{
+                                    setStudentId(student.id)
+                                }}>Consulta les dades d'inscripció</Link>
                             </div>
                         </li>)}
                 </ul>
