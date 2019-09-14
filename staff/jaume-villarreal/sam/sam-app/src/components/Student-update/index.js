@@ -6,7 +6,7 @@ import Feedback from "../Feedback"
 
 import logic from "../../logic"
 
-import { Link , Redirect } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 function UpdateStudent({ history }){
     const { studentId } = useContext(MyContext)
@@ -18,7 +18,7 @@ function UpdateStudent({ history }){
     const [_birthdate , setBirthdate] = useState(undefined)
     const [_healthcard , setHealthcard] = useState(undefined)
     
-    const [result , setResult] = useState(undefined) // encén feedback panel
+    const [result , setResult] = useState(undefined)
 
     useEffect( ()=>{
         async function retrieveStudent(id){
@@ -74,10 +74,10 @@ function UpdateStudent({ history }){
                             </section>
                         </fieldset>
                         <button className="btn">Actualitza les dades</button>
-                    </form>
+                    </form> 
                 }
-                
-                {!student && <p className='feedback--warning'>Hi ha hagut un problema amb la connexió. Torni endarrere per reprendre el procés d'actualització de dades.</p>}
+
+                {!student && <p>Hi ha hagut un problema amb l'actualizació de dades. Torni endarrere per reprendre el procés.</p>}
                 
                 {result && <Feedback message={result}/>}
                 <Link className="btn" to="/home">Torna</Link>

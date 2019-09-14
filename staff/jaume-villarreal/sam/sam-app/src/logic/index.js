@@ -9,6 +9,7 @@ import updateStudent from './update-student'
 import isUserLoggedIn from './is-user-logged-in'
 import userLoggedOut from './user-logged-out'
 import translateMessage from './translate-message'
+import resgisterEnrollment from './register-enrollment'
 
 export default {
     
@@ -22,7 +23,8 @@ export default {
     
     translateMessage, isUserLoggedIn , userLoggedOut ,
     registerTutor, authenticateTutor , retrieveTutor , 
-    registerStudent , retrieveStudent , retrieveStudentsByTutor , updateStudent
+    registerStudent , retrieveStudent , retrieveStudentsByTutor , updateStudent ,
+    resgisterEnrollment
 }
 
       

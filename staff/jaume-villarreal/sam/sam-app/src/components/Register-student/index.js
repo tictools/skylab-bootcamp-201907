@@ -22,9 +22,7 @@ function RegisterStudent({ history }){
             const response = await logic.registerStudent(name , surname , birthdate , healthcard)
             history.push("/register-student-success")
         }catch({ message }){
-            console.log(message)
-            // setResult("El procés no s'ha pogut completar. Torni-ho a intentar.")
-            setResult(message)
+            setResult("El procés no s'ha pogut completar. Torni-ho a intentar.")
         }
     }
 

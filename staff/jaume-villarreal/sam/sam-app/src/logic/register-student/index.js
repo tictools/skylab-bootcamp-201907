@@ -28,18 +28,15 @@ export default function (name , surname , birthdate , healthcard) {
     validate.string(healthcard, 'healthcard')
     
     return (async () => {
-        debugger
-
         const response = await fetch(`${REACT_APP_API_URL}/students`, {
             method: 'POST',
             headers: {'authorization' : `bearer ${this.__token__}` , 'content-type': 'application/json'},
             body: JSON.stringify({ name , surname , birthdate , healthcard })
         })
-        if (response.status !== 201) {
+        if (response.status !== 200) {
             const { error } = await response.json()
             throw Error(error)
-        }
-        else {
+        }else {
             return await response.json()
         }   
     })()
