@@ -11,58 +11,58 @@ const { models : { Activity , Course , Enrollment , Student , Week } } = require
  * @param {String} illness 
  * @param {String} medication 
  * @param {String} observations 
- * @param {Boolean} imageAuth 
- * @param {Boolean} excursionAuth 
+ * @param {String} imageAuth 
+ * @param {String} excursionAuth 
  * @param {String} activity 
  * @param {String} studentId 
  * @param {String} weekOption1 
- * @param {Boolean} morningPerm1 
- * @param {Boolean} afternoonPerm1 
- * @param {Boolean} lunch1 
+ * @param {String} morningPerm1 
+ * @param {String} afternoonPerm1 
+ * @param {String} lunch1 
  * @param {String} weekOption2 
- * @param {Boolean} morningPerm2 
- * @param {Boolean} afternoonPerm2 
- * @param {Boolean} lunch2 
+ * @param {String} morningPerm2 
+ * @param {String} afternoonPerm2 
+ * @param {String} lunch2 
  * @param {String} weekOption3 
- * @param {Boolean} morningPerm3 
- * @param {Boolean} afternoonPerm3 
- * @param {Boolean} lunch3
+ * @param {String} morningPerm3 
+ * @param {String} afternoonPerm3 
+ * @param {String} lunch3
  * @param {String} weekOption4 
- * @param {Boolean} morningPerm4 
- * @param {Boolean} afternoonPerm4 
- * @param {Boolean} lunch4 
+ * @param {String} morningPerm4 
+ * @param {String} afternoonPerm4 
+ * @param {String} lunch4 
  * 
  * @returns {Promise} 
  */
 module.exports =function( school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4){
-
+    debugger
     validate.string(school , "school")
     validate.string(group , "group")
     validate.string(shirt , "shirt")
-    validate.string(allergy , "allergy")
-    validate.string(illness , "illness")
-    validate.string(medication , "medication")
-    validate.string(observations , "observations")
-    validate.boolean(imageAuth , "image authorization")
-    validate.boolean(excursionAuth , "excursion authorization")
+    validate.observation(allergy , "allergy")
+    validate.observation(illness , "illness")
+    validate.observation(medication , "medication")
+    validate.observation(observations , "observations")
+    validate.string(imageAuth , "image authorization")
+    validate.string(excursionAuth , "excursion authorization")
     validate.string(activity , "activity")
     validate.string(studentId , "student")
     validate.string(weekOption1 , "week option 1")
-    validate.boolean(morningPerm1 , "morning perm 1")
-    validate.boolean(afternoonPerm1 , "afternoon perm 1")
-    validate.boolean(lunch1 , "lunch 1")
+    validate.string(morningPerm1 , "morning perm 1")
+    validate.string(afternoonPerm1 , "afternoon perm 1")
+    validate.string(lunch1 , "lunch 1")
     validate.string(weekOption2 , "week option 2")
-    validate.boolean(morningPerm2 , "morning perm 2")
-    validate.boolean(afternoonPerm2 , "afternoon perm 2")
-    validate.boolean(lunch2 , "lunch 2")
+    validate.string(morningPerm2 , "morning perm 2")
+    validate.string(afternoonPerm2 , "afternoon perm 2")
+    validate.string(lunch2 , "lunch 2")
     validate.string(weekOption3 , "week option 3")
-    validate.boolean(morningPerm3 , "morning perm 3")
-    validate.boolean(afternoonPerm3 , "afternoon perm 3")
-    validate.boolean(lunch3 , "lunch 3")
+    validate.string(morningPerm3 , "morning perm 3")
+    validate.string(afternoonPerm3 , "afternoon perm 3")
+    validate.string(lunch3 , "lunch 3")
     validate.string(weekOption4 , "week option 4")
-    validate.boolean(morningPerm4 , "morning perm 4")
-    validate.boolean(afternoonPerm4 , "afternoon perm 4")
-    validate.boolean(lunch4 , "lunch 4")
+    validate.string(morningPerm4 , "morning perm 4")
+    validate.string(afternoonPerm4 , "afternoon perm 4")
+    validate.string(lunch4 , "lunch 4")
 
     return( async ()=>{
         const _activity = await Activity.findOne({ name : activity })
@@ -74,8 +74,55 @@ module.exports =function( school , group , shirt , allergy , illness , medicatio
 
         const date = new Date()
         const year = date.getFullYear()
+
+        const checkEnrollemnt = await Enrollment.findOne({ year : year , student : studentId})
+        if(checkEnrollemnt) throw new Error(`this student has already registered an enrollemnt for current year`)
         
         const enrollment = await new Enrollment({ year , school , group , shirt , allergy , illness , medication , observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
+        
+        if(weekOption1 !== "empty" && weekOption2 !== "empty" && weekOption3 !== "empty" && weekOption4 !== "empty") throw new Error('no week selected')
+
+        if(excursionAuth === "true") {excursionAuth = true}
+        else{excursionAuth = false}
+        
+        if(imageAuth === "true") {imageAuth = true}
+        else{imageAuth = false}
+        
+        if(morningPerm1 === "true") {morningPerm1 = true}
+        else{morningPerm1 = false}
+        
+        if(afternoonPerm1 === "true") {afternoonPerm1 = true}
+        else{afternoonPerm1 = false}
+        
+        if(lunch1 === "true") {lunch1 = true}
+        else{lunch1 = false}
+        
+        if(morningPerm2 === "true") {morningPerm2 = true}
+        else{morningPerm2 = false}
+        
+        if(afternoonPerm2 === "true") {afternoonPerm2 = true}
+        else{afternoonPerm2 = false}
+        
+        if(lunch2 === "true") {lunch2 = true}
+        else{lunch2 = false}
+        
+        if(morningPerm3 === "true") {morningPerm3 = true}
+        else{morningPerm3 = false}
+        
+        if(afternoonPerm3 === "true") {afternoonPerm3 = true}
+        else{afternoonPerm3 = false}
+        
+        if(lunch3 === "true") {lunch3 = true}
+        else{lunch3 = false}
+        
+        if(morningPerm4 === "true") {morningPerm4 = true}
+        else{morningPerm4 = false}
+        
+        if(afternoonPerm4 === "true") {afternoonPerm4 = true}
+        else{afternoonPerm4 = false}
+        
+        if(lunch2 === "true") {lunch2 = true}
+        else{lunch2 = false}
 
         if(weekOption1 !== "empty") {
             const week = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
@@ -96,13 +143,6 @@ module.exports =function( school , group , shirt , allergy , illness , medicatio
             const week = await new Week({number : 4 , category : weekOption4 , morningPermanence : morningPerm4 , afternoonPermanence : afternoonPerm4 , lunch : lunch4 })
             enrollment.weeks.push(week)
         }
-        
-        // for(let i = 1 ; i<=4 ; i++){
-        //     if(`weekOption${i}`){
-        //         const week = await new Week({number : i , category : `weekOption${i}` , morningPermanence : `morningPerm${i}` , afternoonPermanence : `afternoonPerm${i}` , lunch : `lunch${i}` })
-        //         enrollment.weeks.push(week)
-        //     }
-        // }
 
         await enrollment.save()
         

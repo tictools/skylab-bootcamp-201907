@@ -37,7 +37,7 @@ const registerStudent = require('./register-student')
 const retrieveStudent = require('./retrieve-student')
 const updateStudent = require('./update-student')
 
-router.post('/students' , jsonBodyParser , registerStudent)
+router.post('/students' , [jsonBodyParser , tokenMiddleware] , registerStudent)
 router.get('/students/:id' , jsonBodyParser , retrieveStudent)
 router.patch('/students/:id' , jsonBodyParser , updateStudent)
 

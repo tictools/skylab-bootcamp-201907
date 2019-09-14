@@ -59,19 +59,21 @@ describe('logic - retrieve students by tutor', () => {
         const students = await retireveStudentsByTutor(tutorId)
         expect(students).to.have.lengthOf(3)
 
-        expect(students[0]._id.toString()).to.equal(studentId1)
+        expect(students[0].id).to.equal(studentId1)
         expect(students[0].name).to.equal(studentName1)
         expect(students[0].surname).to.equal(studentSurname1)
         expect(students[0].birthdate).to.equal(birthdate1)
         expect(students[0].healthcard).to.equal(healthcard1)
+
+        debugger
         
-        expect(students[1]._id.toString()).to.equal(studentId2)
+        expect(students[1].id).to.equal(studentId2)
         expect(students[1].name).to.equal(studentName2)
         expect(students[1].surname).to.equal(studentSurname2)
         expect(students[1].birthdate).to.equal(birthdate2)
         expect(students[1].healthcard).to.equal(healthcard2)
         
-        expect(students[2]._id.toString()).to.equal(studentId3)
+        expect(students[2].id).to.equal(studentId3)
         expect(students[2].name).to.equal(studentName3)
         expect(students[2].surname).to.equal(studentSurname3)
         expect(students[2].birthdate).to.equal(birthdate3)
