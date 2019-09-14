@@ -30,10 +30,9 @@ function UpdateStudent({ history }){
                 setSurname(response.student.surname)
                 setBirthdate(response.student.birthdate)
                 setHealthcard(response.student.healthcard)
-                
-                console.log(student)
+
             }catch({ message }){
-                console.log(message)
+                history.push("./home")
             }
         }
         
@@ -55,7 +54,7 @@ function UpdateStudent({ history }){
     }
 
     return  <div>
-                <h1>Formulari d'actualització</h1>
+                {student && <h1>Formulari d'actualització</h1>}
                 {student && 
                     <form onSubmit={handleSubmit} className="form">
                         <fieldset>
@@ -76,11 +75,7 @@ function UpdateStudent({ history }){
                         <button className="btn">Actualitza les dades</button>
                     </form> 
                 }
-
-                {!student && <p>Hi ha hagut un problema amb l'actualizació de dades. Torni endarrere per reprendre el procés.</p>}
-                
-                {result && <Feedback message={result}/>}
-                <Link className="btn" to="/home">Torna</Link>
+                    {result && <Feedback message={result}/> && <Link className="btn" to="/home">Torna</Link>}
                 </div>
             }
 

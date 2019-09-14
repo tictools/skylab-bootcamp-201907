@@ -9,7 +9,7 @@ import RegisterTutor from '../Register-tutor'
 import RegisterStudent from '../Register-student'
 import Login from '../Login'
 import RegisterSuccess from '../Register-success'
-import RegisterStudentSuccess from "../Register-student-success"
+import ProcessSuccess from "../Process-success"
 import UpdateSuccess from '../Update-success'
 import Home from '../Home'
 import UpdateStudent from '../Student-update'
@@ -30,7 +30,7 @@ function App() {
                 <Route path="/register-student" render={ () => logic.isUserLoggedIn() ? <RegisterStudent /> : <Redirect to="/login"/> }/>
                 <Route path="/login" render={ () => !logic.isUserLoggedIn() ? <Login /> : <Redirect to="/home"/> } />
                 <Route path="/register-success" render={ () => !logic.isUserLoggedIn() ? <RegisterSuccess /> : <Redirect to="/home"/> } />
-                <Route path="/register-student-success" render={ () => logic.isUserLoggedIn() ? <RegisterStudentSuccess /> : <Redirect to="/home"/> } />
+                <Route path="/process-success" render={ () => logic.isUserLoggedIn() ? <ProcessSuccess /> : <Redirect to="/home"/> } />
                 <Route path="/update-success" render={ () => logic.isUserLoggedIn() ? <UpdateSuccess /> : <Redirect to="/login"/> } />
                 <Route path="/home" render={ () => logic.isUserLoggedIn() ? <Home /> : <Redirect to="/login"/> } />
                 <Route path="/student-update" render={ () => logic.isUserLoggedIn() ? <UpdateStudent /> : <Redirect to="/"/> } />

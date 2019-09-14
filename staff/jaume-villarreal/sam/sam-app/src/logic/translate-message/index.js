@@ -43,6 +43,30 @@ function translateMessage(message , email){
         case 'student updated correctly':
             translatedMessage = "L'usuari ha estat actualitzat correctament"
             break;
+        case 'school is empty or blank':
+            translatedMessage = "L'escola de procedència no ha estat especificada."
+            break;
+        case 'group is empty or blank':
+            translatedMessage = "El curs escolar actual no ha estat especificat."
+            break;
+        case 'shirt is empty or blank':
+            translatedMessage = "La talla de samarreta no ha estat especificada."
+            break;
+        case 'activity is empty or blank':
+            translatedMessage = "La modalitat de casal no ha estat especificada."
+            break;
+        case 'image authorization is empty or blank':
+            translatedMessage = "L'autorització sobre els drets d'imatge no ha estat especificada."
+            break;
+        case 'excursion authorization is empty or blank':
+            translatedMessage = "L'autorització sobre les sortides no ha estat especificada."
+            break;
+        case 'no week selected':
+            translatedMessage = "La mdalittat de jornada no ha estat especificada."
+            break;
+        case 'this student has already registered an enrollemnt for current year':
+            translatedMessage = "L'usuari ja ha registrat una inscripció pel curs actual."
+            break;
         default:
                 translatedMessage = message
             break;

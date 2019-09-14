@@ -20,7 +20,7 @@ function RegisterStudent({ history }){
     async function handleUpdate(name , surname , birthdate , healthcard){
         try{
             const response = await logic.registerStudent(name , surname , birthdate , healthcard)
-            history.push("/register-student-success")
+            history.push("/process-success")
         }catch({ message }){
             setResult("El procés no s'ha pogut completar. Torni-ho a intentar.")
         }

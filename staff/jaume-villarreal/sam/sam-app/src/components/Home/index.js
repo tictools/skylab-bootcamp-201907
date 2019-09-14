@@ -28,8 +28,6 @@ function Home(){
         }
         retrieveUsers()
     },[])
-    
-    // console.log(students.length)
 
     function handleLogout(){
         logic.userLoggedOut()
@@ -38,14 +36,14 @@ function Home(){
     }
 
     return  <div className = "main">
-                <h1>Home</h1>
+                {students && <h1>Home</h1>}
                 
                 {students &&    <div className="card-container">
                                     <StudentsPanel data = {students}/>
                                 </div>
                 }
                 {error && <Feedback message = {error} />}
-                <button className="btn card-container" onClick={handleLogout}><Link to="/">Sortir</Link></button>
+                {students && <Link to="/"className="btn card-container" onClick={handleLogout}>Sortir</Link>}
             </div>
 }
             

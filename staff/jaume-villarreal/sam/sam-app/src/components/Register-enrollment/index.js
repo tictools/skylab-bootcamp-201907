@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import MyContext from "../ProviderContext"
 import logic from "../../logic"
 
+import Feedback from "../Feedback"
+
 function RegisterEnrollment({ history }){
 
     const { studentId } = useContext(MyContext)
@@ -14,8 +16,7 @@ function RegisterEnrollment({ history }){
     const [week3 , setWeek3] = useState("empty")
     const [week4 , setWeek4] = useState("empty")
 
-    const [result , setResult] = useState(undefined)
-
+    const [error , setError] = useState(undefined)
 
     useEffect( () => {
         async function retrieveStudent(id){
@@ -23,7 +24,7 @@ function RegisterEnrollment({ history }){
                 const retrievedStudent = await logic.retrieveStudent(studentId)
                 setStudent(retrievedStudent.student)
             }catch({ message }){
-                console.log(message)
+                history.push("/home")
             }
         }
         retrieveStudent(studentId)
@@ -48,22 +49,13 @@ function RegisterEnrollment({ history }){
                             illness : { value : illness } ,
                             medication : { value : medication } ,
                             observations : { value : observations } ,
-                            imageAuth : { value : imageAuthorization } ,
-                            excursionAuth : { value : excursionAuthorization } } } = event
+                            imageAuth : { value : imageAuth } ,
+                            excursionAuth : { value : excursionAuth } } } = event
         
         const { target : {  weekOption1 : { value : weekOption1 } ,
                             weekOption2 : { value : weekOption2 } ,
                             weekOption3 : { value : weekOption3 } , 
                             weekOption4 : { value : weekOption4 } } } = event
-        
-        
-        let imageAuth , excursionAuth
-
-        if(imageAuthorization === "true") imageAuth = true
-        else imageAuth = false
-        
-        if(excursionAuthorization === "true") excursionAuth = true
-        else excursionAuth = false
 
         let morningPerm1 , afternoonPerm1 , lunch1
         let morningPerm2 , afternoonPerm2 , lunch2
@@ -71,102 +63,65 @@ function RegisterEnrollment({ history }){
         let morningPerm4 , afternoonPerm4 , lunch4
 
         if(weekOption1 === "empty"){
-            morningPerm1 = false
-            afternoonPerm1 = false
-            lunch1 = false
+            morningPerm1 = "false"
+            afternoonPerm1 = "false"
+            lunch1 = "false"
         }
         else{
-            morningPerm1 = event.target.morningPerm1.checked
-            afternoonPerm1 = event.target.afternoonPerm1.checked
-            lunch1 = event.target.lunch1.checked
+            morningPerm1 = event.target.morningPerm1.checked.toString()
+            afternoonPerm1 = event.target.afternoonPerm1.checked.toString()
+            lunch1 = event.target.lunch1.checked.toString()
         }
 
         if(weekOption2 === "empty"){
-            morningPerm2 = false
-            afternoonPerm2 = false
-            lunch2 = false
+            morningPerm2 = "false"
+            afternoonPerm2 = "false"
+            lunch2 = "false"
         }
         else{
-            morningPerm2 = event.target.morningPerm2.checked
-            afternoonPerm2 = event.target.afternoonPerm2.checked
-            lunch2 = event.target.lunch2.checked
+            morningPerm2 = event.target.morningPerm2.checked.toString()
+            afternoonPerm2 = event.target.afternoonPerm2.checked.toString()
+            lunch2 = event.target.lunch2.checked.toString()
         }
 
         if(weekOption3 === "empty"){
-            morningPerm3 = false
-            afternoonPerm3 = false
-            lunch3 = false
+            morningPerm3 = "false"
+            afternoonPerm3 = "false"
+            lunch3 = "false"
         }
         else{
-            morningPerm3 = event.target.morningPerm3.checked
-            afternoonPerm3 = event.target.afternoonPerm3.checked
-            lunch3 = event.target.lunch3.checked
+            morningPerm3 = event.target.morningPerm3.checked.toString()
+            afternoonPerm3 = event.target.afternoonPerm3.checked.toString()
+            lunch3 = event.target.lunch3.checked.toString()
         }
 
         if(weekOption4 === "empty"){
-            morningPerm4 = false
-            afternoonPerm4 = false
-            lunch4 = false
+            morningPerm4 = "false"
+            afternoonPerm4 = "false"
+            lunch4 = "false"
         }
         else{
-            morningPerm4 = event.target.morningPerm4.checked
-            afternoonPerm4 = event.target.afternoonPerm4.checked
-            lunch4 = event.target.lunch4.checked
+            morningPerm4 = event.target.morningPerm4.checked.toString()
+            afternoonPerm4 = event.target.afternoonPerm4.checked.toString()
+            lunch4 = event.target.lunch4.checked.toString()
         }
-
-
-        console.log("school:" , school)
-        console.log("group:" , group)
-        console.log("shirt:" , shirt)
-        console.log("activity:" , activity)
-
-        console.log("week option 1:" , weekOption1)
-        console.log("perm morning 1:" , morningPerm1)
-        console.log("afternoon perm 1:" , afternoonPerm1)
-        console.log("lunch 1:" , lunch1)
-        
-        console.log("week option 2:" , weekOption2)
-        console.log("perm morning 2:" , morningPerm2)
-        console.log("afternoon perm 2:" , afternoonPerm2)
-        console.log("lunch 2:" , lunch2)
-        
-        console.log("week option 3:" , weekOption3)
-        console.log("perm morning 3:" , morningPerm3)
-        console.log("afternoon perm 3:" , afternoonPerm3)
-        console.log("lunch 3:" , lunch3)
-        
-        console.log("week option 4:" , weekOption4)
-        console.log("perm morning 4:" , morningPerm4)
-        console.log("afternoon perm 4:" , afternoonPerm4)
-        console.log("lunch 4:" , lunch4)
-        
-        console.log("image auth:" , imageAuth)
-        console.log("excursion auth:" , excursionAuth)
-        
-        console.log("allergy:\n" , allergy)
-        console.log("illness:\n" , illness)
-        console.log("medication:\n" , medication)
-        console.log("observations:\n" , observations)
 
         handleRegister(school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4)
     }
 
     async function handleRegister(school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4){
         try{
-            debugger 
             const response = await logic.resgisterEnrollment(school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4)
-            console.log(response)
-            history.push("/home")
+            console.log(typeof allergy)
+            history.push("/process-success")
         }catch({ message }){
-            setResult("El procés no s'ha pogut completar. Torni-ho a intentar.") 
-            console.log(message)
+            setError(logic.translateMessage(message)) 
         }
     }
 
 
-
     return  <div>
-                <h1>Formulari d'inscripció - Casal d'estiu {year && year}</h1>
+                {student && <h1>Formulari d'inscripció - Casal d'estiu {year && year}</h1>}
                 {student && <h2>{student.name} {student.surname}</h2>}
                 {student && <form onSubmit = {handleSubmit} className="form form__register">
                     <fieldset className="fieldset fieldset__user">
@@ -376,7 +331,7 @@ function RegisterEnrollment({ history }){
                             </tbody>
                         </table>
                         <span className="radio-item">
-                            <p>Autoritzo a fer ús dels drests d'imatge.</p>
+                            <p>Autoritzo a fer ús dels drets d'imatge.</p>
                             <input type="radio" name="imageAuth" id="imageAuth" value = "true"/>
                             <label htmlFor="campus-basket">Sí</label>
                             <input type="radio" name="imageAuth" id="imageAuth" value = "false"/>
@@ -417,9 +372,9 @@ function RegisterEnrollment({ history }){
                             <textarea className="fieldset__observations--text-area" name="observations" cols="2" rows="10"></textarea>
                     </fieldset>
                     <button>Registra</button>
-            </form>}
-            {!student && <p>Hi ha hagut un problema amb el registre. Torni endarrere per reprendre el procés.</p>}
-                <Link className="btn" to="/home">Torna</Link>
+                </form>}
+                {error && <Feedback message={error}/>}
+                {student &&<Link className="btn" to="/home">Torna</Link>}
             </div>   
 }
 
