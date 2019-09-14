@@ -19,23 +19,20 @@ module.exports = new Schema({
     shirt: {
         type: String,
         enum: ['4' , '6' , '8' , '10' , '12' , 'XS' , 'S' , 'M' , 'L' , 'XL'],
-        ref: 'Shirt'
+        ref: 'Shirt',
+        required: true
     },
     allergy: {
         type: String,
-        required: true
     },
     illness: {
         type: String,
-        required: true
     },
     medication: {
         type: String,
-        required: true
     },
     observations: {
         type: String,
-        required: true
     },
     imageAuth: {
         type: Boolean,
