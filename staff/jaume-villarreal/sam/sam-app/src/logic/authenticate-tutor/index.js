@@ -35,7 +35,7 @@ export default function (email, password) {
             throw Error(error)
         } 
         else {
-            const { id , token } = await response.json()
+            const { token } = await response.json()
             this.__token__ = (token)
             return      
         }   

@@ -17,7 +17,7 @@ function translateMessage(message , email){
             translatedMessage = "El correu electrònic està buit"
             break;
         case `email with value ${email} is not a valid e-mail`:
-            translatedMessage = `El correu electrònic amb valor ${email} no té un format correcte`
+            translatedMessage = `El correu electrònic no té un format correcte`
             break;
         case `tutor with email ${email} already exists`:
             translatedMessage = `L'ususari amb el correu electrònic ${email} ja existeix`

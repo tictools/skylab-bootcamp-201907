@@ -1,22 +1,20 @@
-import React , { useContext } from 'react'
-import MyContext from '../ProviderContext'
-
+import React from 'react'
 import { Link } from 'react-router-dom'
 
+import "./index.sass"
+
 function Landing (){
-    const { credentials } = useContext(MyContext)
-    return  <div> 
-                <h1>Landing</h1>
-                <ul>
-                    <li>
-                        <Link className="btn" to="/register">Registra't</Link>
+    return  <section className="landing">
+                <h1 className="landing__header">sam</h1>
+                <ul className = "landing__form">
+                    <li className="landing__link">
+                        <Link  to="/register">Registra't</Link>
                     </li>
-                    <li>
-                        <Link className="btn" to="/login">Accedeix</Link>
+                    <li className="landing__link">
+                        <Link to="/login">Accedeix</Link>
                     </li>
                 </ul>
-
-            </div>
+            </section>
 }
 
 export default Landing

@@ -2,6 +2,7 @@ import React , { useState } from 'react'
 import { Link , withRouter } from 'react-router-dom'
 import Feedback from '../Feedback'
 import logic from '../../logic'
+import './index.sass'
 
 
 function Login({ history }){
@@ -24,24 +25,28 @@ function Login({ history }){
         }
     }
 
-    return  <div>
+    return  <div className="form-wrapper form-wrapper--login">
                 <form onSubmit = {handleSubmit} className="form form__register">
-                    <fieldset className="fieldset fieldset__guardian">
-                        <legend className="legend legend__guardian">
-                            Dades del tutor
+                    <fieldset className="fieldset">
+                        <legend className="fieldset__legend">
+                            Dades d'accés
                         </legend>
                         <section className="fieldset__body">
-                            <label htmlFor="email">Correu electrònic</label>
-                                <input className="input__form" type="text" name="email"  />
-                            <label htmlFor="password">Contrassenya</label>
-                                <input className="input__form" type="password" name="password"  />
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="email">Correu electrònic</label>
+                                    <input className="input-block__input" type="text" name="email"  />
+                            </div>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="password">Contrassenya</label>
+                                    <input className="input-block__input" type="password" name="password"  />
+                            </div>
+                        <button className="btn btn--submit">Accedeix</button>
                         </section>
-                        <button>Accedeix</button>
                     </fieldset>
                 </form>
-                <Link className="btn" to="/">Torna</Link>
-
                 {error && <Feedback message ={error}/>}
+                <Link className="btn btn--link" to="/">Torna</Link>
+
             </div>
 }
 

@@ -1,9 +1,9 @@
-import { Link , withRouter } from 'react-router-dom'
-import logic from '../../logic'
-
 import React , { useState } from 'react'
-
+import { Link , withRouter } from 'react-router-dom'
 import Feedback from '../Feedback'
+import logic from '../../logic'
+import './index.sass'
+
 
 function Register({ history }){
     const [error, setError]  = useState(undefined)
@@ -25,35 +25,47 @@ function Register({ history }){
         }
     }
 
-    return  <div>
+    return  <div className="form-wrapper">
                 <form onSubmit = {handleSubmit} className="form form__register">
-                    <fieldset className="fieldset fieldset__guardian">
-                        <legend className="legend legend__guardian">
+                    <fieldset className="fieldset">
+                        <legend className="fieldset__legend">
                             Dades del tutor
                         </legend>
                         <section className="fieldset__body">
-                            <label htmlFor="name">Nom</label>
-                                <input className="input__form" type="text" name="name"  />
-                            <label htmlFor="surname">Cognoms</label>
-                                <input className="input__form" type="text" name="surname"  />
-                            <label htmlFor="dni">DNI</label>
-                                <input className="input__form" type="text" name="dni"  />
-                            <label htmlFor="phone1">Telèfon 1</label>
-                                <input className="input__form" type="text" name="phone1"  />
-                            <label htmlFor="email">Correu electrònic</label>
-                                <input className="input__form" type="text" name="email"  />
-                            <label htmlFor="password">Contrassenya</label>
-                                <input className="input__form" type="password" name="password"  />
-                            <label htmlFor="repassword">Confirma la contrassenya</label>
-                                <input className="input__form" type="password" name="repassword"  />
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="name">Nom</label>
+                                    <input className="input-block__input" type="text" name="name"  />
+                            </div>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="surname">Cognoms</label>
+                                    <input className="input-block__input" type="text" name="surname"  />
+                            </div>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="dni">DNI</label>
+                                    <input className="input-block__input" type="text" name="dni"  />
+                            </div>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="phone1">Telèfon 1</label>
+                                    <input className="input-block__input" type="text" name="phone1"  />
+                            </div>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="email">Correu electrònic</label>
+                                    <input className="input-block__input" type="text" name="email"  />
+                            </div>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="password">Contrasenya</label>
+                                    <input className="input-block__input" type="password" name="password"  />
+                            </div>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="repassword">Confirma la contrasenya</label>
+                                    <input className="input-block__input" type="password" name="repassword"  />
+                            </div>
+                        <button className="btn btn--submit">Registra't</button>
                         </section>
-                        <button>Registra't</button>
                     </fieldset>
                 </form>
-                <Link className="btn" to="/">Torna</Link>
-
                 {error && <Feedback message ={error}/>}
-                </div>
-            }
+                <Link className="btn btn--link" to="/">Torna</Link>
+            </div>}
 
 export default withRouter(Register)

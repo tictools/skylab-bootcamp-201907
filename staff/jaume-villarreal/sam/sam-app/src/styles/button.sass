@@ -1,9 +1,48 @@
+@import "./base-settings.sass"
+
 .btn
-    width: 75%
     height: 2rem
     border-radius: .5rem
+    border: 0 none
+    outline: none
+    &:hover
+        cursor: pointer
     &--submit
-        background-color: #396D09
+        width: 48.5%
+        margin-bottom: .75rem
+        background-color: $medium-blue-100
         color: white
         font-size: 1rem
         font-family: 'Raleway', sans-serif
+        &:hover
+            background-color: $deep-blue-100
+        &:active
+            background-color: $medium-blue-100
+    &--link
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        width: 15%
+        background-color: $deep-blue-100
+        color: white
+        margin-top: .75rem
+        font-family: Monda, sans-serif
+        text-align: center
+        text-decoration: none
+        &:active
+            background-color: $medium-blue-100
+    &--success
+        background-color: $medium-blue-100
+        width: 30%
+        &:hover
+            background-color: $deep-blue-100
+        &:active
+            background-color: $medium-blue-100
+    &--logout
+        background: url('./img/logout-icon-24.png') transparent no-repeat 0 0
+        width: 10%
+    
+
+    
+

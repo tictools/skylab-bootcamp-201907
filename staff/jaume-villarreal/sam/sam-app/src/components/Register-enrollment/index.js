@@ -8,8 +8,9 @@ import Feedback from "../Feedback"
 
 function RegisterEnrollment({ history }){
 
-    const { studentId } = useContext(MyContext)
+    const { studentId , setStudentId} = useContext(MyContext)
     const [student , setStudent ] = useState(undefined)
+    const [enrollment , setEnrollment ] = useState(undefined)
     const [year , setYear ] = useState(undefined)
     const [week1 , setWeek1] = useState("empty")
     const [week2 , setWeek2] = useState("empty")
@@ -28,6 +29,18 @@ function RegisterEnrollment({ history }){
             }
         }
         retrieveStudent(studentId)
+    } , [] )
+
+    useEffect( () => {
+        async function retrieveCurrentEnrollment(id){
+            try{
+                const retrievedCurrentEnrollment = await logic.retrieveCurrentEnrollment(studentId)
+                setEnrollment(true)
+            }catch({ message }){
+                setEnrollment(false)
+            }
+        }
+        retrieveCurrentEnrollment(studentId)
     } , [] )
 
     useEffect( () => {
@@ -111,8 +124,7 @@ function RegisterEnrollment({ history }){
 
     async function handleRegister(school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4){
         try{
-            const response = await logic.registerEnrollment(school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4)
-            console.log(typeof allergy)
+            await logic.registerEnrollment(school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4)
             history.push("/process-success")
         }catch({ message }){
             setError(logic.translateMessage(message)) 
@@ -121,9 +133,9 @@ function RegisterEnrollment({ history }){
 
 
     return  <div>
-                {student && <h1>Formulari d'inscripció - Casal d'estiu {year && year}</h1>}
-                {student && <h2>{student.name} {student.surname}</h2>}
-                {student && <form onSubmit = {handleSubmit} className="form form__register">
+                {enrollment === false && student && <h1>Formulari d'inscripció - Casal d'estiu {year && year}</h1>}
+                {enrollment === false && student && <h2>{student.name} {student.surname}</h2>}
+                {enrollment === false && student && <form onSubmit = {handleSubmit} className="form form__register">
                     <fieldset className="fieldset fieldset__user">
                         <legend className="legend legend__user">
                             Dades de l'inscrit/a
@@ -374,7 +386,13 @@ function RegisterEnrollment({ history }){
                     <button>Registra</button>
                 </form>}
                 {error && <Feedback message={error}/>}
-                {student &&<Link className="btn" to="/home">Torna</Link>}
+                {enrollment === false && student &&<Link className="btn" to="/home">Torna</Link>}
+                {enrollment &&  <div>
+                                    <p>L'usuari ja ha estat registrat</p>
+                                    <Link to="/check-enrollment" className="btn" onClick={()=>{
+                                    setStudentId(student.id)
+                                }}>Consulta les dades d'inscripció</Link>
+                                </div>}
             </div>   
 }
 

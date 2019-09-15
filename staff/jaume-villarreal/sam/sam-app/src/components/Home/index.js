@@ -1,6 +1,5 @@
 import React , { useEffect , useState , useContext } from 'react'
 import MyContext from '../ProviderContext'
-import { Link } from 'react-router-dom'
 import logic from "../../logic"
 
 import StudentsPanel from "../Students-panel"
@@ -12,7 +11,7 @@ import "../../styles/button.sass"
 function Home(){
     
     const { setTutor } = useContext(MyContext)
-    const [students , setStudents] = useState(undefined)
+    const [ students , setStudents ] = useState(undefined)
     const [ error , setError ] = useState(undefined)
      
     useEffect(()=> {
@@ -29,12 +28,6 @@ function Home(){
         retrieveUsers()
     },[])
 
-    function handleLogout(){
-        logic.userLoggedOut()
-        setTutor(undefined)
-        setStudents(undefined)
-    }
-
     return  <div className = "main">
                 {students && <h1>Home</h1>}
                 
@@ -43,7 +36,6 @@ function Home(){
                                 </div>
                 }
                 {error && <Feedback message = {error} />}
-                {students && <Link to="/"className="btn card-container" onClick={handleLogout}>Sortir</Link>}
             </div>
 }
             
