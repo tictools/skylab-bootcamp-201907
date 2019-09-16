@@ -1,7 +1,44 @@
-.main
+@import '../../styles/base-settings.sass'
+
+.panel-wrapper
+    margin-top: .25rem
     display: flex
     flex-direction: column
-    border: 1px solid
+    justify-content: center
+    align-items: center
+    .home-header
+        width: 100%
+        text-align: center
+        font-size: 3rem
+        font-family: Monda, Helvetica , Arial , sans-serif
+        color: $deep-blue-100
+    .cards-wrapper
+        margin-top: 1rem
+        width: 75%
+        list-style: none
+        .cards-container
+            list-style: none
+            display: flex
+            flex-wrap: wrap
+            justify-content: space-evenly
+            align-items: center
+            .card
+                width: 45%
+                margin-bottom: 1rem
+                &__info
+                    margin-bottom: .5rem
+                    border: 1px solid
+                    border-radius: .5rem
+                    padding: 1rem
+                    line-height: 2.5rem
+                    font-family: Roboto
+                    font-size: 1.25rem
+                    &--label
+                        font-weight: bold
+                &__button-set
+                    width: 100%
+                    display: flex
+                    flex-direction: column
+                    justify-content: center
+                    align-items: center
 
-.card-container
-    width: 50vw

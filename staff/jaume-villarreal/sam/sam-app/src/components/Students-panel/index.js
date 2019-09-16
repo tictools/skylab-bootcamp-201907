@@ -1,13 +1,13 @@
 import React , { useContext } from 'react'
-import { Link , withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import MyContext from '../ProviderContext'
 
 import "./index.sass"
 
-function StudentsPanel({ history , data }){
+function StudentsPanel({ data }){
     const { setStudentId } = useContext(MyContext)
-    return  <div>
-                <ul >
+    return  <div className="cards-wrapper">
+                <ul className = "cards-container">
                 {data.map( student =>    
                         <li key ={student.id} className="card">
                                 <p>Nom: {student.name} {student.surname}</p>
@@ -27,9 +27,9 @@ function StudentsPanel({ history , data }){
                         </li>)}
                 </ul>
 
-                                        <Link to="/register-student" className="card">Registra un alumne</Link>
+                            <Link to="/register-student" className="card">Registra un alumne</Link>
                 
             </div>
             }
             
- export default withRouter(StudentsPanel)
+ export default StudentsPanel
