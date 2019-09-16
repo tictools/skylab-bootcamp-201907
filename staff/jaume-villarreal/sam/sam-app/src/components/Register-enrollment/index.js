@@ -6,6 +6,8 @@ import logic from "../../logic"
 
 import Feedback from "../Feedback"
 
+import "./index.sass"
+
 function RegisterEnrollment({ history }){
 
     const { studentId , setStudentId} = useContext(MyContext)
@@ -132,20 +134,21 @@ function RegisterEnrollment({ history }){
     }
 
 
-    return  <div>
-                {enrollment === false && student && <h1>Formulari d'inscripció - Casal d'estiu {year && year}</h1>}
-                {enrollment === false && student && <h2>{student.name} {student.surname}</h2>}
-                {enrollment === false && student && <form onSubmit = {handleSubmit} className="form form__register">
-                    <fieldset className="fieldset fieldset__user">
-                        <legend className="legend legend__user">
-                            Dades de l'inscrit/a
+    return  <div className="form-wrapper">
+                {student && <h1 className="home-header">Formulari d'inscripció - Casal d'estiu {year && year}</h1>}
+                {student && <h2 className="home-subheader">{student.name} {student.surname}</h2>}
+                {enrollment === false && student && <form onSubmit = {handleSubmit} className="form-enrollment">
+                    <fieldset className="fieldset__enrollment">
+                        <legend className="fieldset__legend">
+                            Dades generals
                         </legend>
                         <section className="fieldset__body">
-                            <label htmlFor="school">Escola</label>
-                                <input className="input__form" type="text" name="school"/>
-                            
-                            <div className="select--wrapper">
-                                <label htmlFor="size">Curs actual</label>
+                         <div className="input-block">
+                            <label className="input-block__label" htmlFor="school">Escola</label>
+                                <input className="input-block__input" type="text" name="school"/>
+                        </div>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="size">Indica el curs actual</label>
                                     <select className="select__box" name="grade" id="grade">
                                         <option value="">curs actual</option>
                                         <option value="P3">P3</option>
@@ -164,8 +167,8 @@ function RegisterEnrollment({ history }){
                                     </select>
                             </div>
 
-                            <div className="select--wrapper">
-                                <label htmlFor="size">Talla de samarreta</label>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="size">Talla de samarreta</label>
                                     <select className="select__box" name="size" id="size">
                                         <option value="">tria la talla</option>
                                         <option value="4">4</option>
@@ -183,216 +186,241 @@ function RegisterEnrollment({ history }){
                         </section>
                     </fieldset>
 
-                    <fieldset className="fieldset fieldset__modality fieldset--wider">
-                        <legend className="legend legend__modality">
+                    <fieldset className="fieldset__enrollment fieldset__enrollment--radio">
+                        <legend className="fieldset__legend">
                             Modalitat
                         </legend>
-                        <section className="availability-table">
+                        <section className="table__radio-block">
                           
-                            <span className="radio-item">
-                                <input type="radio" name="modality" id="casalet-inf" value = "Casalet INF"/>
-                                <label htmlFor="casalet-inf">Casalet INF (de P3 fins a P5) </label>
+                            <span className="radio-block">
+                                <label className="radio-block__label" htmlFor="casalet-inf">Casalet INF (de P3 fins a P5) </label>
+                                <input className="radio-block__input" type="radio" name="modality" id="casalet-inf" value = "Casalet INF"/>
                             </span>
                           
-                            <span className="radio-item">
-                                <input type="radio" name="modality" id="casalet-ep" value = "Casalet EP"/>
-                                <label htmlFor="casalet-inf">Casalet INF (de P3 fins a P5) </label>
+                           <span className="radio-block">
+                                <label className="radio-block__label" htmlFor="casalet-inf">Casalet EP (1r i 2n de Primària) </label>
+                                <input className="radio-block__input" type="radio" name="modality" id="casalet-ep" value = "Casalet EP"/>
                             </span>
 
-                            <span className="radio-item">
-                                <input type="radio" name="modality" id="casal-ep" value = "Casal EP"/>
-                                <label htmlFor="casal-ep">Casal EP (de 3r fins a 6è de Primària) </label>
+                            <span className="radio-block">
+                                <label className="radio-block__label" htmlFor="casal-ep">Casal EP (de 3r fins a 6è de Primària) </label>
+                                <input className="radio-block__input" type="radio" name="modality" id="casal-ep" value = "Casal EP"/>
                             </span>
 
-                            <span className="radio-item">
-                                <input type="radio" name="modality" id="casal-eso" value = "Casal ESO"/>
-                                <label htmlFor="casalet-eso">Casal ESO (de 1r fins a 3r d'ESO) </label>
+                           <span className="radio-block">
+                                <label className="radio-block__label" htmlFor="casalet-eso">Casal ESO (de 1r fins a 3r d'ESO) </label>
+                                <input className="radio-block__input" type="radio" name="modality" id="casal-eso" value = "Casal ESO"/>
                             </span>
 
-                            <span className="radio-item">
-                                <input type="radio" name="modality" id="campus-futbolf" value = "Campus Futbol"/>
-                                <label htmlFor="cacampussalet-futbol">Campus de Futbol (de 1r de Primària fins a 3r d'ESO) </label>
+                           <span className="radio-block">
+                                <label className="radio-block__label" htmlFor="cacampussalet-futbol">Campus de Futbol (de 1r de Primària fins a 3r d'ESO) </label>
+                                <input className="radio-block__input" type="radio" name="modality" id="campus-futbolf" value = "Campus Futbol"/>
                             </span>
                 
-                            <span className="radio-item">
-                                <input type="radio" name="modality" id="campus-basket" value = "Campus Bàsquet"/>
-                                <label htmlFor="campus-basket">Campus de Bàsquet (de 1r de Primària fins a 3r d'ESO) </label>
+                            <span className="radio-block">
+                                <label className="radio-block__label" htmlFor="campus-basket">Campus de Bàsquet (de 1r de Primària fins a 3r d'ESO) </label>
+                                <input className="radio-block__input" type="radio" name="modality" id="campus-basket" value = "Campus Bàsquet"/>
                             </span>
                     
-                            <span className="radio-item">
-                                <input type="radio" name="modality" id="campus-judo" value = "Campus Judo"/>
-                                <label htmlFor="campus-judo">Campus de Judo (de 1r de Primària fins a 3r d'ESO)</label>
+                            <span className="radio-block">
+                                <label className="radio-block__label" htmlFor="campus-judo">Campus de Judo (de 1r de Primària fins a 3r d'ESO)</label>
+                                <input className="radio-block__input" type="radio" name="modality" id="campus-judo" value = "Campus Judo"/>
                             </span>
 
                         </section>
                     </fieldset>
 
-                    <fieldset className="fieldset fieldset__schedule fieldset--wider">
-                        <legend className="legend legend__modality">
+                    <fieldset className="fieldset__enrollment ">
+                        <legend className="fieldset__legend">
                             Selecció de setmanes i serveis
                         </legend>
-
-                        <table className="schedule">
-                            <tbody>
-                            <tr>
-                                <th></th>
-                                <th>Modalitat de jornada</th>
-                                <th>Permanències de matí</th>
-                                <th>Permanències de tarda</th>
-                                <th>Menjador</th>
-                            </tr>
-                            <tr>
-                                <td className="row-head">Setmana 1</td>
-                                <td>
-                                    <div className="select--wrapper">
-                                        <select className="select__box" name="weekOption1" id="weekOption1" onChange = { event => setWeek1(event.target.value)}> 
-                                            <option value="empty">tria modalitat</option>
-                                            <option value="part">Matí</option>
-                                            <option value="full">Jornada completa</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                {week1 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="morningPerm1" id="morningPerm1"/>
-                                                        </td>
-                                }
-                                {week1 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="afternoonPerm1" id="afternoonPerm1"/>
-                                                        </td>
-                                }
-                                {week1 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="lunch1" id="lunch1"/>
-                                                        </td>
-                                }
-                            </tr>
-                            
-                            <tr>
-                                <td className="row-head">Setmana 2</td>
-                                <td>
-                                    <div className="select--wrapper">
-                                        <select className="select__box" name="weekOption2" id="weekOption2" onChange={ event => setWeek2(event.target.value)}>
-                                            <option value="empty">tria modalitat</option>
-                                            <option value="part">Matí</option>
-                                            <option value="full">Jornada completa</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                {week2 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="morningPerm2" id="morningPerm2"/>
-                                                        </td>
-                                }
-                                {week2 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="afternoonPerm2" id="afternoonPerm2"/>
-                                                        </td>
-                                }
-                                {week2 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="lunch2" id="lunch2"/>
-                                                        </td>
-                                }
-                            </tr>
-                            
-                            <tr>
-                                <td className="row-head">Setmana 3</td>
-                                <td>
-                                    <div className="select--wrapper">
-                                        <select className="select__box" name="weekOption3" id="weekOption3" onChange = { event => setWeek3(event.target.value)}>
-                                            <option value="empty">tria modalitat</option>
-                                            <option value="part">Matí</option>
-                                            <option value="full">Jornada completa</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                {week3 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="morningPerm3" id="morningPerm3"/>
-                                                        </td>
-                                }
-                                {week3 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="afternoonPerm3" id="afternoonPerm3"/>
-                                                        </td>
-                                }
-                                {week3 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="lunch3" id="lunch3"/>
-                                                        </td>
-                                }
-                            </tr>
-                            
-                            <tr>
-                                <td className="row-head">Setmana 4</td>
-                                <td>
-                                    <div className="select--wrapper">
-                                        <select className="select__box" name="weekOption4" id="weekOption4" onChange ={ event => setWeek4(event.target.value)} >
-                                            <option value="empty">tria modalitat</option>
-                                            <option value="part">Matí</option>
-                                            <option value="full">Jornada completa</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                {week4 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="morningPerm4" id="morningPerm4"/>
-                                                        </td>
-                                }
-                                {week4 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="afternoon-perm4-" id="afternoonPerm4"/>
-                                                        </td>
-                                }
-                                {week4 !== "empty" &&   <td>
-                                                            <input type="checkbox" name="lunch4" id="lunch4"/>
-                                                        </td>
-                                }
-                            </tr>
-                            </tbody>
-                        </table>
-                        <span className="radio-item">
-                            <p>Autoritzo a fer ús dels drets d'imatge.</p>
-                            <input type="radio" name="imageAuth" id="imageAuth" value = "true"/>
-                            <label htmlFor="campus-basket">Sí</label>
-                            <input type="radio" name="imageAuth" id="imageAuth" value = "false"/>
-                            <label htmlFor="campus-basket">No</label>
-                        </span>
-                        <span className="radio-item">
-                            <p>Autoritzo al meu fill/a a realitzar les sortides programades durant el casal.</p>
-                            <input type="radio" name="excursionAuth" id="imageAuth" value = "true"/>
-                            <label htmlFor="campus-basket">Sí</label>
-                            <input type="radio" name="excursionAuth" id="imageAuth" value = "false"/>
-                            <label htmlFor="campus-basket">No</label>
-                        </span>
+                        <div className="fieldset__schedule">
+                            <table className="schedule">
+                                <tbody>
+                                <tr>
+                                    <th></th>
+                                    <th>Modalitat de jornada</th>
+                                    <th>Permanències de matí</th>
+                                    <th>Permanències de tarda</th>
+                                    <th>Menjador</th>
+                                </tr>
+                                <tr>
+                                    <td className="row-head">Setmana 1</td>
+                                    <td>
+                                        <div className="select--wrapper">
+                                            <select className="select__box" name="weekOption1" id="weekOption1" onChange = { event => setWeek1(event.target.value)}> 
+                                                <option value="empty">tria modalitat</option>
+                                                <option value="part">Matí</option>
+                                                <option value="full">Jornada completa</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    {week1 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="morningPerm1" id="morningPerm1"/>
+                                                            </td>
+                                    }
+                                    {week1 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="afternoonPerm1" id="afternoonPerm1"/>
+                                                            </td>
+                                    }
+                                    {week1 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="lunch1" id="lunch1"/>
+                                                            </td>
+                                    }
+                                </tr>
+                                
+                                <tr>
+                                    <td className="row-head">Setmana 2</td>
+                                    <td>
+                                        <div className="select--wrapper">
+                                            <select className="select__box" name="weekOption2" id="weekOption2" onChange={ event => setWeek2(event.target.value)}>
+                                                <option value="empty">tria modalitat</option>
+                                                <option value="part">Matí</option>
+                                                <option value="full">Jornada completa</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    {week2 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="morningPerm2" id="morningPerm2"/>
+                                                            </td>
+                                    }
+                                    {week2 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="afternoonPerm2" id="afternoonPerm2"/>
+                                                            </td>
+                                    }
+                                    {week2 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="lunch2" id="lunch2"/>
+                                                            </td>
+                                    }
+                                </tr>
+                                
+                                <tr>
+                                    <td className="row-head">Setmana 3</td>
+                                    <td>
+                                        <div className="select--wrapper">
+                                            <select className="select__box" name="weekOption3" id="weekOption3" onChange = { event => setWeek3(event.target.value)}>
+                                                <option value="empty">tria modalitat</option>
+                                                <option value="part">Matí</option>
+                                                <option value="full">Jornada completa</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    {week3 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="morningPerm3" id="morningPerm3"/>
+                                                            </td>
+                                    }
+                                    {week3 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="afternoonPerm3" id="afternoonPerm3"/>
+                                                            </td>
+                                    }
+                                    {week3 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="lunch3" id="lunch3"/>
+                                                            </td>
+                                    }
+                                </tr>
+                                
+                                <tr>
+                                    <td className="row-head">Setmana 4</td>
+                                    <td>
+                                        <div className="select--wrapper">
+                                            <select className="select__box" name="weekOption4" id="weekOption4" onChange ={ event => setWeek4(event.target.value)} >
+                                                <option value="empty">tria modalitat</option>
+                                                <option value="part">Matí</option>
+                                                <option value="full">Jornada completa</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    {week4 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="morningPerm4" id="morningPerm4"/>
+                                                            </td>
+                                    }
+                                    {week4 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="afternoon-perm4-" id="afternoonPerm4"/>
+                                                            </td>
+                                    }
+                                    {week4 !== "empty" &&   <td>
+                                                                <input className="input-check" type="checkbox" name="lunch4" id="lunch4"/>
+                                                            </td>
+                                    }
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </fieldset>
 
-                    <fieldset className="fieldset fieldset__observations">
-                        <legend className="legend legend__observations">
+                    <fieldset className="fieldset__enrollment fieldset__enrollment--radio">
+                        <legend className="fieldset__legend">
+                            Autoritzacions
+                        </legend>
+                        <section className="table__radio-block">
+                            <span className="radio-block">
+                                <p className="radio-block__text">Autoritzo a fer ús dels drets d'imatge.</p>
+                                <div className="radio-block__auth">
+                                    <div className="radio-auths">
+                                        <label className="radio-block__label" htmlFor="campus-basket">Sí</label>
+                                        <input className="radio-block__input" type="radio" name="imageAuth" id="imageAuth" value = "true"/>
+                                    </div>
+                                    <div className="radio-auths">
+                                        <label className="radio-block__label" htmlFor="campus-basket">No</label>
+                                        <input className="radio-block__input"  type="radio" name="imageAuth" id="imageAuth" value = "false"/>
+                                    </div>
+                                </div>
+                            </span>
+                            <span className="radio-block">
+                                <p className="radio-block__text">Autoritzo al meu fill/a a realitzar les sortides programades.</p>
+                                 <div className="radio-block__auth">
+                                    <div className="radio-auths">
+                                        <label className="radio-block__label" htmlFor="campus-basket">Sí</label>
+                                        <input className="radio-block__input" type="radio" name="excursionAuth" id="excursionAuth" value = "true"/>
+                                    </div>
+                                    <div className="radio-auths">
+                                        <label className="radio-block__label" htmlFor="campus-basket">No</label>
+                                        <input className="radio-block__input" type="radio" name="excursionAuth" id="excursionAuth" value = "false"/>
+                                    </div>
+                                </div>
+                            </span>
+                        </section>
+                    </fieldset>
+
+                    <fieldset className="fieldset__enrollment fieldset__observations">
+                        <legend className="fieldset__legend">
                             Observacions
                         </legend>
 
-                        <label htmlFor="user-allergic">
-                            El vostre fill/a té alguna al·lèrgia? En cas afirmatiu indiqueu a què i quines accions cal tenir en compte.
+                        <label className="observations__label" htmlFor="user-allergic">
+                            El vostre fill/a té alguna al·lèrgia? Indiqueu a què i quines accions cal tenir en compte.
                         </label>
-                            <textarea className="fieldset__observations--text-area" name="allergy" cols="2" rows="10"></textarea>
+                            <textarea className="text-area" name="allergy" cols="2" rows="10"></textarea>
                         
-                        <label htmlFor="user-illness">
-                            El vostre fill/a pateis alguna malaltia? En cas afirmatiu indiqueu quina i quines accions cal tenir en compte.
+                        <label className="observations__label" htmlFor="user-illness">
+                            El vostre fill/a pateis alguna malaltia? Indiqueu quina i quines accions cal tenir en compte.
                         </label>
-                            <textarea className="fieldset__observations--text-area" name="illness" cols="2" rows="10"></textarea>
+                            <textarea className="text-area" name="illness" cols="2" rows="10"></textarea>
                         
-                        <label htmlFor="user-medecine">
-                            El vostre fill/a pren algun medicament? En cas afirmatiu indiqueu quin i quines accions cal tenir en compte.
+                        <label className="observations__label" htmlFor="user-medecine">
+                            El vostre fill/a pren algun medicament? Indiqueu quin i quines accions cal tenir en compte.
                         </label>
-                            <textarea className="fieldset__observations--text-area" name="medication" cols="2" rows="10"></textarea>
+                            <textarea className="text-area" name="medication" cols="2" rows="10"></textarea>
                         
-                        <label htmlFor="user-observations">
+                        <label className="observations__label" htmlFor="user-observations">
                             Si teniu alguna altra observació feu-nos-ho saber, siusplau.
                         </label>
-                            <textarea className="fieldset__observations--text-area" name="observations" cols="2" rows="10"></textarea>
+                            <textarea className="text-area" name="observations" cols="2" rows="10"></textarea>
+                    <button className="btn btn--submit btn--enrollment">Registra't</button>
                     </fieldset>
-                    <button>Registra</button>
                 </form>}
                 {error && <Feedback message={error}/>}
-                {enrollment === false && student &&<Link className="btn" to="/home">Torna</Link>}
-                {enrollment &&  <div>
-                                    <p>L'usuari ja ha estat registrat</p>
-                                    <Link to="/check-enrollment" className="btn" onClick={()=>{
-                                    setStudentId(student.id)
-                                }}>Consulta les dades d'inscripció</Link>
+
+                {enrollment &&  <div className="success-panel">
+                                    <section className="success-panel__wrapper">
+                                        <p className="success-text">L'usuari ja ha estat registrat al casal.</p>
+                                        <div className="button-set">
+
+                                            <Link className="btn btn--success" to="/check-enrollment">Consulta les dades</Link>
+                                        </div>
+                                    </section>
                                 </div>}
+                <Link className="btn btn--link" to="/home">Torna</Link>
             </div>   
 }
 

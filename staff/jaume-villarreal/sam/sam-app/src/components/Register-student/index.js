@@ -22,34 +22,42 @@ function RegisterStudent({ history }){
             await logic.registerStudent(name , surname , birthdate , healthcard)
             history.push("/process-success")
         }catch({ message }){
-            setResult("El procés no s'ha pogut completar. Torni-ho a intentar.")
+            setResult(logic.translateMessage(message))
         }
     }
 
-    return  <div>
-                <h1>Formulari de registre</h1>
+    return  <div className="form-wrapper">
+                <h1 className="home-header">Formulari de registre</h1>
                 
                     <form onSubmit={handleSubmit} className="form">
-                        <fieldset>
-                            <legend className="legend legend__user">
+                        <fieldset className="fieldset">
+                            <legend className="fieldset__legend">
                             Registra un nou usuari
                             </legend>
                             <section className="fieldset__body">
-                                <label htmlFor="name">Nom</label>
-                                    <input className="input__form" type="text" name="name" />
-                                <label htmlFor="surname">Cognoms</label>
-                                    <input className="input__form" type="text" name="surname" />
-                                <label htmlFor="birthdate">Data de naixement</label>
-                                    <input className="input__form" type="text" name="birthdate" />
-                                <label htmlFor="healthcard">Targeta sanitària</label>
-                                    <input className="input__form" type="text" name="healthcard" />
+                                <div className="input-block">
+                                    <label className="input-block__label" htmlFor="name">Nom</label>
+                                        <input className="input-block__input" type="text" name="name" />
+                                </div>
+                                <div className="input-block">
+                                    <label className="input-block__label" htmlFor="surname">Cognoms</label>
+                                        <input className="input-block__input" type="text" name="surname" />
+                                </div>
+                                <div className="input-block">
+                                    <label className="input-block__label" htmlFor="birthdate">Data de naixement</label>
+                                        <input className="input-block__input" type="text" name="birthdate" />
+                                </div>
+                                <div className="input-block">
+                                    <label className="input-block__label" htmlFor="healthcard">Targeta sanitària</label>
+                                        <input className="input-block__input" type="text" name="healthcard" />
+                                </div>
+                                <button className="btn btn--submit">Registra</button>
                             </section>
                         </fieldset>
-                        <button className="btn">Registra</button>
                     </form>
                    
                 {result && <Feedback message={result}/>}
-                <Link className="btn" to="/home">Torna</Link>
+                <Link className="btn btn--link" to="/home">Torna</Link>
             </div>
 }
 

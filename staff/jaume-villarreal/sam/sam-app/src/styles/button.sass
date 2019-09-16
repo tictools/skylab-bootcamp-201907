@@ -24,6 +24,8 @@
             background-color: $deep-blue-100
         &:active
             background-color: $medium-blue-100
+    &--enrollment
+        width: 90%
     &--link
         width: 15%
         border: 1px solid $deep-blue-100
@@ -31,11 +33,13 @@
         margin-top: .75rem
         &:hover
             background-color: $medium-blue-50
-            border: 1px solid $medium-blue-50
+            border: none
             font-weight: bold
         &:active
             background-color: $medium-blue-100
     &--success
+        margin-top: .75rem
+        color: white
         background-color: $medium-blue-100
         width: 30%
         &:hover
@@ -45,10 +49,25 @@
     &--logout
         background: url('./img/logout-icon-24.png') transparent no-repeat 0 0
         width: 10%
-    &--card
-        width: 100%
+    &__card
+        width: 30%
         margin-bottom: .5rem
-        border: 1px solid
+        color: black
+        width: 5rem
+        height: 3rem
+        &--update
+            background: url('./img/update-icon-white-32.png') $medium-blue-100 no-repeat center center
+            &:hover
+                background: url('./img/update-icon-white-32.png') $deep-blue-100 no-repeat center center
+        &--enrollment
+            background: url('./img/file-icon-white-32.png') $medium-blue-100 no-repeat center center
+            &:hover
+                background: url('./img/file-icon-white-32.png') $deep-blue-100 no-repeat center center
+        &--check
+            background: url('./img/search-icon-white-32.png') $medium-blue-100 no-repeat center center
+            &:hover
+                background: url('./img/search-icon-white-32.png') $deep-blue-100 no-repeat center center
+
 
     
 

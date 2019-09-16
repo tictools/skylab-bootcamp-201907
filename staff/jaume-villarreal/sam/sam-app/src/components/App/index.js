@@ -38,7 +38,7 @@ function App() {
                     <Route path="/update-success" render={ () => logic.isUserLoggedIn() ? <UpdateSuccess /> : <Redirect to="/login"/> } />
                     <Route path="/home" render={ () => logic.isUserLoggedIn() ? <Home /> : <Redirect to="/"/> } />
                     <Route path="/student-update" render={ () => logic.isUserLoggedIn() ? <UpdateStudent /> : <Redirect to="/"/> } />
-                    <Route path="/student-enrollment" render={ () => logic.isUserLoggedIn() ? <RegisterEnrollment /> : <Redirect to="/"/> } />
+                    <Route path="/register-enrollment" render={ () => logic.isUserLoggedIn() ? <RegisterEnrollment /> : <Redirect to="/"/> } />
                     <Route path="/check-enrollment" render={ () => logic.isUserLoggedIn() ? <CheckEnrollment /> : <Redirect to="/"/> } />
                 </Router>
               </main>

@@ -3,6 +3,7 @@ import { Link , withRouter } from "react-router-dom"
 import MyContext from '../ProviderContext'
 import logic from "../../logic"
 import Feedback from "../Feedback"
+import "./index.sass"
 
 function CheckEnrollment({ history }){
 
@@ -46,8 +47,8 @@ function CheckEnrollment({ history }){
     console.log("enrollment: " , enrollment)
 
     return  <div>
-                {student && <h1>Dades d'inscripció - Casal d'estiu {year && year}</h1>}
-                {student && <h2>{student.name} {student.surname}</h2>}
+                {student && <h1 className="home-header">Dades d'inscripció - Casal d'estiu {year && year}</h1>}
+                {student && <h2 className="home-subheader">{student.name} {student.surname}</h2>}
                 {enrollment &&  <div>
                                     <p>
                                         {enrollment.year}
@@ -92,8 +93,16 @@ function CheckEnrollment({ history }){
                                                                         </div>  
                                     )}
                                 </div>}
-                {error && <Feedback message = {error} />}
-                {student && <Link to="/home">Torna</Link>}
+                {error && <div className="warning-panel">
+                                    <section className="warning-panel__wrapper">
+                                        <p className="warning-text">L'usuari encara no s'ha registrat al casal.</p>
+                                        <div className="button-set">
+                                            <Link className="btn btn--link btn--success" to="/home">Torna</Link>
+                                            <Link className="btn btn--link btn--success" to="/register-enrollment">Registra</Link>
+                                        </div>
+                                    </section>
+                                </div>}
+                {enrollment && <Link className="btn btn--link btn--back" to="/home">Torna</Link>}
             </div>
 }
 

@@ -1,12 +1,10 @@
 import React , { useContext , useEffect , useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link  , withRouter } from 'react-router-dom'
 import MyContext from '../ProviderContext'
-
-import Feedback from "../Feedback"
-
 import logic from "../../logic"
-
-import { Link } from "react-router-dom"
+import Feedback from "../Feedback"
+import './index.sass'
+import "../../styles/form.sass"
 
 function UpdateStudent({ history }){
     const { studentId } = useContext(MyContext)
@@ -53,29 +51,37 @@ function UpdateStudent({ history }){
         }
     }
 
-    return  <div>
-                {student && <h1>Formulari d'actualització</h1>}
+    return  <div className="form-wrapper">
+                {student && <h1 className="home-header">Formulari d'actualització</h1>}
                 {student && 
                     <form onSubmit={handleSubmit} className="form">
-                        <fieldset>
-                            <legend className="legend legend__user">
+                        <fieldset className = "fieldset">
+                            <legend className="fieldset__legend">
                             Dades de l'inscrit/a
                             </legend>
                             <section className="fieldset__body">
-                                <label htmlFor="name">Nom</label>
-                                    <input className="input__form" type="text" name="name" value={_name} onChange={ event => setName(event.target.value)}/>
-                                <label htmlFor="surname">Cognoms</label>
-                                    <input className="input__form" type="text" name="surname" value={_surname} onChange={ event => setSurname(event.target.value)}/>
-                                <label htmlFor="birthdate">Data de naixement</label>
-                                    <input className="input__form" type="text" name="birthdate" value={_birthdate} onChange={ event => setBirthdate(event.target.value)}/>
-                                <label htmlFor="healthcard">Targeta sanitària</label>
-                                    <input className="input__form" type="text" name="healthcard" value={_healthcard} onChange={ event => setHealthcard(event.target.value)}/>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="name">Nom</label>
+                                    <input className="input-block__input" type="text" name="name" value={_name} onChange={ event => setName(event.target.value)}/>
+                            </div>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="surname">Cognoms</label>
+                                    <input className="input-block__input" type="text" name="surname" value={_surname} onChange={ event => setSurname(event.target.value)}/>
+                            </div>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="birthdate">Data de naixement</label>
+                                    <input className="input-block__input" type="text" name="birthdate" value={_birthdate} onChange={ event => setBirthdate(event.target.value)}/>
+                            </div>
+                            <div className="input-block">
+                                <label className="input-block__label" htmlFor="healthcard">Targeta sanitària</label>
+                                    <input className="input-block__input" type="text" name="healthcard" value={_healthcard} onChange={ event => setHealthcard(event.target.value)}/>
+                            </div>
+                            <button className="btn btn--submit">Actualitza les dades</button>
                             </section>
                         </fieldset>
-                        <button className="btn">Actualitza les dades</button>
                     </form>
                 }
-                {student && <Link className="btn" to="/home">Torna</Link>}
+                {student && <Link className="btn btn--link" to="/home">Torna</Link>}
                 {result && <Feedback message={result}/>}
             </div>
         }

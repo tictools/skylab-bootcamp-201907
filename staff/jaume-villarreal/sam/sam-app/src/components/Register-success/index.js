@@ -7,8 +7,8 @@ function RegisterSuccess(){
                 <section className="success-panel__wrapper">
                     <p className="success-text">El procés de registre s'ha realitzat correctament.</p>
                     <div className="button-set">
-                        <Link className="btn btn--link btn--success" to="/">Torna</Link>
-                        <Link className="btn btn--link btn--success" to="/login">Accedeix</Link>
+                        <Link className="btn btn--success" to="/">Torna</Link>
+                        <Link className="btn btn--success" to="/login">Accedeix</Link>
                     </div>
                 </section>
             </div>
