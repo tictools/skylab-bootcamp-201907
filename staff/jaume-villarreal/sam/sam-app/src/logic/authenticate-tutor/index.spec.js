@@ -31,7 +31,6 @@ describe("logic - authenticate tutor" , ()=>{
     })
 
     it('should succeed on correct data' , async()=>{
-        debugger
         const result = await logic.authenticateTutor(email, password)
 
         expect(result).toBeUndefined()
@@ -45,21 +44,21 @@ describe("logic - authenticate tutor" , ()=>{
         expect(sub).toBe(tutorId)
     })
 
-    // it('should fail on unexisting tutor' , async()=>{
-    //     try{
-    //         await logic.authenticateTutor("unexisting@mail.com" , password)
-    //     }catch({ message }){
-    //         expect(message).toBe(`tutor with email unexisting@mail.com does not exist`)
-    //     }
-    // })
+    it('should fail on unexisting tutor' , async()=>{
+        try{
+            await logic.authenticateTutor("unexisting@mail.com" , password)
+        }catch({ message }){
+            expect(message).toBe(`tutor with email unexisting@mail.com does not exist`)
+        }
+    })
     
-    // it('should fail on wrong credentials' , async()=>{
-    //     try{
-    //         await logic.authenticateTutor(email , '123')
-    //     }catch({ message }){
-    //         expect(message).toBe("wrong credentials")
-    //     }
-    // })
+    it('should fail on wrong credentials' , async()=>{
+        try{
+            await logic.authenticateTutor(email , '123')
+        }catch({ message }){
+            expect(message).toBe("wrong credentials")
+        }
+    })
 
     it('should fail on empty email' , () =>
         expect(() => logic.authenticateTutor("" , password)).toThrow('email is empty or blank')

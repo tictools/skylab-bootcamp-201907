@@ -7,11 +7,11 @@ import jwt from 'jsonwebtoken'
 const { Student , Tutor } = models
 
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
-const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
+const REACT_APP_JWT_SECRET = process.env.REACT_APP_JWT_SECRET
 
 const { random } = Math
 
-describe.only("logic - authenticate tutor" , ()=>{
+describe("logic - authenticate tutor" , ()=>{
     
     beforeAll( ()=> database.connect(REACT_APP_DB_URL_TEST))
 
@@ -37,13 +37,14 @@ describe.only("logic - authenticate tutor" , ()=>{
 
         const tutor = await Tutor.create({ name : tutorName , surname : tutorSurname , dni : tutorDNI , phone1 , email, password : await bcrypt.hash(password,10) })
         tutorId = tutor.id
+
+        const token = jwt.sign( {sub:tutorId} , REACT_APP_JWT_SECRET )
+
+        logic.__token__ = token
     })
     
-    it("should succeed on correct data" , async ()=> {
-        // const result = await logic.registerStudent(studentName , studentSurname , birthdate , healthcard , tutorId )
-        // studentId = result.id
-        
-        const result = await logic.registerStudent(studentName , studentSurname , birthdate , healthcard , tutorId )
+    it("should succeed on correct data" , async ()=> {    
+        const result = await logic.registerStudent(studentName , studentSurname , birthdate , healthcard)
         expect(result).toBeDefined()
 
         const student = await Student.findOne({ healthcard })
