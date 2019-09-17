@@ -68,13 +68,33 @@ function CheckEnrollment({ history }){
                                         </div>  )}
                                     </section>
                                     <ul className="detail-panel__observations">
-                                        <li><span className="info-label">Talla de samarreta:</span> <span className="info-text info-text--center">{enrollment.shirt}</span></li>
-                                        <li><span className="info-label">Autorització de sortides:</span> <span className="info-text info-text--center">{enrollment.excursionAuth = enrollment.excursionAuth ? "sí" : "no"}</span></li>
-                                        <li><span className="info-label">Autorització sobre drets d'imatge:</span> <span className="info-text info-text--center">{enrollment.imageAuth = enrollment.imageAuth ? "sí" : "no"} </span></li>
-                                        <li><span className="info-label">Al·lèrgies:</span> <span className="info-text">{enrollment.allergy}</span></li>
-                                        <li><span className="info-label">Malalties: </span><span className="info-text">{enrollment.illness = enrollment.illness === "" ? "no detallada" : enrollment.illness}</span></li>
-                                        <li><span className="info-label">Medicació:</span> <span className="info-text">{enrollment.medication = enrollment.medication === "" ? "no detallada" : enrollment.medication}</span></li>
-                                        <li><span className="info-label">Observacions:</span> <span className="info-text">{enrollment.observations = enrollment.observations === "" ? "no detallada" : enrollment.observations}</span></li>
+                                        <li><span className="info-label">Talla de samarreta:</span>
+                                            <span className="info-text info-text--center">{enrollment.shirt}</span>
+                                        </li>
+                                        <li>
+                                            <span className="info-label">Autorització de sortides:</span>
+                                            <span className="info-text info-text--center">{enrollment.excursionAuth ? <img src={selected} alt="sí"/> : <img src={unselected} alt="no"/>}</span>
+                                            </li>
+                                            <li>
+                                            <span className="info-label">Autorització sobre drets d'imatge:</span>
+                                            <span className="info-text info-text--center">{enrollment.imageAuth ? <img src={selected} alt="sí"/> : <img src={unselected} alt="no"/>}</span>
+                                        </li>
+                                        <li>
+                                            <span className="info-label">Al·lèrgies:</span>
+                                            <span className="info-text">{enrollment.allergy}</span>
+                                        </li>
+                                        <li>
+                                            <span className="info-label">Malalties: </span>
+                                            <span className="info-text">{enrollment.illness = enrollment.illness === "" ? "no detallada" : enrollment.illness}</span>
+                                        </li>
+                                        <li>
+                                            <span className="info-label">Medicació:</span>
+                                            <span className="info-text">{enrollment.medication = enrollment.medication === "" ? "no detallada" : enrollment.medication}</span>
+                                        </li>
+                                        <li>
+                                            <span className="info-label">Observacions:</span>
+                                            <span className="info-text">{enrollment.observations = enrollment.observations === "" ? "no detallada" : enrollment.observations}</span>
+                                        </li>
                                     </ul>
                                 </section>}
                 
