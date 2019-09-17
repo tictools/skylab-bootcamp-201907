@@ -2,8 +2,9 @@ import React , { useState , useEffect , useContext } from 'react'
 import { Link , withRouter } from "react-router-dom"
 import MyContext from '../ProviderContext'
 import logic from "../../logic"
-import Feedback from "../Feedback"
 import "./index.sass"
+import selected from '../../styles/img/selected-icon.jpg'
+import unselected from '../../styles/img/unselected-icon.png'
 
 function CheckEnrollment({ history }){
 
@@ -44,66 +45,49 @@ function CheckEnrollment({ history }){
         retrieveEnrollment(studentId)
     } , [])
 
-    console.log("enrollment: " , enrollment)
 
-    return  <div>
+    return  <div className="detail-wrapper">
                 {student && <h1 className="home-header">Dades d'inscripció - Casal d'estiu {year && year}</h1>}
-                {student && <h2 className="home-subheader">{student.name} {student.surname}</h2>}
-                {enrollment &&  <div>
-                                    <p>
-                                        {enrollment.year}
-                                    </p>
-                                    <p>
-                                        {enrollment.activity}
-                                    </p>
-                                    <p>
-                                        {enrollment.allergy}
-                                    </p>
-                                    <p>
-                                        {enrollment.excursionAuth = enrollment.excursionAuth ? "sí" : "no"}
-                                    </p>
-                                    <p>
-                                        {enrollment.group}
-                                    </p>
-                                    <p>
-                                        {enrollment.imageAuth = enrollment.imageAuth ? "sí" : "no"}
-                                    </p>
-                                    <p>
-                                        {enrollment.illness = enrollment.illness === "" ? "no detallada" : enrollment.illness}
-                                    </p>
-                                    <p>
-                                        {enrollment.medication = enrollment.medication === "" ? "no detallada" : enrollment.medication}
-                                    </p>
-                                    <p>
-                                        {enrollment.observations = enrollment.observations === "" ? "no detallada" : enrollment.observations}
-                                    </p>
-                                    <p>
-                                        {enrollment.allergy = enrollment.allergy === "" ? "no detallada" : enrollment.allergy}
-                                    </p>
-                                    <p>
-                                        {enrollment.shirt} 
-                                    </p>
-                                    
-                                    { enrollment.weeks.map( week =>  <div>   
-                                                                            <h3>Setmana {week.number}</h3>  
-                                                                            <p>Jornada: {week.category === "part" ? "Matí" : "Jornada completa"}</p>
-                                                                            <p>Permanències de matí: {week.morningPermanence ? "sí" : "no"}</p>
-                                                                            <p>Permanències de matí: {week.afternoonPermanence ? "sí" : "no"}</p>
-                                                                            <p>Servei de menjador: {week.lunch ? "sí" : "no"}</p>
-                                                                        </div>  
-                                    )}
-                                </div>}
-                {error && <div className="warning-panel">
-                                    <section className="warning-panel__wrapper">
-                                        <p className="warning-text">L'usuari encara no s'ha registrat al casal.</p>
-                                        <div className="button-set">
-                                            <Link className="btn btn--link btn--success" to="/home">Torna</Link>
-                                            <Link className="btn btn--link btn--success" to="/register-enrollment">Registra</Link>
+                {student && <h2 className="home-header2">{student.name} {student.surname}</h2>}
+                {enrollment && <h3 className="home-header3">{enrollment.activity} - {enrollment.group}</h3>}
+                {enrollment &&  <section className="detail-panel">
+                                    <section className="detail-panel__table">
+                                        <div className="detail-table__row detail-table__header">
+                                            <p className="cell">Setmana</p>
+                                            <p className="cell">Modalitat</p>
+                                            <p className="cell">Menjador</p>
+                                            <p className="cell">Permanències matí</p>
+                                            <p className="cell">Permanències tarda</p>
                                         </div>
+                                        {enrollment.weeks.map( week =>  <div className="detail-table__row">
+                                            <p className="cell">{week.number}</p>   
+                                            <p className="cell">{week.category === "part" ? "Matí" : "Jornada completa"}</p>
+                                            <p className="cell">{week.morningPermanence ? <img src={selected} alt="sí"/> : <img src={unselected} alt="no"/>}</p>
+                                            <p className="cell">{week.afternoonPermanence ? <img src={selected} alt="sí"/> : <img src={unselected} alt="no"/>}</p>
+                                            <p className="cell">{week.lunch ? <img src={selected} alt="sí"/> : <img src={unselected} alt="no"/>}</p>
+                                        </div>  )}
                                     </section>
-                                </div>}
-                {enrollment && <Link className="btn btn--link btn--back" to="/home">Torna</Link>}
-            </div>
+                                    <ul className="detail-panel__observations">
+                                        <li><span className="info-label">Talla de samarreta:</span> <span className="info-text info-text--center">{enrollment.shirt}</span></li>
+                                        <li><span className="info-label">Autorització de sortides:</span> <span className="info-text info-text--center">{enrollment.excursionAuth = enrollment.excursionAuth ? "sí" : "no"}</span></li>
+                                        <li><span className="info-label">Autorització sobre drets d'imatge:</span> <span className="info-text info-text--center">{enrollment.imageAuth = enrollment.imageAuth ? "sí" : "no"} </span></li>
+                                        <li><span className="info-label">Al·lèrgies:</span> <span className="info-text">{enrollment.allergy}</span></li>
+                                        <li><span className="info-label">Malalties: </span><span className="info-text">{enrollment.illness = enrollment.illness === "" ? "no detallada" : enrollment.illness}</span></li>
+                                        <li><span className="info-label">Medicació:</span> <span className="info-text">{enrollment.medication = enrollment.medication === "" ? "no detallada" : enrollment.medication}</span></li>
+                                        <li><span className="info-label">Observacions:</span> <span className="info-text">{enrollment.observations = enrollment.observations === "" ? "no detallada" : enrollment.observations}</span></li>
+                                    </ul>
+                                </section>}
+                
+                 {error && <div className="warning-panel">
+                                <section className="warning-panel__wrapper">
+                                    <p className="warning-text">L'usuari encara no s'ha registrat al casal.</p>
+                                    <div className="button-set">
+                                        <Link className="btn btn--link btn--success" to="/register-enrollment">Registra</Link>
+                                    </div>
+                                </section>
+                            </div>}
+                <Link className="btn btn--link" to="/home">Torna</Link>
+            </div>   
 }
 
 export default withRouter(CheckEnrollment)
