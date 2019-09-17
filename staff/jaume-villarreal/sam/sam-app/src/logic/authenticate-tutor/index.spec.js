@@ -17,12 +17,12 @@ describe("logic - authenticate tutor" , ()=>{
     let name , surname , dni , phone1 , email , password , tutorId
 
     beforeEach( async ()=> {
-        name = `name-${Math.random()}`
-        surname = `surname-${Math.random()}`
-        dni = `dni-${Math.random()}`
-        phone1 = `phone1-${Math.random()}`
-        email = `tutor-email-${Math.random()}@mail.com`
-        password = `password-${Math.random()}`
+        name = `name-${random()}`
+        surname = `surname-${random()}`
+        dni = `dni-${random()}`
+        phone1 = `phone1-${random()}`
+        email = `tutor-email-${random()}@mail.com`
+        password = `password-${random()}`
 
         await Tutor.deleteMany()
 
@@ -35,7 +35,7 @@ describe("logic - authenticate tutor" , ()=>{
         expect(id).toBeDefined
         expect(id).toBe(tutorId)
 
-        const result = await logic.authenticateUser(email, password)
+        // const result = await logic.authenticateUser(email, password)
 
         // expect(result).toBeUndefined()
 
@@ -66,23 +66,23 @@ describe("logic - authenticate tutor" , ()=>{
     })
 
     it('should fail on empty email' , () =>
-        expect(() => logic.authenticateTutor("" , password)).to.throw('email is empty or blank')
+        expect(() => logic.authenticateTutor("" , password)).toThrow('email is empty or blank')
     )
     
     it('should fail on wrong email type' , () =>
-        expect(() => logic.authenticateTutor(123 , password)).to.throw('email with value 123 is not a string')
+        expect(() => logic.authenticateTutor(123 , password)).toThrow('email with value 123 is not a string')
     )
     
     it('should fail on wrong email format' , () =>
-        expect(() => logic.authenticateTutor("123@mailcom" , password)).to.throw('email with value 123@mailcom is not a valid e-mail')
+        expect(() => logic.authenticateTutor("123@mailcom" , password)).toThrow('email with value 123@mailcom is not a valid e-mail')
     )
     
     it('should fail on empty password' , () =>
-        expect(() => logic.authenticateTutor(email , "")).to.throw('password is empty or blank')
+        expect(() => logic.authenticateTutor(email , "")).toThrow('password is empty or blank')
     )
     
     it('should fail on wrong password wrong' , () =>
-        expect(() => logic.authenticateTutor(email , 123)).to.throw('password with value 123 is not a string')
+        expect(() => logic.authenticateTutor(email , 123)).toThrow('password with value 123 is not a string')
     )
 
     afterAll(database.disconnect())
