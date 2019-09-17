@@ -11,11 +11,11 @@ import Login from '../Login'
 import RegisterTutor from '../Register-tutor'
 import RegisterStudent from '../Register-student'
 import RegisterSuccess from '../Register-success'
-import UpdateSuccess from '../Update-success'
-import ProcessSuccess from "../Process-success"
-import UpdateStudent from '../Student-update'
-import RegisterEnrollment from "../Register-enrollment"
-import CheckEnrollment from "../Check-enrollment"
+import UpdateSuccess from '../UpdateSuccess'
+import ProcessSuccess from "../ProcessSuccess"
+import UpdateStudent from '../StudentUpdate'
+import RegisterEnrollment from "../RegisterEnrollment"
+import CheckEnrollment from "../CheckEnrollment"
 
 import './index.sass'
 import '../../styles/normalize.sass'

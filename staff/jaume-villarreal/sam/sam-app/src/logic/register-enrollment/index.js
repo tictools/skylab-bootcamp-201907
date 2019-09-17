@@ -2,7 +2,7 @@ import utils from 'utils'
 
 const { validate } = utils
 
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+const REACT_APP_DB_URL = process.env.REACT_APP_DB_URL
 
 /**
  * Register a enrollment
@@ -54,26 +54,26 @@ export default function(school , group , shirt , allergy , illness , medication 
     
     validate.string( weekOption1 , " week option 1")
     validate.string( morningPerm1 , "morning permanence 1")
-    validate.string( afternoonPerm1 , "morning permanence 1")
+    validate.string( afternoonPerm1 , "afternoon permanence 1")
     validate.string( lunch1 , "lunch 1")
     
     validate.string( weekOption2 , " week option 2")
     validate.string( morningPerm2 , "morning permanence 2")
-    validate.string( afternoonPerm2 , "morning permanence 2")
+    validate.string( afternoonPerm2 , "afternoon permanence 2")
     validate.string( lunch2 , "lunch 2")
     
     validate.string( weekOption3 , " week option 3")
     validate.string( morningPerm3 , "morning permanence 3")
-    validate.string( afternoonPerm3 , "morning permanence 3")
+    validate.string( afternoonPerm3 , "afternoon permanence 3")
     validate.string( lunch3 , "lunch 3")
     
     validate.string( weekOption4 , " week option 4")
     validate.string( morningPerm4 , "morning permanence 4")
-    validate.string( afternoonPerm4 , "morning permanence 4")
+    validate.string( afternoonPerm4 , "afternoon permanence 4")
     validate.string( lunch4 , "lunch 4")
     
     return(async () => {
-        const response = await fetch(`${REACT_APP_API_URL}/enrollments` , {
+        const response = await fetch(`${REACT_APP_DB_URL}/enrollments` , {
             method: 'POST',
             headers: {'content-type' : 'application/json'},
             body: JSON.stringify({ school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity , studentId , weekOption1, morningPerm1 , afternoonPerm1 , lunch1 , weekOption2 , morningPerm2 , afternoonPerm2 , lunch2 , weekOption3 , morningPerm3 , afternoonPerm3 , lunch3 , weekOption4 , morningPerm4 , afternoonPerm4 , lunch4 })

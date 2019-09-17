@@ -1,8 +1,7 @@
 import utils from 'utils'
 
 const { validate } = utils
-
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL
+const REACT_APP_DB_URL = process.env.REACT_APP_DB_URL
 
 /**
  * Retrieves all students by tutor id.
@@ -14,7 +13,6 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL
  */
 
 export default function (email, password) {
-
     validate.string(email, 'email')
     validate.email(email, 'email')
     validate.string(password, 'password')
@@ -24,7 +22,7 @@ export default function (email, password) {
         const headers = { "content-type" : "application/json" }
         const body = JSON.stringify({ email, password })
 
-        const response = await fetch(`${REACT_APP_API_URL}/tutors/auth`, {
+        const response = await fetch(`${REACT_APP_DB_URL}/tutors/auth`, {
             method: 'POST',
             headers: headers,
             body: body
@@ -36,8 +34,7 @@ export default function (email, password) {
         } 
         else {
             const { token } = await response.json()
-            this.__token__ = (token)
-            return      
+            this.__token__ = (token)   
         }   
     })()
 }
