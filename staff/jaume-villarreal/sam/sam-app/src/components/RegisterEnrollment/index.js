@@ -1,6 +1,5 @@
 import React , { useContext , useEffect , useState } from "react"
-import { withRouter } from 'react-router-dom'
-import { Link } from "react-router-dom"
+import { Link , withRouter } from 'react-router-dom'
 import MyContext from "../ProviderContext"
 import logic from "../../logic"
 
@@ -11,9 +10,9 @@ import "./index.sass"
 function RegisterEnrollment({ history }){
 
     const { studentId , setStudentId} = useContext(MyContext)
-    const [student , setStudent ] = useState(undefined)
-    const [enrollment , setEnrollment ] = useState(undefined)
-    const [year , setYear ] = useState(undefined)
+    const [student , setStudent] = useState(undefined)
+    const [enrollment , setEnrollment] = useState(undefined)
+    const [year , setYear] = useState(undefined)
     const [week1 , setWeek1] = useState("empty")
     const [week2 , setWeek2] = useState("empty")
     const [week3 , setWeek3] = useState("empty")

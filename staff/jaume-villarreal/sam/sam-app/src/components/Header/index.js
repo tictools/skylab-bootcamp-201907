@@ -7,7 +7,7 @@ import orangeLogo from '../../styles/img/logo-orange-50.png'
 
 import "./index.sass"
 
-function Header({ history }){
+function Header(){
     const { tutor , setTutor } = useContext(MyContext)
 
     function handleLogout(){

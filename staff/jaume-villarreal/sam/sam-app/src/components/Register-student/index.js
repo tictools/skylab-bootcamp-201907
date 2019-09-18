@@ -14,10 +14,10 @@ function RegisterStudent({ history }){
     function handleSubmit(event){
         event.preventDefault()
         const { target : { name : { value : name } , surname : { value : surname } , birthdate : { value : birthdate } , healthcard : { value : healthcard } } } = event
-        handleUpdate(name , surname , birthdate , healthcard)
+        handleRegister(name , surname , birthdate , healthcard)
     }
 
-    async function handleUpdate(name , surname , birthdate , healthcard){
+    async function handleRegister(name , surname , birthdate , healthcard){
         try{
             await logic.registerStudent(name , surname , birthdate , healthcard)
             history.push("/process-success")
