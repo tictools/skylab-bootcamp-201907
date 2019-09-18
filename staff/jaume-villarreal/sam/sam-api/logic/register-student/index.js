@@ -24,7 +24,7 @@ const { models : { Student , Tutor }} = require('data')
      return(async ()=> {
          const student = await Student.findOne({ healthcard })
 
-         if(student) throw new Error (`student with healthcard ${healthcard} already exists`)
+         if(student) throw new Error (`this student already exists`)
 
          const tutor = await Tutor.findOne({ _id : tutorId })
          if (!tutor)  throw new Error (`tutor with id ${tutorId} does not exist`)

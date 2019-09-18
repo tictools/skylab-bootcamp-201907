@@ -8,7 +8,7 @@ const { formatDate } = require('utils')
 const registerStudent = require('.')
 
 
-describe('logic - register student' , ()=>{
+describe.only('logic - register student' , ()=>{
     before( () => database.connect(DB_URL_TEST))
 
     let studentName , studentSurname , birthdate , healthcard
@@ -55,7 +55,7 @@ describe('logic - register student' , ()=>{
         try{
             await registerStudent(studentName , studentSurname , birthdate , healthcard , tutorId)
         }catch({ message }){
-            expect(message).to.equal(`student with healthcard ${healthcard} already exists`)
+            expect(message).to.equal(`this student already exists`)
         }
     })
 
