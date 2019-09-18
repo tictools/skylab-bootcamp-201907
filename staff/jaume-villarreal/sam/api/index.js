@@ -1,6 +1,5 @@
 require('dotenv').config()
 const { env : { DB_URL ,  PORT } } = process
-// const { env : { DB_URL_TEST ,  PORT } } = process
 const { database } = require('data')
 const { name , version , description } = require('./package')
 

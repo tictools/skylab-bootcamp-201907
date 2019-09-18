@@ -9,7 +9,7 @@ const retrieveEnrollment = require('.')
 
 const { env : { DB_URL_TEST } } = process
 
-describe.only('logic - retrieve current enrollment', () => {
+describe('logic - retrieve current enrollment', () => {
     before(() => database.connect(DB_URL_TEST))
 
     let studentName , studentSurname , birthdate , healthcard
