@@ -20,7 +20,7 @@ function Register({ history }){
             history.push('/register-success')
         }
         catch({ message }){
-            const translatedMessage = logic.translateMessage(message , email)
+            const translatedMessage = logic.translateMessage(message , email )
             setError(translatedMessage)
         }
     }

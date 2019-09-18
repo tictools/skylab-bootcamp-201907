@@ -145,7 +145,7 @@ describe("logic - retrieve current enrollment" , ()=>{
         const currentCourse = await Course.findOne({ year })
         currentCourse.enrollments.push(enrollmentId)
         await currentCourse.save()
-        debugger
+
         const enrollment = await logic.retrieveCurrentEnrollment(studentId)
 
         expect(enrollment.group).toBe(group)

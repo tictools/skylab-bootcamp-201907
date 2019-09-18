@@ -5,6 +5,7 @@ import logic from "../../logic"
 import Feedback from "../Feedback"
 import './index.sass'
 import "../../styles/form.sass"
+import translateMessage from '../../logic/translate-message'
 
 function UpdateStudent({ history }){
     const { studentId } = useContext(MyContext)
@@ -47,7 +48,9 @@ function UpdateStudent({ history }){
             const response = await logic.updateStudent(studentId , _name , _surname , birthdate , healthcard)
             history.push("/update-success")
         }catch({ message }){
-            setResult("El procés no s'ha pogut completar. Torni-ho a intentar.")
+            console.log(message)
+            console.log(student.healthcard)
+            setResult(logic.translateMessage(message , undefined , student.healthcard))
         }
     }
 

@@ -1,4 +1,4 @@
-function translateMessage(message , email){
+function translateMessage(message , email ){
     let translatedMessage = ""
     switch(message){
         case 'name is empty or blank':
@@ -69,6 +69,9 @@ function translateMessage(message , email){
             break;
         case 'this enrollment does not exist':
             translatedMessage = "L'usuari encara no ha realitzat la inscripció pel curs actual."
+            break;
+        case `this student already exists`:
+            translatedMessage = `Aquest usuari usuari ja ha estat registrat.`
             break;
         default:
                 translatedMessage = message
