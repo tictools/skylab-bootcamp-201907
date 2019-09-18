@@ -10,7 +10,7 @@ const {  value , boolean  } = random
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 // const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
-describe("logic - authenticate tutor" , ()=>{
+describe.only("logic - retrieve current enrollment" , ()=>{
     
     beforeAll( ()=> database.connect(REACT_APP_DB_URL_TEST))
 
@@ -77,6 +77,7 @@ describe("logic - authenticate tutor" , ()=>{
     })
     
     it('should succeed on correct data for first week enrollment', async () =>{
+        debugger
         weekOption1 = "part"
         morningPerm1 = boolean()
         afternoonPerm1 = boolean()
@@ -98,7 +99,7 @@ describe("logic - authenticate tutor" , ()=>{
         await currentCourse.save()
 
         const {enrollment} = await logic.retrieveCurrentEnrollment(studentId)
-debugger
+        debugger
         expect(enrollment.school).toBe(school)
         expect(enrollment.group).toBe(group)
         expect(enrollment.shirt).toBe(shirt)

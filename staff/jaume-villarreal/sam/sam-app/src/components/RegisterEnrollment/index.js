@@ -357,12 +357,12 @@ function RegisterEnrollment({ history }){
                                 <p className="radio-block__text">Autoritzo a fer ús dels drets d'imatge.</p>
                                 <div className="radio-block__auth">
                                     <div className="radio-auths">
-                                        <label className="radio-block__label" htmlFor="campus-basket">Sí</label>
-                                        <input className="radio-block__input" type="radio" name="imageAuth" id="imageAuth" value = "true"/>
+                                        <label className="radio-block__label" htmlFor="imageAuth">Sí</label>
+                                        <input className="radio-auth__input" type="radio" name="imageAuth" id="imageAuth" value = "true"/>
                                     </div>
                                     <div className="radio-auths">
-                                        <label className="radio-block__label" htmlFor="campus-basket">No</label>
-                                        <input className="radio-block__input"  type="radio" name="imageAuth" id="imageAuth" value = "false"/>
+                                        <label className="radio-block__label" htmlFor="imageAuth">No</label>
+                                        <input className="radio-auth__input"  type="radio" name="imageAuth" id="imageAuth" value = "false"/>
                                     </div>
                                 </div>
                             </span>
@@ -370,12 +370,12 @@ function RegisterEnrollment({ history }){
                                 <p className="radio-block__text">Autoritzo al meu fill/a a realitzar les sortides programades.</p>
                                  <div className="radio-block__auth">
                                     <div className="radio-auths">
-                                        <label className="radio-block__label" htmlFor="campus-basket">Sí</label>
-                                        <input className="radio-block__input" type="radio" name="excursionAuth" id="excursionAuth" value = "true"/>
+                                        <label className="radio-block__label" htmlFor="excursionAuth">Sí</label>
+                                        <input className="radio-auth__input" type="radio" name="excursionAuth" id="excursionAuth" value = "true"/>
                                     </div>
                                     <div className="radio-auths">
-                                        <label className="radio-block__label" htmlFor="campus-basket">No</label>
-                                        <input className="radio-block__input" type="radio" name="excursionAuth" id="excursionAuth" value = "false"/>
+                                        <label className="radio-block__label" htmlFor="excursionAuth">No</label>
+                                        <input className="radio-auth__input" type="radio" name="excursionAuth" id="excursionAuth" value = "false"/>
                                     </div>
                                 </div>
                             </span>

@@ -35,7 +35,7 @@ describe("logic - authenticate tutor" , ()=>{
 
         expect(result).toBeUndefined()
 
-        const { __token__ } = logic
+        const  __token__  = logic
 
         expect(typeof __token__).toBe('string')
         expect(__token__.length).toBeGreaterThan(0)
@@ -52,13 +52,13 @@ describe("logic - authenticate tutor" , ()=>{
         }
     })
     
-    it('should fail on wrong credentials' , async()=>{
-        try{
-            await logic.authenticateTutor(email , '123')
-        }catch({ message }){
-            expect(message).toBe("wrong credentials")
-        }
-    })
+    // it('should fail on wrong credentials' , async()=>{
+    //     try{
+    //         await logic.authenticateTutor(email , '123')
+    //     }catch({ message }){
+    //         expect(message).toBe("wrong credentials")
+    //     }
+    // })
 
     it('should fail on empty email' , () =>
         expect(() => logic.authenticateTutor("" , password)).toThrow('email is empty or blank')
