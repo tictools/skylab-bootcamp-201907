@@ -10,7 +10,7 @@ const {  value , boolean  } = random
 const REACT_APP_DB_URL_TEST = process.env.REACT_APP_DB_URL_TEST
 // const REACT_APP_JWT_SECRET_TEST = process.env.REACT_APP_JWT_SECRET_TEST
 
-describe.only("logic - retrieve current enrollment" , ()=>{
+describe("logic - retrieve current enrollment" , ()=>{
     
     beforeAll( ()=> database.connect(REACT_APP_DB_URL_TEST))
 
@@ -77,7 +77,6 @@ describe.only("logic - retrieve current enrollment" , ()=>{
     })
     
     it('should succeed on correct data for first week enrollment', async () =>{
-        debugger
         weekOption1 = "part"
         morningPerm1 = boolean()
         afternoonPerm1 = boolean()
@@ -99,7 +98,6 @@ describe.only("logic - retrieve current enrollment" , ()=>{
         await currentCourse.save()
 
         const {enrollment} = await logic.retrieveCurrentEnrollment(studentId)
-        debugger
         expect(enrollment.school).toBe(school)
         expect(enrollment.group).toBe(group)
         expect(enrollment.shirt).toBe(shirt)
@@ -119,61 +117,61 @@ describe.only("logic - retrieve current enrollment" , ()=>{
         expect(enrollment.weeks[0].lunch).toBe(lunch1)
     })
 
-    // it('should succeed on correct data for first and second week enrollment', async () =>{
-    //     weekOption1 = "part"
-    //     morningPerm1 = boolean()
-    //     afternoonPerm1 = boolean()
-    //     lunch1 = boolean()
+    it('should succeed on correct data for first and second week enrollment', async () =>{
+        weekOption1 = "part"
+        morningPerm1 = boolean()
+        afternoonPerm1 = boolean()
+        lunch1 = boolean()
         
-    //     weekOption2 = "full"
-    //     morningPerm2 = boolean()
-    //     afternoonPerm2 = boolean()
-    //     lunch2 = boolean()
+        weekOption2 = "full"
+        morningPerm2 = boolean()
+        afternoonPerm2 = boolean()
+        lunch2 = boolean()
         
-    //     const newEnrollment = await new Enrollment({ year : currentYear , school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
-    //     enrollmentId = newEnrollment.id
+        const newEnrollment = await new Enrollment({ year : currentYear , school , group , shirt , allergy , illness , medication ,  observations , imageAuth , excursionAuth , activity : activityId , student : studentId })
+        enrollmentId = newEnrollment.id
 
-    //     const week1 = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
-    //     newEnrollment.weeks.push(week1)
+        const week1 = await new Week({number : 1 , category : weekOption1 , morningPermanence : morningPerm1 , afternoonPermanence : afternoonPerm1 , lunch : lunch1 })
+        newEnrollment.weeks.push(week1)
 
-    //     const week2 = await new Week({number : 2 , category : weekOption2 , morningPermanence : morningPerm2 , afternoonPermanence : afternoonPerm2 , lunch : lunch2 })
-    //     newEnrollment.weeks.push(week2)
+        const week2 = await new Week({number : 2 , category : weekOption2 , morningPermanence : morningPerm2 , afternoonPermanence : afternoonPerm2 , lunch : lunch2 })
+        newEnrollment.weeks.push(week2)
 
-    //     await newEnrollment.save()
+        await newEnrollment.save()
         
-    //     let currentDate = new Date()
-    //     let year = currentDate.getFullYear()
+        let currentDate = new Date()
+        let year = currentDate.getFullYear()
         
-    //     const currentCourse = await Course.findOne({ year })
-    //     currentCourse.enrollments.push(enrollmentId)
-    //     await currentCourse.save()
+        const currentCourse = await Course.findOne({ year })
+        currentCourse.enrollments.push(enrollmentId)
+        await currentCourse.save()
+        debugger
+        const enrollment = await logic.retrieveCurrentEnrollment(studentId)
 
-    //     const enrollment = await logic.retrieveCurrentEnrollment(studentId)
+        expect(enrollment.group).toBe(group)
+        expect(enrollment.school).toBe(school)
+        expect(enrollment.shirt).toBe(shirt)
+        expect(enrollment.allergy).toBe(allergy)
+        expect(enrollment.illness).toBe(illness)
+        expect(enrollment.medication).toBe(medication)
+        expect(enrollment.observations).toBe(observations)
+        expect(enrollment.imageAuth).toBe(imageAuth)
+        expect(enrollment.excursionAuth).toBe(excursionAuth)
+        expect(enrollment.student.toString()).toBe(studentId)
+        expect(enrollment.activity.toString()).toBe(activity)
 
-    //     expect(enrollment.school).toBe(school)
-    //     expect(enrollment.group).toBe(group)
-    //     expect(enrollment.shirt).toBe(shirt)
-    //     expect(enrollment.allergy).toBe(allergy)
-    //     expect(enrollment.illness).toBe(illness)
-    //     expect(enrollment.medication).toBe(medication)
-    //     expect(enrollment.observations).toBe(observations)
-    //     expect(enrollment.imageAuth).toBe(imageAuth)
-    //     expect(enrollment.excursionAuth).toBe(excursionAuth)
-    //     expect(enrollment.student.toString()).toBe(studentId)
-    //     expect(enrollment.activity.toString()).toBe(activity)
+        expect(enrollment.weeks[0].number).toBe(1)
+        expect(enrollment.weeks[0].category).toBe(weekOption1)
+        expect(enrollment.weeks[0].morningPermanence).toBe(morningPerm1)
+        expect(enrollment.weeks[0].afternoonPermanence).toBe(afternoonPerm1)
+        expect(enrollment.weeks[0].lunch).toBe(lunch1)
 
-    //     expect(enrollment.weeks[0].number).toBe(1)
-    //     expect(enrollment.weeks[0].category).toBe(weekOption1)
-    //     expect(enrollment.weeks[0].morningPermanence).toBe(morningPerm1)
-    //     expect(enrollment.weeks[0].afternoonPermanence).toBe(afternoonPerm1)
-    //     expect(enrollment.weeks[0].lunch).toBe(lunch1)
-
-    //     expect(enrollment.weeks[1].number).toBe(2)
-    //     expect(enrollment.weeks[1].category).toBe(weekOption2)
-    //     expect(enrollment.weeks[1].morningPermanence).toBe(morningPerm2)
-    //     expect(enrollment.weeks[1].afternoonPermanence).toBe(afternoonPerm2)
-    //     expect(enrollment.weeks[1].lunch).toBe(lunch2)
-    // })
+        expect(enrollment.weeks[1].number).toBe(2)
+        expect(enrollment.weeks[1].category).toBe(weekOption2)
+        expect(enrollment.weeks[1].morningPermanence).toBe(morningPerm2)
+        expect(enrollment.weeks[1].afternoonPermanence).toBe(afternoonPerm2)
+        expect(enrollment.weeks[1].lunch).toBe(lunch2)
+    })
 
     // it('should succeed on correct data for first, second and third week enrollment', async () =>{
     //     weekOption1 = "part"

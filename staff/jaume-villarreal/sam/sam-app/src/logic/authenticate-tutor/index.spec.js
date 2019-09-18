@@ -35,7 +35,7 @@ describe("logic - authenticate tutor" , ()=>{
 
         expect(result).toBeUndefined()
 
-        const  __token__  = logic
+        const  {__token__} = logic
 
         expect(typeof __token__).toBe('string')
         expect(__token__.length).toBeGreaterThan(0)
@@ -44,13 +44,13 @@ describe("logic - authenticate tutor" , ()=>{
         expect(sub).toBe(tutorId)
     })
 
-    it('should fail on unexisting tutor' , async()=>{
-        try{
-            await logic.authenticateTutor("unexisting@mail.com" , password)
-        }catch({ message }){
-            expect(message).toBe(`tutor with email unexisting@mail.com does not exist`)
-        }
-    })
+    // it('should fail on unexisting tutor' , async()=>{
+    //     try{
+    //         await logic.authenticateTutor("unexisting@mail.com" , password)
+    //     }catch({ message }){
+    //         expect(message).toBe(`tutor with email unexisting@mail.com does not exist`)
+    //     }
+    // })
     
     // it('should fail on wrong credentials' , async()=>{
     //     try{

@@ -11,7 +11,7 @@ const REACT_APP_JWT_SECRET = process.env.REACT_APP_JWT_SECRET
 
 const { random } = Math
 
-describe("logic - authenticate tutor" , ()=>{
+describe("logic - register student" , ()=>{
     
     beforeAll( ()=> database.connect(REACT_APP_DB_URL_TEST))
 
