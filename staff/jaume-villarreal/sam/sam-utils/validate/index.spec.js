@@ -1,7 +1,7 @@
 const validate = require('./')
 const { expect } = require('chai')
 
-describe("validate", () => {
+describe.only("validate", () => {
 
         describe("string", () => {
             it ("should detect that it's a string and not throw error", () => {
@@ -13,8 +13,15 @@ describe("validate", () => {
                   expect(() => { validate.string() }).to.throw(Error, "undefined with value undefined is not a string")
             })
             
-            it ("should detect numeric string", () => {
-                  expect(() => { validate.string("905.4" , "name") }).to.throw(Error, "name is not a valid string")
+        })
+        
+        describe("alphabetic", () => {
+            it ("should detect decimal numeric string", () => {
+                  expect(() => { validate.alphabetic("905.4" , "string") }).to.throw(Error, "string is not a valid string")
+            })
+            
+            it ("should detect enter numeric string", () => {
+                  expect(() => { validate.alphabetic("905" , "string") }).to.throw(Error, "string is not a valid string")
             })
         })
         
